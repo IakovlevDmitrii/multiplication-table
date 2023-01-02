@@ -1,7 +1,7 @@
 
 // Медиа-запросы
 @mixin respond-to($breakpoint) {
-	@media (min-width: $breakpoint) {
+	@media only screen and (min-width: $breakpoint) {
 		@content;
 	}
 }

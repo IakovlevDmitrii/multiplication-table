@@ -4,8 +4,7 @@ import {	Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectCoverflow, Keyboard, Mousewheel, Navigation, Pagination } from "swiper/modules";
 import PageLayout from "../../../components/pageLayout/PageLayout";
 import { useLanguage, useSolutions, useTargetMultiplier } from "../../../hooks";
-import { createArrayRange } from "../../../utils";
-import MATH_CONFIG from "../../../utils/config";
+import { createDefaultArrayRange } from "../../../utils/math";
 import locales from "../../../features/locales";
 import SWIPER_PARAMS from "../../../utils/swiper-params";
 import 'swiper/scss';
@@ -20,18 +19,17 @@ import styles from "./SelectMultiplierPage.module.scss";
 const SelectMultiplierPage: FC = (): JSX.Element => {
 	const { currentLanguage } = useLanguage();
 	const { clearSolutions } = useSolutions();
-	const { setTargetMultiplier } = useTargetMultiplier();
-	const { MAX_MULTIPLIER, MIN_MULTIPLIER } = MATH_CONFIG;
+	const { setTargetMultiplier, setDefaultTargetMultiplier } = useTargetMultiplier();
 
 	useEffect((): void => {
 			clearSolutions();
-			setTargetMultiplier(MIN_MULTIPLIER);
-		}, [clearSolutions, setTargetMultiplier, MIN_MULTIPLIER]
+			setDefaultTargetMultiplier();
+		}, [clearSolutions, setDefaultTargetMultiplier]
 	);
 
-	const list: number[] = useMemo((): number[] =>
-		createArrayRange(MIN_MULTIPLIER, MAX_MULTIPLIER)
-		, [MIN_MULTIPLIER, MAX_MULTIPLIER]
+	const multiplierList: number[] = useMemo((): number[] =>
+			createDefaultArrayRange()
+		, []
 	);
 
 	const handleMultiplierClick: (multiplier: number) => void = useCallback(
@@ -44,7 +42,7 @@ const SelectMultiplierPage: FC = (): JSX.Element => {
 		<PageLayout
 			title={locales[currentLanguage].choose_multiplier}
 			main={
-				<section className={styles.multiplierList}>
+				<section className={styles._}>
 					<article>
 						<div className={styles.swiperContainer}>
 							<Swiper
@@ -58,18 +56,19 @@ const SelectMultiplierPage: FC = (): JSX.Element => {
 									Pagination,
 								]}
 							>
-								{list.map((multiplier: number): JSX.Element => (
+								{multiplierList.map((multiplier: number): JSX.Element => (
 									<SwiperSlide key={multiplier}>
 										<NavLink
+											className={styles.multiplierLink}
 											to={`/multiplication-table/${multiplier}`}
-											onClick={() => handleMultiplierClick(multiplier)}
+											onClick={(): void => handleMultiplierClick(multiplier)}
 										>
 											<span>{multiplier}</span>
 										</NavLink>
 									</SwiperSlide>
 								))}
 							</Swiper>
-							<div className={styles.customNavigation}>
+							<div className={styles.navigation}>
 								<div className="button-prev"></div>
 								<div className="button-next"></div>
 							</div>

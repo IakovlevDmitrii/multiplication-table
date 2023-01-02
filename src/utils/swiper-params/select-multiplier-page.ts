@@ -5,8 +5,8 @@ export const selectMultiplierPageSwiperParams = {
 	effect: 'coverflow' as const,
 	coverflowEffect: {
 		rotate: 50,
-		stretch: 20,
-		depth: 200,
+		stretch: 15,
+		depth: 400,
 		modifier: 1,
 		slideShadows: true,
 	},
