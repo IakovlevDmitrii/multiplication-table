@@ -1,24 +1,39 @@
-$screen-sm:  'min-width:  576px';
-$screen-md:  'min-width:  768px';
-$screen-lg:  'min-width:  992px';
-$screen-xl:  'min-width: 1200px';
-$screen-xxl: 'min-width: 1400px';
+$screen-sm: '576px';
+$screen-md: '768px';
+$screen-lg: '992px';
+$screen-xl: '1200px';
+$screen-xxl: '1400px';
 
 $fontSize_regular: 1rem;
 $fontSize_title: 1.2rem;
+$fontSize_large: 3rem;
 
 $borderRadius_small: 0.25rem;
 $borderRadius_regular: 0.5rem;
-$borderRadius_large: 1rem;
+$borderRadius_large: 0.75rem;
 
-$borderWidth_regular: 1px;
+$borderWidth_small: 1px;
+$borderWidth_regular: 2px;
+$borderWidth_large: 4px;
+
+@keyframes PulseLine {
+	50% { opacity: 0.2; }
+	70% { opacity: 0.8; }
+	100% { opacity: 0.2; }
+}
 
 :root {
+	--fontSize_regular: #{$fontSize_regular};
+	--fontSize_title: #{$fontSize_title};
+	--fontSize_large: #{$fontSize_large};
+
 	--border-radius-small: #{$borderRadius_small};
 	--border-radius-regular: #{$borderRadius_regular};
 	--border-radius-large: #{$borderRadius_large};
 
+	--border-width-small: #{$borderWidth_small};
 	--border-width-regular: #{$borderWidth_regular};
+	--border-width-large: #{$borderWidth_large};
 
 	--color-base: initial;
 

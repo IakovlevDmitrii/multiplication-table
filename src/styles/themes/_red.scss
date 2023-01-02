@@ -1,0 +1,17 @@
+:root[data-theme="red"] {
+	--color-base: rgba(65, 33, 40, 1);
+
+	--color-surface: var(--color-base);
+
+	--color-surface-0: rgba(5, 3, 0, 1);
+	--color-surface-1: rgba(17, 9, 8, 1);
+	--color-surface-2: rgba(29, 15, 16, 1);
+	--color-surface-3: rgba(41, 21, 24, 1);
+	--color-surface-4: rgba(53, 27, 32, 1);
+	--color-surface-5: var(--color-surface);
+	--color-surface-6: rgba(77, 39, 48, 1);
+	--color-surface-7: rgba(89, 45, 54, 1);
+	--color-surface-8: rgba(101, 51, 62, 1);
+	--color-surface-9: rgba(113, 57, 70, 1);
+	--color-surface-10: rgba(125, 71, 78, 1);
+}

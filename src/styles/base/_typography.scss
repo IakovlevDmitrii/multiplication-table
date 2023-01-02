@@ -1,12 +1,10 @@
-@use '../abstracts/variables' as v;
-
 body {
 	line-height: 1.2;
 	letter-spacing: 0;
 	font: {
 		family: 'Caveat', -apple-system, BlinkMacSystemFont, sans-serif;
 		weight: 400;
-		size: v.$fontSize_regular;
+		size: var(--fontSize_regular);
 	}
 }
 

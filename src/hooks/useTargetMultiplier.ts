@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { useAppDispatch, useAppSelector } from "./index";
 import { selectTargetMultiplier, setTargetMultiplierAction } from "../store/equationsSlice";
+import MATH_CONFIG from "../utils/math/math-config";
 
 const useTargetMultiplier = () => {
 	const dispatch = useAppDispatch();
@@ -9,11 +10,16 @@ const useTargetMultiplier = () => {
 	const setTargetMultiplier: (multiplier: number) => void = useCallback(
 		(multiplier: number): void => {
 			dispatch(setTargetMultiplierAction(multiplier));
-		},
-		[dispatch]
+		}, [dispatch]
 	);
 
-	return { targetMultiplier, setTargetMultiplier };
+	const setDefaultTargetMultiplier: () => void = useCallback(
+		(): void => {
+			dispatch(setTargetMultiplierAction(MATH_CONFIG.MIN_MULTIPLIER));
+		}, [dispatch]
+	);
+
+	return { targetMultiplier, setTargetMultiplier, setDefaultTargetMultiplier };
 };
 
 export default useTargetMultiplier;
