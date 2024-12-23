@@ -1,2 +1,8 @@
-.example {
+.content {
+	display: flex;
+	flex-direction: column;
+}
+
+.numbers {
+	margin-bottom: 2rem;
 }

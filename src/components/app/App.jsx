@@ -1,8 +1,10 @@
 import React from "react";
 import AppLayout from "../appLayout";
 
-export default function App() {
+function App() {
 	return (
 		<AppLayout />
 	);
 }
+
+export default App;
