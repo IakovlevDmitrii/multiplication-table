@@ -1,11 +1,11 @@
 import React from 'react';
-import Example from "../example";
+import SelectMultiplierPage from "../pages/select-multiplier-page";
 import styles from './appLayout.module.scss'
 
 export default function AppLayout() {
    return (
 		<div className={styles.content}>
-			<Example />
+			<SelectMultiplierPage />
 		</div>
 	)
 }
