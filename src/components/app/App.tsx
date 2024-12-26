@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import AppLayout from '../appLayout/AppLayout';
-import SelectMultiplierPage from '../pages/selectMultiplierPage';
+import SelectMultiplierPage from '../pages/selectMultiplierPage/SelectMultiplierPage';
 import MultiplicationTablePage from "../pages/multiplicationTablePage";
 
 function App() {
