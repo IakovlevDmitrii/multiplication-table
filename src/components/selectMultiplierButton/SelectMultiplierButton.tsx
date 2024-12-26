@@ -3,7 +3,7 @@ import styles from './SelectMultiplierButton.module.scss';
 
 export default function SelectMultiplierButton({ multiplier }) {
 	return (
-		<div className={styles.link}>
+		<div className={styles.multiplier}>
 			x {multiplier}
 		</div>
 	)
