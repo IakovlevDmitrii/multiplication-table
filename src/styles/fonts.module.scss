@@ -1,0 +1,35 @@
+/* Regular */
+@font-face{
+	font-family: 'CaveatRegular';
+	src: local('Caveat-Regular'),
+	url('../fonts/Caveat/static/Caveat-Regular.ttf') format('truetype');
+	font-weight: 400;
+	font-style: normal;
+}
+
+/* Medium */
+@font-face{
+	font-family: 'CaveatMedium';
+	src: local('Caveat-Medium'),
+	url('../fonts/Caveat/static/Caveat-Medium.ttf') format('truetype');
+	font-weight: 500;
+	font-style: normal;
+}
+
+/* Semi-bold */
+@font-face{
+	font-family: 'CaveatSemiBold';
+	src: local('Caveat-SemiBold'),
+	url('../fonts/Caveat/static/Caveat-SemiBold.ttf') format('truetype');
+	font-weight: 600;
+	font-style: normal;
+}
+
+/* Bold  */
+@font-face{
+	font-family: 'CaveatBold';
+	src: local('Caveat-Bold'),
+	url('../fonts/Caveat/static/Caveat-Bold.ttf') format('truetype');
+	font-weight: 700;
+	font-style: normal;
+}

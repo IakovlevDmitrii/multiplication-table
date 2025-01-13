@@ -1,14 +1,16 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
+import App from './components/app';
+import {TrainingProvider} from "./state/state";
 
-import App from './components/app/App.tsx';
-
-const root = document.getElementById("root");
+const root = document.getElementById("root")!;
 ReactDOM.createRoot(root).render(
-   <BrowserRouter>
-      <React.StrictMode>
-         <App />
-      </React.StrictMode>
-   </BrowserRouter>
+   <TrainingProvider>
+      <BrowserRouter>
+         <React.StrictMode>
+            <App />
+         </React.StrictMode>
+      </BrowserRouter>
+   </TrainingProvider>
 );

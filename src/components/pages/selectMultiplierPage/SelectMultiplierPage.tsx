@@ -1,13 +1,14 @@
 import React from "react";
-import SelectMultiplierHeader from "../../selectMultiplierHeader";
-import SelectMultiplierList from "../../selectMultiplierList";
-import styles from './SelectMultiplierPage.module.scss';
+import Header from "../../header";
+import SelectMultiplierList from './selectMultiplierList'
 
-export default function SelectMultiplierPage() {
-	return (
-		<section className={styles.content}>
-			<SelectMultiplierHeader />
-			<SelectMultiplierList />
-		</section>
-	)
+export default function SelectMultiplierPage(): React.JSX.Element {
+   const title: React.JSX.Element = <h1>Выбери множитель</h1>
+
+   return (
+      <>
+         <Header title={title} />
+         <SelectMultiplierList />
+      </>
+   )
 }

@@ -1,0 +1,17 @@
+@import '../../styles/const.module';
+
+.container {
+	margin-right: auto;
+	margin-left: auto;
+	padding: 0 1rem;
+	@media only screen and ($screen-sm) {
+		max-width: 20rem;
+		padding: 0 0;
+	}
+	@media only screen and ($screen-md) {
+		width: 750px;
+	}
+	@media only screen and ($screen-lg) {
+		width: 940px;
+	}
+}

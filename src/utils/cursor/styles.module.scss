@@ -1,0 +1,16 @@
+@import '../../styles/const.module';
+
+.cursor_container {
+	position: absolute;
+	left: -40px;
+	top: -40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.cursor {
+	background-color: $textColor_regular;
+	border-radius: 50%;
+	pointer-events: none;
+}
