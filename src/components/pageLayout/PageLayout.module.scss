@@ -1,0 +1,31 @@
+@import '../../styles/const.module';
+
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	min-width: 320px;
+	min-height: 100vh;
+	margin-right: auto;
+	margin-left: auto;
+	padding: 0 1rem;
+	@media only screen and ($screen-sm) {
+		padding: 0 0;
+	}
+}
+
+.content {
+	min-width: 24rem;
+}
+
+.header {
+    min-height: 6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main {
+
+}

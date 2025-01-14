@@ -1,14 +1,53 @@
-import React from "react";
+import React, { Dispatch } from 'react';
+import { NavLink } from "react-router-dom";
+import PageLayout from "../../pageLayout";
 import Header from "../../header";
-import SelectMultiplierList from './selectMultiplierList'
+import { useTraining, useTrainingDispatch } from "../../../state/state";
+import styles from './SelectMultiplierPage.module.scss';
 
-export default function SelectMultiplierPage(): React.JSX.Element {
-   const title: React.JSX.Element = <h1>Выбери множитель</h1>
+const SelectMultiplierPage: () => React.JSX.Element = (): React.JSX.Element => {
 
-   return (
-      <>
-         <Header title={title} />
-         <SelectMultiplierList />
-      </>
-   )
-}
+   const dispatch: Dispatch<any> = useTrainingDispatch();
+   const {multiplierList} = useTraining();
+
+   function handleChangeSubjectOfRepetition(num: number): void {
+      dispatch({
+         type: 'changeSubjectOfRepetition',
+         payload: {
+            subjectOfRepetition: num,
+         },
+      })
+   }
+
+   const selectMultiplierList :React.JSX.Element = (
+      <ol className={styles.multiplierList}>
+         {
+            multiplierList.map((index :number): React.JSX.Element => (
+               <li key={index}>
+                  <NavLink
+                     className={styles.link}
+                     to={`/multiplication-table/${index}`}
+                     onClick={(): void => handleChangeSubjectOfRepetition(index)}
+                  >
+                     x {index}
+                  </NavLink>
+               </li>
+            ))
+         }
+      </ol>
+   );
+
+   const header: React.JSX.Element = (
+      <Header title={<h1>Выбери множитель</h1>} />
+   );
+
+   const content: React.JSX.Element = (
+      <article className={styles.content}>
+         {selectMultiplierList}
+      </article>
+   );
+
+   return <PageLayout header={header} content={content} />
+};
+
+export default SelectMultiplierPage;

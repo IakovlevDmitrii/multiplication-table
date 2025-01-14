@@ -61,6 +61,7 @@ function trainingReducer(training: TrainingContextType, action: ActionType) {
 		case 'changeSubjectOfRepetition': {
 			return {
 				...initialTraining,
+				answers: [],
 				subjectOfRepetition: action.payload.subjectOfRepetition,
 			}
 		}

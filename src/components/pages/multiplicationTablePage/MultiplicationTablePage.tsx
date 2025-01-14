@@ -1,30 +1,68 @@
 import React from 'react';
-import {NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import PageLayout from "../../pageLayout";
 import Header from "../../header";
-import LinkToBack from "../../linkToBack";
-import MultiplicationTableList from './multiplicationTableList';
-import {useTraining} from "../../../state/state";
-import type {TrainingContextType} from "../../../types";
-import styles from './MultiplicationTanlePage.module.scss';
+import arrowToLeft from '../../../img/arrow-to-left/arrow-to-left_color.png';
+import { useTraining } from "../../../state/state";
+import styles from './MultiplicationTablePage.module.scss';
 
-export default function MultiplicationTablePage(): React.JSX.Element {
-	const training: TrainingContextType = useTraining();
-	const {subjectOfRepetition} = training;
+const MultiplicationTablePage: () => React.JSX.Element = (): React.JSX.Element => {
+	const {
+		multiplierList,
+		subjectOfRepetition,
+	} = useTraining();
 
-	const leftSide: React.JSX.Element = <LinkToBack
-		to='/select-multiplier'
-		alt='link to select a multiplier' />
-	const title: React.JSX.Element = <h1>{`Повтори умножение на ${subjectOfRepetition}`}</h1>
+	const leftSide: React.JSX.Element = (
+		<NavLink
+			to='/select-multiplier'
+			className={styles.link}
+		>
+			<img src={arrowToLeft} alt='link to select a multiplier' />
+		</NavLink>
+	);
 
-	return (
-		<>
-			<Header leftSide={leftSide} title={title} />
-			<MultiplicationTableList />
-			<footer className={styles.footer}>
-				<NavLink to={`/trainer-select-result/${subjectOfRepetition}`}>
+	const title: React.JSX.Element = (
+		<h1>{`Повтори умножение на ${subjectOfRepetition}`}</h1>
+	);
+
+	const header: React.JSX.Element = (
+		<Header leftSide={leftSide} title={title} />
+	);
+
+	const multiplicationTable: React.JSX.Element = (
+		<ol className={styles.example_list}>
+			{
+				multiplierList.map(index => (
+					<li key={index}>
+						<div className={styles.example}>
+							<div className={styles.condition}>
+								{`${subjectOfRepetition} * ${index} = `}
+							</div>
+							<div className={styles.result}>
+								{`${subjectOfRepetition * index}`}
+							</div>
+						</div>
+					</li>
+				))
+			}
+		</ol>
+	);
+
+	const content: React.JSX.Element = (
+		<article className={styles.content}>
+			{multiplicationTable}
+			<div className={styles.links}>
+				<NavLink
+					className={styles.trainerLink}
+					to={`/trainer-select-result/${subjectOfRepetition}`}
+				>
 					{`Проверь умножение на ${subjectOfRepetition}`}
 				</NavLink>
-			</footer>
-		</>
+			</div>
+		</article>
 	)
-}
+
+	return <PageLayout header={header} content={content}/>
+};
+
+export default MultiplicationTablePage;

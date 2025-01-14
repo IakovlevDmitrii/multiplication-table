@@ -15,79 +15,46 @@
 	}
 }
 
-.content {}
-
-.header {
-	display: flex;
-	justify-content: space-evenly;
-	align-items: center;
-	height: 1.5rem;
-}
-
-.correctCount {
-	color: $textColor_correct;
-	font-size: $fontSize_regular;
-}
-
-.count {
-	width: auto;
-	color: $textColor_regular;
-	font-size: $fontSize_regular;
-}
-
-.wrongCount {
-	color: $textColor_wrong;
-	font-size: $fontSize_regular;
-}
-
-.condition {
+.content {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	min-height: 6rem;
+	padding: 1rem 0;
+	gap: 3rem;
+}
+
+.example_list {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: repeat(4, auto);
+	grid-auto-flow: column;
+	gap: 1.5rem 2rem;
 }
 
 .example {
 	display: flex;
 	justify-content: center;
-	padding: 2rem 0;
+	align-items: center;
+	height: 2rem;
+}
+
+.condition {
+	padding: 0 0.2rem 0 0;
 	color: $textColor_regular;
 	font-size: $fontSize_regular;
 }
 
-.solution {
+.result {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding: 1rem 0 0 0;
-}
-
-.version_list {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: 0.5rem 0.5rem;
-
-	li {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		width: 3rem;
-		height: 1.5rem;
-	}
-}
-
-.version {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
+	width: 3.5rem;
 	height: 100%;
 	color: $textColor_regular;
 	font-size: $fontSize_regular;
 	border: 1px solid $borderColor_regular;
 	border-radius: $borderRadius_regular;
-	cursor: pointer;
 }
 
 .links {
@@ -97,7 +64,7 @@
 	padding: 1rem 0;
 }
 
-.summaryLink {
+.trainerLink {
 	display: flex;
 	justify-content: center;
 	align-items: center;
