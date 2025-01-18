@@ -1,0 +1,62 @@
+@import '../../../../styles/const.module';
+
+.condition {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	min-height: 6rem;
+
+	div {
+		display: flex;
+		justify-content: center;
+		padding: 2rem 0;
+		color: $textColor_regular;
+		font-size: $fontSize_regular;
+	}
+}
+
+._ {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 1rem 0 0 0;
+
+	ul {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 0.5rem 0.5rem;
+
+		li {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 3rem;
+			height: 1.5rem;
+		}
+
+		button {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+			height: 100%;
+			color: $textColor_regular;
+			font-size: $fontSize_regular;
+			border: 1px solid $borderColor_regular;
+			border-radius: $borderRadius_regular;
+			cursor: pointer;
+		}
+	}
+}
+
+.links {
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	padding: 1rem 0;
+
+	a {
+		@include result_item;
+	}
+}

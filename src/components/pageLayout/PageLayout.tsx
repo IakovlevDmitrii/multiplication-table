@@ -1,18 +1,16 @@
 import React from "react";
+import type { PageLayoutProps } from "../../types";
 import styles from './PageLayout.module.scss';
 
-const PageLayout: (
-   {header, content}: {
-      header: React.JSX.Element,
-      content: React.JSX.Element,
-   }) => React.JSX.Element = ({header, content}) => {
+const PageLayout: React.FC<PageLayoutProps> = (
+   { header, content }) => {
    return (
-      <div className={styles.container}>
+      <div className={styles._}>
          <div className={styles.content}>
-            <header className={styles.header}>
+            <header>
                {header}
             </header>
-            <main className={styles.main}>
+            <main>
                {content}
             </main>
          </div>

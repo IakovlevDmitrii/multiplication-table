@@ -1,3 +1,5 @@
+import React from "react";
+
 export interface Answer {
    multiplier: number,
    result: number,
@@ -24,3 +26,14 @@ interface ActionChangeSubjectOfRepetition {
    }
 }
 export type ActionType = ActionAnswer | ActionChangeSubjectOfRepetition
+
+export interface HeaderProps {
+   leftSide?: React.JSX.Element,
+   title: React.JSX.Element,
+   rightSide?: React.JSX.Element,
+}
+
+export interface PageLayoutProps {
+   header: React.JSX.Element,
+   content: React.JSX.Element,
+}

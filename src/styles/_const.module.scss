@@ -19,6 +19,32 @@ $screen-xxl: 'min-width: 1400px';
 
 /* ---------- blocks ---------- */
 
+@mixin back-link {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 1px solid $borderColor_regular;
+	border-radius: $borderRadius_regular;
+	width: 2.5rem;
+	height: auto;
+
+	img {
+		width: 1.5rem;
+		height: auto;
+	}
+}
+@mixin result_item {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 3rem;
+	padding: 0 1rem;
+	border: 1px solid $borderColor_regular;
+	border-radius: $borderRadius_regular;
+	color: $textColor_regular;
+	font-size: $fontSize_regular;
+}
 $borderRadius_regular: 2px;
 
 /* ---------- typography ---------- */
