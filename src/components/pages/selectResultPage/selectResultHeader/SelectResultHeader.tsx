@@ -1,4 +1,4 @@
-import React from "react";
+import { JSX, FC } from "react";
 import { NavLink } from "react-router-dom";
 import HeaderLayout from "../../../headerLayout";
 import arrowToLeft from "../../../../img/arrow-to-left/arrow-to-left_color.png";
@@ -10,14 +10,14 @@ interface SelectResultHeaderProps {
 	handleClick: () => void;
 }
 
-const SelectResultHeader: React.FC<SelectResultHeaderProps> = (
+const SelectResultHeader: FC<SelectResultHeaderProps> = (
 	{
 		isTrainingFinished,
 		subjectOfRepetition,
 		handleClick,
 	}) => {
 
-	const leftSide: React.JSX.Element = (
+	const leftSide: JSX.Element = (
 		<NavLink
 			to={`/multiplication-table/${subjectOfRepetition}`}
 			className={styles.link}
@@ -27,7 +27,7 @@ const SelectResultHeader: React.FC<SelectResultHeaderProps> = (
 		</NavLink>
 	);
 
-	const title: React.JSX.Element = isTrainingFinished ?
+	const title: JSX.Element = isTrainingFinished ?
 		<h1>Твой результат</h1>
 		:
 		<h1>Выбери ответ</h1>

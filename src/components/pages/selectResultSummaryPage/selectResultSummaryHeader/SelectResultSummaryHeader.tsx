@@ -1,13 +1,13 @@
-import React from "react";
+import { JSX } from "react";
 import { NavLink } from "react-router-dom";
 import HeaderLayout from "../../../headerLayout";
 import arrowToLeft from '../../../../img/arrow-to-left/arrow-to-left_color.png';
 import styles from './SelectResultSummaryHeader.module.scss';
 
-const SelectResultSummaryHeader = (): React.JSX.Element => {
-	const leftSide: React.JSX.Element = (
+const SelectResultSummaryHeader = (): JSX.Element => {
+	const leftSide: JSX.Element = (
 		<NavLink
-			to={`/trainer-select-result`}
+			to={`/select-result`}
 			className={styles.link}
 		>
 			<img src={arrowToLeft} alt='link to multiplication table' />

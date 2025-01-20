@@ -1,10 +1,10 @@
-import React from 'react';
+import { JSX } from 'react';
 import PageLayout from "../../pageLayout";
 import MultiplicationTableHeader from "./multiplicationTableHeader";
 import MultiplicationTableContent from "./multiplicationContent";
 import { useTraining } from "../../../state/state";
 
-const MultiplicationTablePage: () => React.JSX.Element = (): React.JSX.Element => {
+const MultiplicationTablePage = (): JSX.Element => {
 	const {
 		multiplierList,
 		subjectOfRepetition,

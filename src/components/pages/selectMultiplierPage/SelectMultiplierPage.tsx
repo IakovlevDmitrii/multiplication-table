@@ -1,12 +1,13 @@
-import React, { Dispatch } from 'react';
+import { JSX, Dispatch } from 'react';
 import PageLayout from "../../pageLayout";
 import SelectMultiplierHeader from "./selectMultiplierHeader";
 import SelectMultiplierContent from "./selectMultiplierContent";
 import { useTraining, useTrainingDispatch } from "../../../state/state";
+import type { ChangeSubjectOfRepetitionDispatch } from "../../../types";
 
-const SelectMultiplierPage: () => React.JSX.Element = (): React.JSX.Element => {
+const SelectMultiplierPage = (): JSX.Element => {
    const { multiplierList } = useTraining();
-   const dispatch: Dispatch<any> = useTrainingDispatch();
+   const dispatch: Dispatch<ChangeSubjectOfRepetitionDispatch> = useTrainingDispatch();
 
    function handleChangeSubjectOfRepetition(subjectOfRepetition: number): void {
       dispatch({

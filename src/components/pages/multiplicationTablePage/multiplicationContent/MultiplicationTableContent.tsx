@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 import { NavLink } from "react-router-dom";
 import styles from "./MultiplicationTableContent.module.scss";
 
@@ -7,7 +7,7 @@ interface MultiplicationTableProps {
    list: number[],
 }
 
-const MultiplicationTableContent: React.FC<MultiplicationTableProps> = (
+const MultiplicationTableContent: FC<MultiplicationTableProps> = (
    { subjectOfRepetition, list }) => {
 
    return (
@@ -29,7 +29,7 @@ const MultiplicationTableContent: React.FC<MultiplicationTableProps> = (
             }
          </ol>
          <div className={styles.links}>
-            <NavLink to={`/trainer-select-result/${subjectOfRepetition}`}>
+            <NavLink to={`/select-result/${subjectOfRepetition}`}>
                {`Проверь умножение на ${subjectOfRepetition}`}
             </NavLink>
          </div>

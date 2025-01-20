@@ -1,59 +1,78 @@
-import React from "react";
+import { FC } from "react";
 import { NavLink } from "react-router-dom";
 import styles from './SelectResultContent.module.scss';
 
 interface SelectResultProps {
+	questionsTotal: number;
+	correct: number;
+	wrong: number;
 	isTrainingFinished: boolean;
 	subjectOfRepetition: number;
 	secondMultiplier: number;
 	versionArray: number[];
-	handleClick: (multiplier: number, result: number) => void;
+	onVersionClick: (multiplier: number, result: number) => void;
 }
 
-const SelectResultContent: React.FC<SelectResultProps> = (
+const SelectResultContent: FC<SelectResultProps> = (
 	{
+		questionsTotal,
+		correct,
+		wrong,
 		isTrainingFinished,
 		subjectOfRepetition,
 		secondMultiplier,
 		versionArray,
-		handleClick,
+		onVersionClick,
 	}
 ) => {
 
-	if(isTrainingFinished) {
-		return (
-			<div className={styles.links}>
-				<NavLink to='summary'>
-					Посмотреть ответы
-				</NavLink>
-			</div>
-		)
-	}
-
 	return (
-		<>
-			<div className={styles.condition}>
-				<div className={styles.example}>
-					{`${subjectOfRepetition} * ${secondMultiplier} = ?`}
+		<article>
+			<header>
+				<div>
+					{`верно: ${correct}`}
 				</div>
-			</div>
-			<div className={styles._}>
-				<ul>
-					{versionArray.map((version: number): React.JSX.Element => (
-						<li key={version}>
-							<button
-								type="button"
-								onClick={(): void => handleClick(
-									secondMultiplier,
-									subjectOfRepetition * version)}
-							>
-								{subjectOfRepetition * version}
-							</button>
-						</li>
-					))}
-				</ul>
-			</div>
-		</>
+				<div>
+					{`${correct + wrong} / ${questionsTotal}`}
+				</div>
+				<div>
+					{`не верно: ${wrong}`}
+				</div>
+			</header>
+			{
+				isTrainingFinished ? (
+					<div className={styles.links}>
+						<NavLink to='summary'>
+							Посмотреть ответы
+						</NavLink>
+					</div>
+				) : (
+					<>
+						<div className={styles.condition}>
+							<div className={styles.example}>
+								{`${subjectOfRepetition} * ${secondMultiplier} = ?`}
+							</div>
+						</div>
+						<div className={styles._}>
+							<ul>
+								{versionArray.map((version: number) => (
+									<li key={version}>
+										<button
+											type="button"
+											onClick={(): void => onVersionClick(
+												secondMultiplier,
+												subjectOfRepetition * version)}
+										>
+											{subjectOfRepetition * version}
+										</button>
+									</li>
+								))}
+							</ul>
+						</div>
+					</>
+				)
+			}
+		</article>
 	)
 };
 

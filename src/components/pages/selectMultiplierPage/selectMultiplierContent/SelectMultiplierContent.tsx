@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from "react";
 import { NavLink } from "react-router-dom";
 import styles from "./SelectMultiplierContent.module.scss";
 
@@ -7,14 +7,14 @@ interface SelectMultiplierListProps {
    handleClick: (index: number) => void;
 }
 
-const SelectMultiplierContent: React.FC<SelectMultiplierListProps> = (
+const SelectMultiplierContent: FC<SelectMultiplierListProps> = (
    { list, handleClick }) => {
 
    return (
       <article className={styles._}>
          <ol>
             {
-               list.map((index: number): React.JSX.Element => (
+               list.map((index: number) => (
                   <li key={index}>
                      <NavLink
                         to={`/multiplication-table/${index}`}

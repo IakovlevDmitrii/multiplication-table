@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from "react";
 import type { Answer } from "../../../../types";
 import styles from "./SelectResultSummaryContent.module.scss";
 
@@ -7,14 +7,14 @@ interface ResultListProps {
    list: Answer[],
 }
 
-const SelectResultSummaryContent: React.FC<ResultListProps> = (
+const SelectResultSummaryContent: FC<ResultListProps> = (
    { subjectOfRepetition, list }) => {
 
    return (
       <article className={styles._}>
-         <ol className={styles.answer_list}>
+         <ol>
             {
-               list.map(({multiplier, result}: Answer): React.JSX.Element => {
+               list.map(({multiplier, result}: Answer) => {
                   return (
                      <li key={multiplier}>
                         <div className={styles.answer}>

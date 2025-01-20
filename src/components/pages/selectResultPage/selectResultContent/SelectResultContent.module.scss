@@ -1,5 +1,39 @@
 @import '../../../../styles/const.module';
 
+header {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	height: 1.5rem;
+
+	div:first-child {
+		color: $textColor_correct;
+		font-size: $fontSize_regular;
+	}
+
+	div:nth-child(2) {
+		width: auto;
+		color: $textColor_regular;
+		font-size: $fontSize_regular;
+	}
+
+	div:last-child {
+		color: $textColor_wrong;
+		font-size: $fontSize_regular;
+	}
+}
+
+.links {
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	padding: 1rem 0;
+
+	a {
+		@include result_item;
+	}
+}
+
 .condition {
 	display: flex;
 	flex-direction: column;
@@ -47,16 +81,5 @@
 			border-radius: $borderRadius_regular;
 			cursor: pointer;
 		}
-	}
-}
-
-.links {
-	display: flex;
-	justify-content: center;
-	align-items: flex-start;
-	padding: 1rem 0;
-
-	a {
-		@include result_item;
 	}
 }

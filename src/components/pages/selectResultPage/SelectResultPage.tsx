@@ -1,13 +1,12 @@
-import React, { Dispatch } from "react";
+import { Dispatch, JSX } from "react";
 import PageLayout from "../../pageLayout";
 import SelectResultHeader from "./selectResultHeader";
-import SelectResultContentHeader from "./selectResultContent/selectResultContentHeader";
 import SelectResultContent from "./selectResultContent";
-import type { Answer } from "../../../types";
+import type { Answer, DispatchType } from "../../../types";
 import { fillArrayWithUniqueRandomNumbers, getRandomElementFromArray } from "../../../utils";
 import { useTraining, useTrainingDispatch } from "../../../state/state";
 
-const SelectResultPage: () => React.JSX.Element = (): React.JSX.Element => {
+const SelectResultPage = (): JSX.Element => {
 	const {
 		subjectOfRepetition,
 		multiplierList,
@@ -15,7 +14,7 @@ const SelectResultPage: () => React.JSX.Element = (): React.JSX.Element => {
 		remainingMultiplierList,
 	} = useTraining();
 
-	const dispatch: Dispatch<any> = useTrainingDispatch();
+	const dispatch: Dispatch<DispatchType> = useTrainingDispatch();
 	const isTrainingFinished = !remainingMultiplierList.length;
 	let secondMultiplier: number = getRandomElementFromArray(remainingMultiplierList);
 	const versionArray: number[] = fillArrayWithUniqueRandomNumbers(4, 2, 9, secondMultiplier);
@@ -33,15 +32,17 @@ const SelectResultPage: () => React.JSX.Element = (): React.JSX.Element => {
 		const results = {correct: 0, wrong: 0};
 
 		answers.forEach(({multiplier, result}: Answer): void => {
-			(multiplier * subjectOfRepetition === result) ?
-				results.correct++ :
+			if(multiplier * subjectOfRepetition === result) {
+				results.correct++
+			} else {
 				results.wrong++
-		})
+			}
+		});
 
 		return results
 	})();
 
-	function handleAnswer(multiplier: number, result: number): void {
+	function onVersionClick(multiplier: number, result: number): void {
 		dispatch({
 			type: 'answer',
 			payload: {
@@ -63,20 +64,16 @@ const SelectResultPage: () => React.JSX.Element = (): React.JSX.Element => {
 				/>
 			}
 			content={
-				<article>
-					<SelectResultContentHeader
-						questionsTotal={multiplierList.length}
-						correct={resultCounter.correct}
-						wrong={resultCounter.wrong}
-					/>
-					<SelectResultContent
-						isTrainingFinished={isTrainingFinished}
-						subjectOfRepetition={subjectOfRepetition}
-						secondMultiplier={secondMultiplier}
-						versionArray={versionArray}
-						handleClick={handleAnswer}
-					/>
-				</article>
+				<SelectResultContent
+					questionsTotal={multiplierList.length}
+					correct={resultCounter.correct}
+					wrong={resultCounter.wrong}
+					isTrainingFinished={isTrainingFinished}
+					subjectOfRepetition={subjectOfRepetition}
+					secondMultiplier={secondMultiplier}
+					versionArray={versionArray}
+					onVersionClick={onVersionClick}
+				/>
 			}
 		/>
 	)

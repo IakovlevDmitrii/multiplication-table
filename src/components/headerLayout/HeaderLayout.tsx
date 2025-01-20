@@ -1,8 +1,8 @@
-import React from "react";
-import type { HeaderProps } from "../../types";
+import { FC } from "react";
+import type { HeaderLayoutProps } from "../../types";
 import styles from './HeaderLayout.module.scss';
 
-const HeaderLayout: React.FC<HeaderProps> = (
+const HeaderLayout: FC<HeaderLayoutProps> = (
    { leftSide, title, rightSide }) => {
    return (
       <div className={styles._}>

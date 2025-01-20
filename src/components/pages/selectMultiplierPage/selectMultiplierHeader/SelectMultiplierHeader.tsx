@@ -1,7 +1,7 @@
-import React from "react";
+import { JSX } from 'react';
 import HeaderLayout from "../../../headerLayout";
 
-const SelectMultiplierHeader = () => {
+const SelectMultiplierHeader = (): JSX.Element => {
 	return (
 		<HeaderLayout title={<h1>Выбери множитель</h1>} />
 	)

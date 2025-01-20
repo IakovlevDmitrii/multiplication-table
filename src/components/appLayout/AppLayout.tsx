@@ -1,8 +1,8 @@
-import React from 'react';
+import { JSX } from 'react'
 import { Outlet } from 'react-router-dom';
 import Canvas from "../../utils/cursor/Canvas";
 
-const AppLayout: () => React.JSX.Element = (): React.JSX.Element => {
+const AppLayout = (): JSX.Element => {
 	return (
 		<>
 			<Canvas />

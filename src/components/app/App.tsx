@@ -1,4 +1,4 @@
-import React from 'react';
+import { JSX } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import AppLayout from "../appLayout";
 import SelectMultiplierPage from "../pages/selectMultiplierPage";
@@ -7,7 +7,7 @@ import SelectResultPage from "../pages/selectResultPage";
 import SelectResultSummaryPage from "../pages/selectResultSummaryPage";
 import '../../styles/styles.module.scss';
 
-const App: () => React.JSX.Element = () :React.JSX.Element => {
+const App = () :JSX.Element => {
 	return (
       <Routes>
          <Route path='/' element={<AppLayout />} >
@@ -17,7 +17,7 @@ const App: () => React.JSX.Element = () :React.JSX.Element => {
                <Route index element={<SelectMultiplierPage />} />
                <Route path=':multiplier' element={<MultiplicationTablePage />} />
             </Route>
-            <Route path='trainer-select-result'>
+            <Route path='select-result'>
                <Route index element={<SelectMultiplierPage />} />
                <Route path=':multiplier' element={<SelectResultPage />} />
                <Route path=':multiplier/summary' element={<SelectResultSummaryPage />} />

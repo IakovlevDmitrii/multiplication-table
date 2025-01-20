@@ -1,8 +1,8 @@
-import React from "react";
+import { FC } from "react";
 import type { PageLayoutProps } from "../../types";
 import styles from './PageLayout.module.scss';
 
-const PageLayout: React.FC<PageLayoutProps> = (
+const PageLayout: FC<PageLayoutProps> = (
    { header, content }) => {
    return (
       <div className={styles._}>
