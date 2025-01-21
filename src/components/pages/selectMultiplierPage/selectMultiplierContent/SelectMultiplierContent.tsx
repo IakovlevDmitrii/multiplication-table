@@ -1,20 +1,33 @@
-import { FC } from "react";
+import { FC, useRef } from "react";
 import { NavLink } from "react-router-dom";
 import styles from "./SelectMultiplierContent.module.scss";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 interface SelectMultiplierListProps {
-   list: number[],
+   multiplierList: number[],
    handleClick: (index: number) => void;
 }
 
+gsap.registerPlugin(useGSAP);
+
 const SelectMultiplierContent: FC<SelectMultiplierListProps> = (
-   { list, handleClick }) => {
+   { multiplierList, handleClick }) => {
+
+   const container = useRef<HTMLOListElement>(null);
+
+   useGSAP(() => {
+      gsap.from("li", {
+         opacity: 0,
+         stagger: 0.1
+      });
+   },{ scope: container });
 
    return (
       <article className={styles._}>
-         <ol>
+         <ol ref={container}>
             {
-               list.map((index: number) => (
+               multiplierList.map((index: number) => (
                   <li key={index}>
                      <NavLink
                         to={`/multiplication-table/${index}`}

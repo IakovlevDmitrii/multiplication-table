@@ -23,7 +23,7 @@ const SelectMultiplierPage = (): JSX.Element => {
          header={<SelectMultiplierHeader />}
          content={
             <SelectMultiplierContent
-               list={multiplierList}
+               multiplierList={multiplierList}
                handleClick={handleChangeSubjectOfRepetition}
             />
          }
