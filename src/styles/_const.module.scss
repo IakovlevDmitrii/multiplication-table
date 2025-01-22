@@ -29,7 +29,7 @@ $screen-xxl: 'min-width: 1400px';
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 2rem;
+	gap: 1.8rem;
 	width: 100%;
 
 	.example {
@@ -57,13 +57,13 @@ $screen-xxl: 'min-width: 1400px';
 	.result_correct {
 		color: $textColor_correct;
 		font-size: $fontSize_regular;
-		border: 2px solid $borderColor_correct;
+		border: 1px solid $borderColor_correct;
 	}
 
 	.result_wrong {
 		color: $textColor_wrong;
 		font-size: $fontSize_regular;
-		border: 2px solid $borderColor_wrong;
+		border: 1px solid $borderColor_wrong;
 	}
 }
 
@@ -71,7 +71,7 @@ $screen-xxl: 'min-width: 1400px';
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	border: 2px solid $borderColor_regular;
+	border: 1px solid $borderColor_regular;
 	border-radius: $borderRadius_regular;
 	width: 4rem;
 	height: auto;
@@ -87,18 +87,18 @@ $screen-xxl: 'min-width: 1400px';
 	align-items: center;
 	width: 100%;
 	padding: 1rem 2rem;
-	border: 2px solid $borderColor_regular;
+	border: 1px solid $borderColor_regular;
 	border-radius: $borderRadius_regular;
 	color: $textColor_regular;
 	font-size: $fontSize_regular;
 	text-align: center;
 }
-$borderRadius_regular: 2px;
+$borderRadius_regular: 4px;
 
 /* ---------- typography ---------- */
 
-$fontSize_regular: 2.6rem;
-$fontSize_title: 3rem;
+$fontSize_regular: 2.2rem;
+$fontSize_title: 2.6rem;
 
 :export {
 	textColor_regular: $textColor_regular;

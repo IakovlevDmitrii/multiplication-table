@@ -2,7 +2,7 @@
 
 ._ {
 	display: grid;
-	grid-template-rows: 2rem 7rem;
+	grid-template-rows: 2rem 6rem;
 	height: 100%;
 
 	div:first-child {
@@ -17,7 +17,7 @@
 		justify-content: center;
 		align-items: center;
 		text-align: center;
-		min-height: 7rem;
+		min-height: 6rem;
 		color: $textColor_regular;
 		font-size: $fontSize_title;
 	}
