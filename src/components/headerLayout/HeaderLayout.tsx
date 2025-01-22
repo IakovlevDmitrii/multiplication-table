@@ -7,13 +7,15 @@ const HeaderLayout: FC<HeaderLayoutProps> = (
    return (
       <div className={styles._}>
          <div>
-            {leftSide}
+            <div>
+               {leftSide}
+            </div>
+            <div>
+               {rightSide}
+            </div>
          </div>
          <div>
             {title}
-         </div>
-         <div>
-            {rightSide}
          </div>
       </div>
    )

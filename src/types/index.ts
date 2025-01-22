@@ -1,7 +1,8 @@
 import React from "react";
 
 export interface Answer {
-   multiplier: number,
+   subjectOfRepetition: number,
+   secondMultiplier: number,
    result: number,
 }
 
@@ -15,7 +16,8 @@ export interface TrainingContextType {
 interface ActionAnswer {
    type: "answer";
    payload: {
-      multiplier: number,
+      subjectOfRepetition: number,
+      secondMultiplier: number,
       result: number,
    }
 }
@@ -46,8 +48,9 @@ export interface ChangeSubjectOfRepetitionDispatch {
 export interface AnswerDispatch {
    type: string;
    payload: {
-      multiplier: number;
-      result: number;
+      subjectOfRepetition: number,
+      secondMultiplier: number,
+      result: number,
    };
 }
 

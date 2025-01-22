@@ -9,21 +9,22 @@
 	min-height: 100vh;
 	margin-right: auto;
 	margin-left: auto;
-	padding: 0 1rem;
+	padding: 1rem;
 
 	@media only screen and ($screen-sm) {
-		padding: 0 0;
+		padding: 1rem 0 0 0;
 	}
 }
 
 .content {
-	min-width: 24rem;
+	display: flex;
+	flex-direction: column;
+	gap: 3rem;
+	width: 100%;
+	max-width: 30rem;
 
 	& > header {
-		min-height: 6rem;
-		display: flex;
-		justify-content: center;
-		align-items: center;
+		border-bottom: 1px solid $borderColor_regular;
 	}
 }
 
