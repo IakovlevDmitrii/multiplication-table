@@ -46,7 +46,8 @@ function trainingReducer(training: TrainingContextType, action: ActionType) {
 		case 'answer': {
 			const newAnswerList: Answer[] = training.answers;
 			newAnswerList.push({
-				multiplier: action.payload.multiplier,
+				subjectOfRepetition: action.payload.subjectOfRepetition,
+				secondMultiplier: action.payload.secondMultiplier,
 				result: action.payload.result,
 			});
 
@@ -55,7 +56,8 @@ function trainingReducer(training: TrainingContextType, action: ActionType) {
 				answers: newAnswerList,
 				remainingMultiplierList: training
 					.remainingMultiplierList
-					.filter((multiplier: number): boolean => multiplier !== action.payload.multiplier),
+					.filter((secondMultiplier: number): boolean =>
+						secondMultiplier !== action.payload.secondMultiplier),
 			}
 		}
 		case 'changeSubjectOfRepetition': {

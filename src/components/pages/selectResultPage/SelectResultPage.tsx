@@ -31,8 +31,8 @@ const SelectResultPage = (): JSX.Element => {
 	const resultCounter = (function () {
 		const results = {correct: 0, wrong: 0};
 
-		answers.forEach(({multiplier, result}: Answer): void => {
-			if(multiplier * subjectOfRepetition === result) {
+		answers.forEach(({secondMultiplier, result}: Answer): void => {
+			if(secondMultiplier * subjectOfRepetition === result) {
 				results.correct++
 			} else {
 				results.wrong++
@@ -42,11 +42,12 @@ const SelectResultPage = (): JSX.Element => {
 		return results
 	})();
 
-	function onVersionClick(multiplier: number, result: number): void {
+	function onVersionClick(result: number): void {
 		dispatch({
 			type: 'answer',
 			payload: {
-				multiplier,
+				subjectOfRepetition,
+				secondMultiplier,
 				result,
 			},
 		});

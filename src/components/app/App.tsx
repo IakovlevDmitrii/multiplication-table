@@ -4,7 +4,7 @@ import AppLayout from "../appLayout";
 import SelectMultiplierPage from "../pages/selectMultiplierPage";
 import MultiplicationTablePage from "../pages/multiplicationTablePage";
 import SelectResultPage from "../pages/selectResultPage";
-import SelectResultSummaryPage from "../pages/selectResultSummaryPage";
+import ResultPage from "../pages/resultPage";
 import '../../styles/styles.module.scss';
 
 const App = () :JSX.Element => {
@@ -20,7 +20,7 @@ const App = () :JSX.Element => {
             <Route path='select-result'>
                <Route index element={<SelectMultiplierPage />} />
                <Route path=':multiplier' element={<SelectResultPage />} />
-               <Route path=':multiplier/summary' element={<SelectResultSummaryPage />} />
+               <Route path=':multiplier/summary' element={<ResultPage />} />
             </Route>
          </Route>
       </Routes>

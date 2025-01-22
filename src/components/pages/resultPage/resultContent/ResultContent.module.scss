@@ -1,0 +1,8 @@
+@import '../../../../styles/const.module';
+
+._ {
+	display: flex;
+	justify-content: center;
+
+	@include example-list;
+}

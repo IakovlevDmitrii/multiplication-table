@@ -22,16 +22,16 @@ export default function Canvas(): React.JSX.Element {
 
 	return (
 		<>
-			<Dot position={pos1} size={45} opacity={0.035} />
-			<Dot position={pos2} size={50} opacity={0.04} />
-			<Dot position={pos3} size={55} opacity={0.045} />
-			<Dot position={pos4} size={60} opacity={0.05} />
-			<Dot position={pos5} size={55} opacity={0.045} />
-			<Dot position={pos6} size={50} opacity={0.04} />
-			<Dot position={pos7} size={45} opacity={0.035} />
-			<Dot position={pos8} size={40} opacity={0.03} />
-			<Dot position={pos9} size={35} opacity={0.025} />
-			<Dot position={pos10} size={30} opacity={0.02} />
+			<Dot position={pos1} size={125} opacity={0.035} />
+			<Dot position={pos2} size={150} opacity={0.04} />
+			<Dot position={pos3} size={175} opacity={0.045} />
+			<Dot position={pos4} size={200} opacity={0.05} />
+			<Dot position={pos5} size={175} opacity={0.045} />
+			<Dot position={pos6} size={150} opacity={0.04} />
+			<Dot position={pos7} size={125} opacity={0.035} />
+			<Dot position={pos8} size={100} opacity={0.03} />
+			<Dot position={pos9} size={75} opacity={0.025} />
+			<Dot position={pos10} size={50} opacity={0.02} />
 		</>
 	);
 }
@@ -46,8 +46,8 @@ function Dot({ position, size, opacity }: DotType): React.JSX.Element {
 	return (
 		<div style={{
 			transform: `translate(${position.x}px, ${position.y}px)`,
-			width: 80,
-			height: 80,
+			width: 200,
+			height: 200,
 			pointerEvents: 'none',
 		}} className={styles.cursor_container}>
 			<div className={styles.cursor}
