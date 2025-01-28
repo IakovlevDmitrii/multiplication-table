@@ -1,17 +1,16 @@
 import { JSX } from "react";
-import { NavLink } from "react-router-dom";
 import HeaderLayout from "../../../headerLayout";
-import arrowToLeft from "../../../../img/arrow-to-left/arrow-to-left_color.png";
-import styles from "./MultiplicationTableHeader.module.scss";
+import LinkBack from "../../../linkBack";
 
 const MultiplicationTableHeader  = (): JSX.Element => (
 	<HeaderLayout
 		leftSide={
-			<NavLink to='/select-multiplier' className={styles.link}>
-				<img src={arrowToLeft} alt='link to select a multiplier' />
-			</NavLink>
+			<LinkBack
+				to='/select-multiplier'
+				alt='link to select a multiplier'
+			/>
 		}
-		title={<h1>{`Запоминай`}</h1>}
+		title={<h1>{`Remember`}</h1>}
 	/>
 );
 

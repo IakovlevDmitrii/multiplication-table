@@ -1,59 +1,42 @@
-import React from "react";
+import React, { JSX } from "react";
 
-export interface Answer {
+export interface Equation {
    subjectOfRepetition: number,
    secondMultiplier: number,
    result: number,
 }
 
 export interface TrainingContextType {
-   answers: Answer[],
+   answers: Equation[],
    multiplierList: number[],
    remainingMultiplierList: number[],
    subjectOfRepetition: number,
 }
 
-interface ActionAnswer {
+export interface Answer {
    type: "answer";
-   payload: {
-      subjectOfRepetition: number,
-      secondMultiplier: number,
-      result: number,
-   }
+   payload: Equation;
 }
-interface ActionChangeSubjectOfRepetition {
+
+export interface ChangeSubjectOfRepetition {
    type: "changeSubjectOfRepetition";
-   payload: {
-      subjectOfRepetition: number
-   }
+   payload: { subjectOfRepetition: number }
 }
-export type ActionType = ActionAnswer | ActionChangeSubjectOfRepetition
+
+export type ActionType = Answer | ChangeSubjectOfRepetition
 
 export interface HeaderLayoutProps {
-   leftSide?: React.JSX.Element,
-   title: React.JSX.Element,
-   rightSide?: React.JSX.Element,
+   leftSide?: JSX.Element,
+   title: JSX.Element,
+   rightSide?: JSX.Element,
 }
 
 export interface PageLayoutProps {
-   header: React.JSX.Element,
-   content: React.JSX.Element,
-}
-
-export interface ChangeSubjectOfRepetitionDispatch {
-   type: string;
-   payload: { subjectOfRepetition: number };
-}
-
-export interface AnswerDispatch {
-   type: string;
-   payload: {
-      subjectOfRepetition: number,
-      secondMultiplier: number,
-      result: number,
-   };
+   header: JSX.Element,
+   content: JSX.Element,
+   myRef?: React.RefObject<HTMLDivElement | null>,
 }
 
 export type DispatchType =
-   | ChangeSubjectOfRepetitionDispatch
-   | AnswerDispatch
+   | ChangeSubjectOfRepetition
+   | Answer

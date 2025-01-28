@@ -24,12 +24,11 @@ const ResultPage = (): JSX.Element => {
 	}, { scope: selectResultSummaryRef });
 
 	return (
-		<div ref={selectResultSummaryRef}>
-			<PageLayout
-				header={<ResultHeader />}
-				content={<ResultContent exampleList={answers}/>}
-			/>
-		</div>
+		<PageLayout
+			header={<ResultHeader />}
+			content={<ResultContent exampleList={answers} />}
+			myRef={selectResultSummaryRef}
+		/>
 	)
 };
 

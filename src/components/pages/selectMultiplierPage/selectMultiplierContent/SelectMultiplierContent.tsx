@@ -4,7 +4,7 @@ import styles from "./SelectMultiplierContent.module.scss";
 
 interface SelectMultiplierListProps {
    multiplierList: number[],
-   handleClick: (index: number) => void;
+   handleClick: (multiplier: number) => void;
 }
 
 const SelectMultiplierContent: FC<SelectMultiplierListProps> = (
@@ -14,13 +14,13 @@ const SelectMultiplierContent: FC<SelectMultiplierListProps> = (
       <article className={styles._}>
          <ol>
             {
-               multiplierList.map((index: number) => (
-                  <li key={index}>
+               multiplierList.map((multiplier: number) => (
+                  <li key={multiplier}>
                      <NavLink
-                        to={`/multiplication-table/${index}`}
-                        onClick={(): void => handleClick(index)}
+                        to={`/multiplication-table/${multiplier}`}
+                        onClick={(): void => handleClick(multiplier)}
                      >
-                        x {index}
+                        * {multiplier}
                      </NavLink>
                   </li>
                ))

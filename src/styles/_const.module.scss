@@ -29,14 +29,14 @@ $screen-xxl: 'min-width: 1400px';
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 1.8rem;
+	gap: 0.8rem;
 	width: 100%;
 
 	.example {
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		height: 2rem;
+		height: 3rem;
 	}
 
 	.condition {
@@ -45,25 +45,26 @@ $screen-xxl: 'min-width: 1400px';
 		font-size: $fontSize_regular;
 	}
 
-	.result_correct, .result_wrong {
+	.result {
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		width: 8rem;
 		height: 3rem;
 		border-radius: $borderRadius_regular;
-	}
-
-	.result_correct {
-		color: $textColor_correct;
 		font-size: $fontSize_regular;
-		border: 1px solid $borderColor_correct;
-	}
+		color: $textColor_regular;
+		border: 1px solid $borderColor_regular;
 
-	.result_wrong {
-		color: $textColor_wrong;
-		font-size: $fontSize_regular;
-		border: 1px solid $borderColor_wrong;
+		&.correct {
+			color: $textColor_correct;
+			border: 1px solid $borderColor_correct;
+		}
+
+		&.wrong {
+			color: $textColor_wrong;
+			border: 1px solid $borderColor_wrong;
+		}
 	}
 }
 

@@ -1,6 +1,6 @@
-import React, {createContext, useReducer, useContext, ReactNode, Context} from "react";
-import {createArrayRange} from '../utils';
-import type {Answer, ActionType, TrainingContextType} from "../types";
+import React, { createContext, useReducer, useContext, ReactNode, Context } from "react";
+import { createArrayRange } from '../utils';
+import type { Equation, ActionType, TrainingContextType } from "../types";
 
 const multiplierList: number[] = createArrayRange(2, 9, 1);
 
@@ -44,7 +44,7 @@ export function useTrainingDispatch(): React.Dispatch<any> {
 function trainingReducer(training: TrainingContextType, action: ActionType) {
 	switch (action.type) {
 		case 'answer': {
-			const newAnswerList: Answer[] = training.answers;
+			const newAnswerList: Equation[] = training.answers;
 			newAnswerList.push({
 				subjectOfRepetition: action.payload.subjectOfRepetition,
 				secondMultiplier: action.payload.secondMultiplier,

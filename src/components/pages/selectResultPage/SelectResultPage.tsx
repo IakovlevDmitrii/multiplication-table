@@ -1,8 +1,8 @@
-import { Dispatch, JSX } from "react";
+import { Dispatch, JSX, useCallback } from "react";
 import PageLayout from "../../pageLayout";
 import SelectResultHeader from "./selectResultHeader";
 import SelectResultContent from "./selectResultContent";
-import type { Answer, DispatchType } from "../../../types";
+import type { Equation, DispatchType } from "../../../types";
 import { fillArrayWithUniqueRandomNumbers, getRandomElementFromArray } from "../../../utils";
 import { useTraining, useTrainingDispatch } from "../../../state/state";
 
@@ -13,25 +13,24 @@ const SelectResultPage = (): JSX.Element => {
 		answers,
 		remainingMultiplierList,
 	} = useTraining();
-
 	const dispatch: Dispatch<DispatchType> = useTrainingDispatch();
 	const isTrainingFinished = !remainingMultiplierList.length;
-	let secondMultiplier: number = getRandomElementFromArray(remainingMultiplierList);
+	const secondMultiplier: number = getRandomElementFromArray(remainingMultiplierList);
 	const versionArray: number[] = fillArrayWithUniqueRandomNumbers(4, 2, 9, secondMultiplier);
 
-	const handleLinkToBack = ()=> {
+	const handleLinkToBack = useCallback(()=> {
 		dispatch({
 			type: 'changeSubjectOfRepetition',
 			payload: {
 				subjectOfRepetition,
 			},
 		})
-	};
+	},[dispatch, subjectOfRepetition]);
 
-	const resultCounter = (function () {
+	const getResultCounter = () => {
 		const results = {correct: 0, wrong: 0};
 
-		answers.forEach(({secondMultiplier, result}: Answer): void => {
+		answers.forEach(({ secondMultiplier, result }: Equation): void => {
 			if(secondMultiplier * subjectOfRepetition === result) {
 				results.correct++
 			} else {
@@ -39,21 +38,32 @@ const SelectResultPage = (): JSX.Element => {
 			}
 		});
 
-		return results
-	})();
+		return results;
+	};
 
-	function onVersionClick(result: number): void {
+	const resultCounter = getResultCounter();
+
+	const onVersionClick = useCallback((value: number): void => {
 		dispatch({
 			type: 'answer',
 			payload: {
 				subjectOfRepetition,
 				secondMultiplier,
-				result,
+				result: value,
 			},
-		});
+		})
+	},[dispatch,subjectOfRepetition, secondMultiplier]);
 
-		secondMultiplier = getRandomElementFromArray(remainingMultiplierList);
-	}
+	const contentProps = {
+		questionsTotal: multiplierList.length,
+		correct: resultCounter.correct,
+		wrong: resultCounter.wrong,
+		isTrainingFinished: isTrainingFinished,
+		subjectOfRepetition: subjectOfRepetition,
+		secondMultiplier: secondMultiplier,
+		versionArray: versionArray,
+		onVersionClick: onVersionClick,
+	};
 
 	return (
 		<PageLayout
@@ -64,18 +74,7 @@ const SelectResultPage = (): JSX.Element => {
 					handleClick={handleLinkToBack}
 				/>
 			}
-			content={
-				<SelectResultContent
-					questionsTotal={multiplierList.length}
-					correct={resultCounter.correct}
-					wrong={resultCounter.wrong}
-					isTrainingFinished={isTrainingFinished}
-					subjectOfRepetition={subjectOfRepetition}
-					secondMultiplier={secondMultiplier}
-					versionArray={versionArray}
-					onVersionClick={onVersionClick}
-				/>
-			}
+			content={<SelectResultContent contentProps={contentProps} />}
 		/>
 	)
 };

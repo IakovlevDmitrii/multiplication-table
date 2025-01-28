@@ -15,10 +15,10 @@ const ResultCounter: FC<ResultCounterProps> = (
 		</div>
 		<div className={styles.answers}>
 			<div>
-				{`верно: ${correct}`}
+				{`Correct: ${correct}`}
 			</div>
 			<div>
-				{`не верно: ${wrong}`}
+				{`Wrong: ${wrong}`}
 			</div>
 		</div>
 	</div>

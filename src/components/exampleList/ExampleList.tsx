@@ -1,13 +1,15 @@
 import { FC } from "react";
-import type { Answer } from "../../types";
+import type { Equation } from "../../types";
+import classNames from "classnames";
 import styles from './ExampleList.module.scss';
 
 interface ExampleListProps {
-	exampleList: Answer[]
+	exampleList: Equation[],
+	isDefault: boolean,
 }
 
 const ExampleList: FC<ExampleListProps> = (
-	{ exampleList }) => {
+	{ exampleList, isDefault }) => {
 
 	return (
 		<ol className={styles._}>
@@ -15,7 +17,7 @@ const ExampleList: FC<ExampleListProps> = (
 				exampleList.map((
 					{ subjectOfRepetition, secondMultiplier, result }) => {
 
-					const isCorrect = subjectOfRepetition * secondMultiplier === result;
+					const isSuccess = subjectOfRepetition * secondMultiplier === result;
 
 					return (
 						<li key={secondMultiplier}>
@@ -23,7 +25,10 @@ const ExampleList: FC<ExampleListProps> = (
 								<div className={styles.condition}>
 									{`${subjectOfRepetition} * ${secondMultiplier} = `}
 								</div>
-								<div className={isCorrect ? styles.result_correct : styles.result_wrong}>
+								<div className={classNames(styles.result, {
+									[styles.correct]: !isDefault && isSuccess,
+									[styles.wrong]: !isDefault && !isSuccess,
+								}) }>
 									{`${result}`}
 								</div>
 							</div>

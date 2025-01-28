@@ -1,8 +1,6 @@
 import { JSX, FC } from "react";
-import { NavLink } from "react-router-dom";
 import HeaderLayout from "../../../headerLayout";
-import arrowToLeft from "../../../../img/arrow-to-left/arrow-to-left_color.png";
-import styles from './SelectResultHeader.module.scss';
+import LinkBack from "../../../linkBack";
 
 interface SelectResultHeaderProps {
 	isTrainingFinished: boolean;
@@ -18,23 +16,20 @@ const SelectResultHeader: FC<SelectResultHeaderProps> = (
 	}) => {
 
 	const leftSide: JSX.Element = (
-		<NavLink
+		<LinkBack
 			to={`/multiplication-table/${subjectOfRepetition}`}
-			className={styles.link}
-			onClick={() => handleClick()}
-		>
-			<img src={arrowToLeft} alt='link to multiplication table' />
-		</NavLink>
+			alt='link to multiplication table'
+			handleClick={() => handleClick()}
+		/>
 	);
 
-	const title: JSX.Element = isTrainingFinished ?
-		<h1>Твой результат</h1>
-		:
-		<h1>Выбери ответ</h1>
+	const title: JSX.Element = (
+		<h1>
+			{isTrainingFinished ? 'Your result' : 'Choose an answer'}
+		</h1>
+	);
 
-	return (
-		<HeaderLayout leftSide={leftSide} title={title} />
-	)
+	return <HeaderLayout leftSide={leftSide} title={title} />
 };
 
 export default SelectResultHeader;

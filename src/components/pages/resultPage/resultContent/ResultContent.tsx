@@ -1,10 +1,10 @@
 import { FC } from "react";
 import ExampleList from "../../../exampleList";
-import type { Answer } from "../../../../types";
+import type { Equation } from "../../../../types";
 import styles from "./ResultContent.module.scss";
 
 interface ResultListProps {
-   exampleList: Answer[]
+   exampleList: Equation[]
 }
 
 const ResultContent: FC<ResultListProps> = (
@@ -12,7 +12,7 @@ const ResultContent: FC<ResultListProps> = (
 
    return (
       <article className={styles._}>
-         <ExampleList exampleList={exampleList} />
+         <ExampleList exampleList={exampleList} isDefault={false} />
       </article>
    )
 };

@@ -2,7 +2,7 @@ import { JSX, useRef } from 'react';
 import PageLayout from "../../pageLayout";
 import MultiplicationTableHeader from "./multiplicationTableHeader";
 import MultiplicationTableContent from "./multiplicationContent";
-import type { Answer } from "../../../types";
+import type { Equation } from "../../../types";
 import { useTraining } from "../../../state/state";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -15,17 +15,18 @@ const MultiplicationTablePage = (): JSX.Element => {
 		subjectOfRepetition,
 	} = useTraining();
 
-	const getExampleList = (): Answer[] => {
-		const list: Answer[] = [];
+	const getEquationList = (): Equation[] => {
+		const equationsList: Equation[] = [];
+
 		multiplierList.forEach(multiplier => {
-			list.push({
+			equationsList.push({
 				subjectOfRepetition,
 				secondMultiplier: multiplier,
 				result: subjectOfRepetition * multiplier,
 			})
 		})
 
-		return list;
+		return equationsList;
 	};
 
 	const multiplicationTablePageRef = useRef<HTMLDivElement>(null);
@@ -44,17 +45,16 @@ const MultiplicationTablePage = (): JSX.Element => {
 	}, { scope: multiplicationTablePageRef });
 
 	return (
-		<div ref={multiplicationTablePageRef}>
-			<PageLayout
-				header={<MultiplicationTableHeader />}
-				content={
-					<MultiplicationTableContent
-						subjectOfRepetition={subjectOfRepetition}
-						exampleList={getExampleList()}
-					/>
-				}
-			/>
-		</div>
+		<PageLayout
+			header={<MultiplicationTableHeader />}
+			content={
+				<MultiplicationTableContent
+					subjectOfRepetition={subjectOfRepetition}
+					exampleList={getEquationList()}
+				/>
+			}
+			myRef={multiplicationTablePageRef}
+		/>
 	)
 };
 
