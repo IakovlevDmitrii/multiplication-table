@@ -25,7 +25,7 @@ const SelectResultHeader: FC<SelectResultHeaderProps> = (
 
 	const title: JSX.Element = (
 		<h1>
-			{isTrainingFinished ? 'Your result' : 'Choose an answer'}
+			{isTrainingFinished ? 'Your result' : 'Choose a solution'}
 		</h1>
 	);
 

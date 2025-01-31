@@ -1,65 +1,64 @@
-import { Dispatch, JSX, useCallback } from "react";
+import { JSX, useCallback } from "react";
 import PageLayout from "../../pageLayout";
 import SelectResultHeader from "./selectResultHeader";
 import SelectResultContent from "./selectResultContent";
-import type { Equation, DispatchType } from "../../../types";
-import { fillArrayWithUniqueRandomNumbers, getRandomElementFromArray } from "../../../utils";
-import { useTraining, useTrainingDispatch } from "../../../state/state";
+import { useAppDispatch, useAppSelector } from "../../../features/hooks";
+import {
+	multiplicationSolution,
+	deleteMultiplicationSolution,
+	selectSolutions,
+} from "../../../store/solutionsSlice";
+import {
+	selectEquations,
+	changeSubjectOfRepetition_multiplication,
+	decreaseRemainingMultiplierList,
+} from "../../../store/equationsSlice";
+import {
+	fillArrayWithUniqueRandomNumbers,
+	getMultiplicationResultCounter,
+	getRandomElementFromArray,
+} from "../../../utils";
 
 const SelectResultPage = (): JSX.Element => {
+	const solutions = useAppSelector(selectSolutions);
+	const { multiplication } = useAppSelector(selectEquations);
 	const {
-		subjectOfRepetition,
 		multiplierList,
-		answers,
 		remainingMultiplierList,
-	} = useTraining();
-	const dispatch: Dispatch<DispatchType> = useTrainingDispatch();
+		currentSubjectOfRepetition,
+	} = multiplication;
+
+	const dispatch = useAppDispatch();
+
 	const isTrainingFinished = !remainingMultiplierList.length;
 	const secondMultiplier: number = getRandomElementFromArray(remainingMultiplierList);
 	const versionArray: number[] = fillArrayWithUniqueRandomNumbers(4, 2, 9, secondMultiplier);
 
 	const handleLinkToBack = useCallback(()=> {
-		dispatch({
-			type: 'changeSubjectOfRepetition',
-			payload: {
-				subjectOfRepetition,
-			},
-		})
-	},[dispatch, subjectOfRepetition]);
+		dispatch(
+			changeSubjectOfRepetition_multiplication(currentSubjectOfRepetition));
+		dispatch(
+			deleteMultiplicationSolution())
+	}, [dispatch, currentSubjectOfRepetition]);
 
-	const getResultCounter = () => {
-		const results = {correct: 0, wrong: 0};
+	const resultCounter = getMultiplicationResultCounter(
+		solutions.multiplication);
 
-		answers.forEach(({ secondMultiplier, result }: Equation): void => {
-			if(secondMultiplier * subjectOfRepetition === result) {
-				results.correct++
-			} else {
-				results.wrong++
-			}
-		});
-
-		return results;
-	};
-
-	const resultCounter = getResultCounter();
-
-	const onVersionClick = useCallback((value: number): void => {
-		dispatch({
-			type: 'answer',
-			payload: {
-				subjectOfRepetition,
-				secondMultiplier,
-				result: value,
-			},
-		})
-	},[dispatch,subjectOfRepetition, secondMultiplier]);
+	const onVersionClick = useCallback((version: number): void => {
+		dispatch(multiplicationSolution({
+			subjectOfRepetition: currentSubjectOfRepetition,
+			secondMultiplier,
+			product: version,
+		}));
+		dispatch(decreaseRemainingMultiplierList(secondMultiplier));
+	}, [dispatch,currentSubjectOfRepetition, secondMultiplier]);
 
 	const contentProps = {
 		questionsTotal: multiplierList.length,
 		correct: resultCounter.correct,
 		wrong: resultCounter.wrong,
 		isTrainingFinished: isTrainingFinished,
-		subjectOfRepetition: subjectOfRepetition,
+		subjectOfRepetition: currentSubjectOfRepetition,
 		secondMultiplier: secondMultiplier,
 		versionArray: versionArray,
 		onVersionClick: onVersionClick,
@@ -70,7 +69,7 @@ const SelectResultPage = (): JSX.Element => {
 			header={
 				<SelectResultHeader
 					isTrainingFinished={isTrainingFinished}
-					subjectOfRepetition={subjectOfRepetition}
+					subjectOfRepetition={currentSubjectOfRepetition}
 					handleClick={handleLinkToBack}
 				/>
 			}

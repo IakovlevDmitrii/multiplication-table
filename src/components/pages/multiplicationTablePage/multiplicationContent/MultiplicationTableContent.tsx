@@ -1,18 +1,18 @@
 import { FC } from "react";
 import { NavLink } from "react-router-dom";
-import ExampleList from "../../../exampleList";
-import type { Equation } from "../../../../types";
+import MultiplicationSolutionsList from "../../../multiplicationSolutionsList";
+import type { Solution_Multiplication } from "../../../../types";
 import styles from "./MultiplicationTableContent.module.scss";
 
 interface MultiplicationTableProps {
    subjectOfRepetition: number,
-   exampleList: Equation[],
+   solutionsList: Solution_Multiplication[],
 }
 
 const MultiplicationTableContent: FC<MultiplicationTableProps> = (
-   { subjectOfRepetition, exampleList }) => (
+   { subjectOfRepetition, solutionsList }) => (
    <article className={styles._}>
-      <ExampleList exampleList={exampleList} isDefault={true} />
+      <MultiplicationSolutionsList solutionsList={solutionsList} isDefault={true} />
       <div className={styles.links}>
          <NavLink to={`/select-result/${subjectOfRepetition}`}>
             {'Check yourself'}

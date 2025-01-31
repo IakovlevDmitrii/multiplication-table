@@ -1,26 +1,25 @@
-import { JSX, Dispatch, useRef, useCallback } from 'react';
+import { JSX, useRef, useCallback } from 'react';
 import PageLayout from "../../pageLayout";
 import SelectMultiplierHeader from "./selectMultiplierHeader";
 import SelectMultiplierContent from "./selectMultiplierContent";
-import { useTraining, useTrainingDispatch } from "../../../state/state";
-import type { ChangeSubjectOfRepetition } from "../../../types";
+import { useAppDispatch, useAppSelector } from "../../../features/hooks";
+import {
+   selectEquations,
+   changeSubjectOfRepetition_multiplication } from "../../../store/equationsSlice";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(useGSAP);
 
 const SelectMultiplierPage = (): JSX.Element => {
-   const { multiplierList } = useTraining();
-   const dispatch: Dispatch<ChangeSubjectOfRepetition> = useTrainingDispatch();
+   const { multiplication } = useAppSelector(selectEquations);
+   const dispatch = useAppDispatch();
 
-   const handleChangeSubjectOfRepetition = useCallback((subjectOfRepetition: number): void => {
-      dispatch({
-         type: 'changeSubjectOfRepetition',
-         payload: {
-            subjectOfRepetition,
-         },
-      })
-   }, [dispatch]);
+   const onSelectMultiplier = useCallback(
+      (newSubjectOfRepetition: number): void => {
+         dispatch(changeSubjectOfRepetition_multiplication(newSubjectOfRepetition)
+      )}, [dispatch]
+   );
 
    const selectMultiplierPageRef = useRef<HTMLDivElement>(null);
 
@@ -39,8 +38,8 @@ const SelectMultiplierPage = (): JSX.Element => {
          header={<SelectMultiplierHeader />}
          content={
             <SelectMultiplierContent
-               multiplierList={multiplierList}
-               handleClick={handleChangeSubjectOfRepetition}
+               multiplierList={multiplication.multiplierList}
+               onSelectMultiplier={onSelectMultiplier}
             />
          }
          myRef={selectMultiplierPageRef}

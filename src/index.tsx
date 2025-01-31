@@ -1,17 +1,18 @@
 import React from 'react';
-import * as ReactDOM from 'react-dom/client';
+import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from "react-redux";
 import App from './components/app';
-import { TrainingProvider } from "./state/state";
+import store from "./store/store";
 
-const root = document.getElementById("root")!;
+const root = createRoot(document.getElementById('root')!)
 
-ReactDOM.createRoot(root).render(
-   <TrainingProvider>
+root.render(
+   <Provider store={store}>
       <BrowserRouter>
          <React.StrictMode>
             <App />
          </React.StrictMode>
       </BrowserRouter>
-   </TrainingProvider>
+   </Provider>
 );

@@ -1,18 +1,18 @@
 import { FC } from "react";
-import ExampleList from "../../../exampleList";
-import type { Equation } from "../../../../types";
+import MultiplicationSolutionsList from "../../../multiplicationSolutionsList";
+import type { Solution_Multiplication } from "../../../../types";
 import styles from "./ResultContent.module.scss";
 
 interface ResultListProps {
-   exampleList: Equation[]
+   solutionsList: Solution_Multiplication[]
 }
 
 const ResultContent: FC<ResultListProps> = (
-   { exampleList }) => {
+   { solutionsList }) => {
 
    return (
       <article className={styles._}>
-         <ExampleList exampleList={exampleList} isDefault={false} />
+         <MultiplicationSolutionsList solutionsList={solutionsList} isDefault={false} />
       </article>
    )
 };

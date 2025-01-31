@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@gsap/react": "^2.1.2",
+    "@reduxjs/toolkit": "^2.5.1",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.10.2",
     "@types/react": "^19.0.2",
@@ -12,8 +13,11 @@
     "cra-template": "1.2.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-redux": "^9.2.0",
     "react-router-dom": "^7.1.1",
     "react-scripts": "5.0.1",
+    "redux": "^5.0.1",
+    "redux-logger": "^3.0.6",
     "sass": "^1.83.0"
   },
   "scripts": {
@@ -39,5 +43,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/redux-logger": "^3.0.13"
   }
 }

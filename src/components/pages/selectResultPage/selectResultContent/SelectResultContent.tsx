@@ -19,7 +19,6 @@ interface SelectResultProps {
 
 const SelectResultContent: FC<SelectResultProps> = (
 	{ contentProps }) => {
-
 	const {
 		questionsTotal,
 		correct,
