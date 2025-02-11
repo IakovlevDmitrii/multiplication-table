@@ -17,7 +17,7 @@
 		justify-content: center;
 		align-items: center;
 		width: 7rem;
-		height: 4rem;
+		height: 3.5rem;
 	}
 
 	a {
@@ -26,9 +26,9 @@
 		align-items: center;
 		width: 100%;
 		height: 100%;
-		color: $textColor_regular;
 		font-size: $fontSize_regular;
-		border: 1px solid $borderColor_regular;
+		background-color: var(--background-color__opacity);
+		border: 1px solid var(--border-color__opacity);
 		border-radius: $borderRadius_regular;
 	}
 }

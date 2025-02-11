@@ -1,20 +1,20 @@
-import { JSX, FC } from "react";
+import { FC, JSX } from "react";
 import HeaderLayout from "../../../headerLayout";
 import LinkBack from "../../../linkBack";
 
-interface SelectResultHeaderProps {
+interface TrainingFinishedHeaderProps {
 	subjectOfRepetition: number;
 	handleClick: () => void;
-	title: JSX.Element;
+	title: JSX.Element,
 }
 
-const SelectResultHeader: FC<SelectResultHeaderProps> = (
+const TrainingFinishedHeader: FC<TrainingFinishedHeaderProps> = (
 	{
 		subjectOfRepetition,
 		handleClick,
 		title,
-	}) => {
-
+	}
+) => {
 	const leftSide: JSX.Element = (
 		<LinkBack
 			to={`/multiplication-table/${subjectOfRepetition}`}
@@ -31,4 +31,4 @@ const SelectResultHeader: FC<SelectResultHeaderProps> = (
 	)
 };
 
-export default SelectResultHeader;
+export default TrainingFinishedHeader;

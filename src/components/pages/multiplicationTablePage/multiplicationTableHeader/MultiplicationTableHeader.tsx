@@ -1,8 +1,13 @@
-import { JSX } from "react";
+import { FC, JSX } from "react";
 import HeaderLayout from "../../../headerLayout";
 import LinkBack from "../../../linkBack";
 
-const MultiplicationTableHeader  = (): JSX.Element => (
+interface MultiplicationTableHeaderProps {
+	title: JSX.Element;
+}
+
+const MultiplicationTableHeader: FC<MultiplicationTableHeaderProps>  = (
+	{ title }): JSX.Element => (
 	<HeaderLayout
 		leftSide={
 			<LinkBack
@@ -10,7 +15,7 @@ const MultiplicationTableHeader  = (): JSX.Element => (
 				alt='link to select a multiplier'
 			/>
 		}
-		title={<h1>{`Remember`}</h1>}
+		title={title}
 	/>
 );
 

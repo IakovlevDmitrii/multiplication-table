@@ -1,4 +1,5 @@
 import { FC } from "react";
+import classNames from "classnames";
 import styles from "./SelectionButton.module.scss";
 
 interface SelectionButtonProps {
@@ -9,7 +10,7 @@ interface SelectionButtonProps {
 const SelectionButton: FC<SelectionButtonProps> = (
 	{ value, handleClick }) => (
 	<button
-		className={styles._}
+		className={classNames(styles._, styles.opacity)}
 		type="button"
 		onClick={(): void => handleClick(value)}
 	>

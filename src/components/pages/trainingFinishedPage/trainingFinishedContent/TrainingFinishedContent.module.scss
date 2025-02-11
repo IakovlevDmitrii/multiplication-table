@@ -1,10 +1,8 @@
 @import '../../../../styles/const.module';
 
-._ {
+.content {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
-	align-items: center;
 	gap: 3rem;
 }
 
@@ -12,17 +10,16 @@
 	display: flex;
 	justify-content: center;
 	align-items: flex-start;
+	padding: 1rem 0;
 
 	a {
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		width: 100%;
 		padding: 1rem 2rem;
-		text-align: center;
-		color: var(--text-color);
-		border: 1px solid var(--border-color);
 		font-size: $fontSize_regular;
+		text-align: center;
+		background-color: var(--background-color__opacity);
+		border: 1px solid var(--border-color__opacity);
 	}
 }
-

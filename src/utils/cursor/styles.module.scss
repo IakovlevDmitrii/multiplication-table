@@ -10,7 +10,7 @@
 }
 
 .cursor {
-	background-color: $textColor_regular;
+	background-color: var(--text-color);
 	border-radius: 50%;
 	pointer-events: none;
 }

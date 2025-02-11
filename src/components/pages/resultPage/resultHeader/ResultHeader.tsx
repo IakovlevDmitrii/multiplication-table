@@ -1,13 +1,14 @@
-import { FC } from "react";
+import { JSX, FC } from "react";
 import HeaderLayout from "../../../headerLayout";
 import LinkBack from "../../../linkBack";
 
 interface ResultHeaderProps {
-	handleClick: () => void
+	handleClick: () => void,
+	title: JSX.Element,
 }
 
 const ResultHeader: FC<ResultHeaderProps> = (
-	{ handleClick }) => {
+	{ handleClick, title }) => {
 	const leftSide = (
 		<LinkBack
 			to='/select-result'
@@ -19,7 +20,7 @@ const ResultHeader: FC<ResultHeaderProps> = (
 	return (
 		<HeaderLayout
 			leftSide={leftSide}
-			title={<h1>Your answers</h1>}
+			title={title}
 		/>
 	)
 };

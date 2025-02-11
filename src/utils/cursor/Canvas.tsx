@@ -50,13 +50,14 @@ function Dot({ position, size, opacity }: DotType): React.JSX.Element {
 			height: 200,
 			pointerEvents: 'none',
 		}} className={styles.cursor_container}>
-			<div className={styles.cursor}
-			style={{
-				opacity,
-				width: size,
-				height: size,
-			}}>
-
+			<div
+				className={styles.cursor}
+				style={{
+					opacity,
+					width: size,
+					height: size,
+				}}
+			>
 			</div>
 		</div>
 	);

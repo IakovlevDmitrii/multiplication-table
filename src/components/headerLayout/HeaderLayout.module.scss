@@ -5,7 +5,7 @@
 	grid-template-rows: 2rem 6rem;
 	grid-template-columns: 1fr 1fr;
 	width: 100%;
-	border-bottom: 1px solid $borderColor_regular;
+	border-bottom: 1px solid var(--border-color);
 
 	div:first-child {
 		display: flex;
@@ -17,6 +17,7 @@
 		display: flex;
 		justify-content: flex-end;
 		align-items: center;
+		gap: 1rem;
 	}
 
 	div:last-child {
@@ -27,7 +28,6 @@
 		align-items: center;
 		text-align: center;
 		min-height: 6rem;
-		color: $textColor_regular;
 		font-size: $fontSize_title;
 	}
 }

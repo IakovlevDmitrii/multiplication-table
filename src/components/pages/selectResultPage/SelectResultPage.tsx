@@ -1,12 +1,13 @@
 import { JSX, useCallback } from "react";
+import TrainingFinishedPage from "../trainingFinishedPage";
 import PageLayout from "../../pageLayout";
 import SelectResultHeader from "./selectResultHeader";
 import SelectResultContent from "./selectResultContent";
 import { useAppDispatch, useAppSelector } from "../../../features/hooks";
+import { selectUi } from "../../../store/uiSlice";
 import {
 	multiplicationSolution,
 	deleteMultiplicationSolution,
-	selectSolutions,
 } from "../../../store/solutionsSlice";
 import {
 	selectEquations,
@@ -15,19 +16,17 @@ import {
 } from "../../../store/equationsSlice";
 import {
 	fillArrayWithUniqueRandomNumbers,
-	getMultiplicationResultCounter,
 	getRandomElementFromArray,
 } from "../../../utils";
+import contentTexts from "../../../features/contentTexts";
 
 const SelectResultPage = (): JSX.Element => {
-	const solutions = useAppSelector(selectSolutions);
+	const { lang } = useAppSelector(selectUi);
 	const { multiplication } = useAppSelector(selectEquations);
 	const {
-		multiplierList,
 		remainingMultiplierList,
 		currentSubjectOfRepetition,
 	} = multiplication;
-
 	const dispatch = useAppDispatch();
 
 	const isTrainingFinished = !remainingMultiplierList.length;
@@ -38,11 +37,14 @@ const SelectResultPage = (): JSX.Element => {
 		dispatch(
 			changeSubjectOfRepetition_multiplication(currentSubjectOfRepetition));
 		dispatch(
-			deleteMultiplicationSolution())
+			deleteMultiplicationSolution());
 	}, [dispatch, currentSubjectOfRepetition]);
 
-	const resultCounter = getMultiplicationResultCounter(
-		solutions.multiplication);
+	const title = (
+		<h1>
+			{contentTexts.selectResultPage.header[lang]}
+		</h1>
+	);
 
 	const onVersionClick = useCallback((version: number): void => {
 		dispatch(multiplicationSolution({
@@ -53,27 +55,27 @@ const SelectResultPage = (): JSX.Element => {
 		dispatch(decreaseRemainingMultiplierList(secondMultiplier));
 	}, [dispatch,currentSubjectOfRepetition, secondMultiplier]);
 
-	const contentProps = {
-		questionsTotal: multiplierList.length,
-		correct: resultCounter.correct,
-		wrong: resultCounter.wrong,
-		isTrainingFinished: isTrainingFinished,
-		subjectOfRepetition: currentSubjectOfRepetition,
-		secondMultiplier: secondMultiplier,
-		versionArray: versionArray,
-		onVersionClick: onVersionClick,
-	};
+	if(isTrainingFinished) {
+		return <TrainingFinishedPage/>
+	}
 
 	return (
 		<PageLayout
 			header={
 				<SelectResultHeader
-					isTrainingFinished={isTrainingFinished}
 					subjectOfRepetition={currentSubjectOfRepetition}
 					handleClick={handleLinkToBack}
+					title={title}
 				/>
 			}
-			content={<SelectResultContent contentProps={contentProps} />}
+			content={
+				<SelectResultContent
+					subjectOfRepetition={currentSubjectOfRepetition}
+					secondMultiplier={secondMultiplier}
+					versionArray={versionArray}
+					onVersionClick={onVersionClick}
+				/>
+			}
 		/>
 	)
 };

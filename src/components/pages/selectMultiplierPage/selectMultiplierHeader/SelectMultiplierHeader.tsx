@@ -1,8 +1,15 @@
-import { JSX } from 'react';
+import { FC, JSX } from 'react';
 import HeaderLayout from "../../../headerLayout";
 
-const SelectMultiplierHeader = (): JSX.Element => (
-	<HeaderLayout title={<h1>Select a multiplier</h1>} />
+interface SelectMultiplierHeaderProps {
+	title: JSX.Element,
+}
+
+const SelectMultiplierHeader: FC<SelectMultiplierHeaderProps> = (
+	{ title }): JSX.Element => (
+	<HeaderLayout
+		title={title}
+	/>
 );
 
 export default SelectMultiplierHeader;
