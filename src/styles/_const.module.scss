@@ -16,6 +16,7 @@ $borderColor_wrong: $color_wrong__dark;
 :root[data-theme="light"] {
 	--background-color: rgba(192, 224, 240, 1);
 	--background-color__opacity: rgba(173, 217, 240, 1);
+	--background-color__cursor: rgba(32, 120, 224, 1);
 	--text-color: rgba(40, 40, 40, 1);
 	--text-color_correct: #4c8150;
 	--text-color_wrong: #a66969;
@@ -28,6 +29,7 @@ $borderColor_wrong: $color_wrong__dark;
 :root[data-theme="dark"] {
 	--background-color: rgba(64, 64, 64, 1);
 	--background-color__opacity: rgba(72, 72, 72, 1);
+	--background-color__cursor: rgba(173, 217, 240, 1);
 	--text-color: rgba(200, 220, 220, 1);
 	--text-color_correct: #c3f3c3;
 	--text-color_wrong: #e8c1c1;
@@ -67,6 +69,9 @@ $screen-xl:  'min-width: 1200px';
 $screen-xxl: 'min-width: 1400px';
 
 /* ---------- blocks ---------- */
+// --- cursor ---
+$cursor-size: 200px;
+
 @mixin example-list {
 	display: flex;
 	flex-direction: column;

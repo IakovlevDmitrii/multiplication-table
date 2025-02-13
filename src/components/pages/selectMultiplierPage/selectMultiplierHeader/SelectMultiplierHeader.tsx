@@ -1,15 +1,15 @@
-import { FC, JSX } from 'react';
+import { FC } from 'react';
 import HeaderLayout from "../../../headerLayout";
+import { useAppSelector } from "../../../../features/hooks";
+import { selectUi } from "../../../../store/uiSlice";
+import contentTexts from "../../../../features/contentTexts";
 
-interface SelectMultiplierHeaderProps {
-	title: JSX.Element,
-}
+const SelectMultiplierHeader: FC = () => {
+	const { lang } = useAppSelector(selectUi);
+	const titleText = contentTexts.selectMultiplierPage.title[lang];
+	const title = <h1>{titleText}</h1>
 
-const SelectMultiplierHeader: FC<SelectMultiplierHeaderProps> = (
-	{ title }): JSX.Element => (
-	<HeaderLayout
-		title={title}
-	/>
-);
+	return <HeaderLayout title={title} />
+};
 
 export default SelectMultiplierHeader;

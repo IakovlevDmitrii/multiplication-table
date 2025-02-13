@@ -2,15 +2,18 @@
 
 .cursor_container {
 	position: absolute;
+	width: $cursor-size;
+	height: $cursor-size;
 	left: -100px;
 	top: -100px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	pointer-events: none;
 }
 
 .cursor {
-	background-color: var(--text-color);
+	background-color: var(--background-color__cursor);
 	border-radius: 50%;
 	pointer-events: none;
 }

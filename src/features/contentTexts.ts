@@ -1,6 +1,6 @@
 const contentTexts = {
 	multiplicationTablePage: {
-		header: {
+		title: {
 			eng: "Remember",
 			ru: "Запомни",
 		},
@@ -10,19 +10,19 @@ const contentTexts = {
 		}
 	},
 	resultPage: {
-		header: {
+		title: {
 			eng: "Your answers",
 			ru: "Твои ответы",
 		},
 	},
 	selectMultiplierPage: {
-		header: {
+		title: {
 			eng: "Select a multiplier",
 			ru: "Выбери множитель",
 		},
 	},
 	selectResultPage: {
-		header: {
+		title: {
 			eng: "Choose a solution",
 			ru: "Выбери решение",
 		},
@@ -36,7 +36,7 @@ const contentTexts = {
 		},
 	},
 	trainingFinishedPage: {
-		header: {
+		title: {
 			eng: "Your result",
 			ru: "Твой результат",
 		},

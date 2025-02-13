@@ -17,7 +17,7 @@ const MultiplicationTablePage = (): JSX.Element => {
 	const { multiplication } = useAppSelector(selectEquations);
 	const title = (
 		<h1>
-			{contentTexts.multiplicationTablePage.header[lang]}
+			{contentTexts.multiplicationTablePage.title[lang]}
 		</h1>
 	);
 	const { currentSubjectOfRepetition, multiplierList } = multiplication;

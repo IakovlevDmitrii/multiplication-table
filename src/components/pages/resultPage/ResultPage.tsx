@@ -21,7 +21,7 @@ const ResultPage = (): JSX.Element => {
 		dispatch(changeSubjectOfRepetition_multiplication(2))
 	}, [dispatch]);
 	const title = (
-		<h1>{contentTexts.resultPage.header[lang]}</h1>
+		<h1>{contentTexts.resultPage.title[lang]}</h1>
 	);
 
 	const selectResultSummaryRef = useRef<HTMLDivElement>(null);

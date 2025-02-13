@@ -1,10 +1,9 @@
-import { JSX, useCallback } from "react";
+import { FC, useCallback, useRef } from "react";
 import TrainingFinishedPage from "../trainingFinishedPage";
 import PageLayout from "../../pageLayout";
 import SelectResultHeader from "./selectResultHeader";
 import SelectResultContent from "./selectResultContent";
 import { useAppDispatch, useAppSelector } from "../../../features/hooks";
-import { selectUi } from "../../../store/uiSlice";
 import {
 	multiplicationSolution,
 	deleteMultiplicationSolution,
@@ -18,20 +17,21 @@ import {
 	fillArrayWithUniqueRandomNumbers,
 	getRandomElementFromArray,
 } from "../../../utils";
-import contentTexts from "../../../features/contentTexts";
+import gsap from "gsap";
 
-const SelectResultPage = (): JSX.Element => {
-	const { lang } = useAppSelector(selectUi);
+const SelectResultPage: FC = () => {
 	const { multiplication } = useAppSelector(selectEquations);
 	const {
 		remainingMultiplierList,
 		currentSubjectOfRepetition,
 	} = multiplication;
 	const dispatch = useAppDispatch();
+	const buttonsRef = useRef<(HTMLButtonElement | null)[]>([]);
 
 	const isTrainingFinished = !remainingMultiplierList.length;
 	const secondMultiplier: number = getRandomElementFromArray(remainingMultiplierList);
-	const versionArray: number[] = fillArrayWithUniqueRandomNumbers(4, 2, 9, secondMultiplier);
+	const versions: number[] = fillArrayWithUniqueRandomNumbers(4, 2, 9, secondMultiplier);
+	const correctIndex = versions.indexOf(secondMultiplier);
 
 	const handleLinkToBack = useCallback(()=> {
 		dispatch(
@@ -40,20 +40,52 @@ const SelectResultPage = (): JSX.Element => {
 			deleteMultiplicationSolution());
 	}, [dispatch, currentSubjectOfRepetition]);
 
-	const title = (
-		<h1>
-			{contentTexts.selectResultPage.header[lang]}
-		</h1>
-	);
 
-	const onVersionClick = useCallback((version: number): void => {
-		dispatch(multiplicationSolution({
-			subjectOfRepetition: currentSubjectOfRepetition,
-			secondMultiplier,
-			product: version,
-		}));
-		dispatch(decreaseRemainingMultiplierList(secondMultiplier));
-	}, [dispatch,currentSubjectOfRepetition, secondMultiplier]);
+	const onVersionClick =	(
+		isCorrect: boolean, value: number, index: number): void => {
+
+		const button = buttonsRef.current[index];
+		const correctButton = buttonsRef.current[correctIndex];
+
+		const tl = gsap.timeline();
+
+		tl.to(button, {
+			backgroundColor: isCorrect ? "#4CAF50" : "#F44336",
+			duration: 0.3,
+			ease: "power2.out",
+		});
+
+		if (!isCorrect && correctButton) {
+			tl.to(correctButton, {
+				backgroundColor: "#4CAF50",
+				duration: 0.3,
+				delay: 0.2,
+			});
+		}
+
+		// ⚡ Здесь вызываем `onComplete`, чтобы `dispatch` сработал раньше
+		tl.to(button, {
+			backgroundColor: "",
+			duration: 0.5,
+			delay: 0.3, // Уменьшаем задержку
+			onComplete: () => {
+				dispatch(multiplicationSolution({
+					subjectOfRepetition: currentSubjectOfRepetition,
+					secondMultiplier,
+					product: value,
+				}));
+				dispatch(decreaseRemainingMultiplierList(secondMultiplier));
+			},
+		});
+
+		if (!isCorrect && correctButton) {
+			tl.to(correctButton, {
+				backgroundColor: "",
+				duration: 0.5,
+				delay: 0.3,
+			});
+		}
+	}
 
 	if(isTrainingFinished) {
 		return <TrainingFinishedPage/>
@@ -65,14 +97,14 @@ const SelectResultPage = (): JSX.Element => {
 				<SelectResultHeader
 					subjectOfRepetition={currentSubjectOfRepetition}
 					handleClick={handleLinkToBack}
-					title={title}
 				/>
 			}
 			content={
 				<SelectResultContent
+					refs={buttonsRef}
 					subjectOfRepetition={currentSubjectOfRepetition}
 					secondMultiplier={secondMultiplier}
-					versionArray={versionArray}
+					versions={versions}
 					onVersionClick={onVersionClick}
 				/>
 			}

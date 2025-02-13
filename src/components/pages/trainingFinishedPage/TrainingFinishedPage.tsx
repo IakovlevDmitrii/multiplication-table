@@ -19,7 +19,7 @@ const TrainingFinishedPage = (): JSX.Element => {
 
 	const title = (
 		<h1>
-			{contentTexts.trainingFinishedPage.header[lang]}
+			{contentTexts.trainingFinishedPage.title[lang]}
 		</h1>
 	);
 
