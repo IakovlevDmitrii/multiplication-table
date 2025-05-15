@@ -1,8 +1,12 @@
 import type { Solution_Multiplication } from "../../types";
 
-const getMultiplicationResultCounter = (
-	equationList: Solution_Multiplication[]) => {
-	const resultCounter = {correct: 0, wrong: 0};
+const getMultiplicationResultCounter :(equationList: Solution_Multiplication[]) =>
+	{correct: number, wrong: number} = (
+	equationList: Solution_Multiplication[]): {correct: number, wrong: number} => {
+	const resultCounter = {
+		correct: 0,
+		wrong: 0
+	};
 
 	equationList.forEach((
 		{ subjectOfRepetition, secondMultiplier, product }: Solution_Multiplication): void => {

@@ -4,12 +4,12 @@ import { configureStore } from "@reduxjs/toolkit";
 import logger from "redux-logger";
 import solutionsReducer from "./solutionsSlice";
 import equationsReducer from "./equationsSlice";
-import uiReducer from "./uiSlice";
+import settingsReducer from "./settingsSlice";
 
 const reducer = {
 	solutions: solutionsReducer,
 	equations: equationsReducer,
-	ui: uiReducer,
+	settings: settingsReducer,
 };
 
 const store = configureStore({

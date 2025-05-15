@@ -1,13 +1,17 @@
 import { useState, useEffect } from 'react';
+import type { PointerPosition } from "../../types";
 
-export function useDelayedValue(value: {x: number, y: number}, delay: number): {x: number, y: number} {
-	const [delayedValue, setDelayedValue] = useState(value);
+const useDelayedValue: (value: PointerPosition, delay: number) => PointerPosition = (
+	value: PointerPosition, delay: number): PointerPosition => {
+	const [ delayedValue, setDelayedValue ] = useState(value);
 
-	useEffect(() => {
-		setTimeout(() => {
+	useEffect((): void => {
+		setTimeout((): void => {
 			setDelayedValue(value);
 		}, delay);
 	}, [value, delay]);
 
 	return delayedValue;
-}
+};
+
+export default useDelayedValue;

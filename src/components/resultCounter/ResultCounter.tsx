@@ -1,21 +1,22 @@
-import { JSX } from 'react';
-import { useAppSelector } from "../../features/hooks";
-import { selectUi } from "../../store/uiSlice";
+import { FC, JSX } from 'react';
+import { useAppSelector, useSettings } from "../../features/hooks";
 import { selectSolutions } from "../../store/solutionsSlice";
-import { selectEquations } from "../../store/equationsSlice";
 import { getMultiplicationResultCounter } from "../../utils";
-import contentTexts from "../../features/contentTexts";
+import locales from "../../features/locales";
+import type { SolutionsState } from "../../store/solutionsSlice";
 import styles from './ResultCounter.module.scss';
 
-const ResultCounter = (): JSX.Element => {
-	const { lang } = useAppSelector(selectUi);
-	const solutions = useAppSelector(selectSolutions);
-	const { multiplication } = useAppSelector(selectEquations);
-	const resultCounter = getMultiplicationResultCounter(solutions.multiplication);
-	const correct = resultCounter.correct;
-	const wrong = resultCounter.wrong;
-	const { multiplierList } = multiplication;
-	const questionsTotal = multiplierList.length;
+interface ResultCounterProps {
+	questionsTotal: number;
+}
+
+const ResultCounter: FC<ResultCounterProps> = (
+	{ questionsTotal }: ResultCounterProps): JSX.Element => {
+	const { language } = useSettings();
+	const solutions: SolutionsState = useAppSelector(selectSolutions);
+	const resultCounter: {correct: number, wrong: number} = getMultiplicationResultCounter(solutions.multiplication);
+	const correct: number = resultCounter.correct;
+	const wrong: number = resultCounter.wrong;
 
 	return (
 		<div className={styles._}>
@@ -24,10 +25,10 @@ const ResultCounter = (): JSX.Element => {
 			</div>
 			<div className={styles.answers}>
 				<div className={styles.correct}>
-					{`${contentTexts.selectResultPage.correct[lang]}: ${correct}`}
+					{`${locales[language].correct}: ${correct}`}
 				</div>
 				<div className={styles.wrong}>
-					{`${contentTexts.selectResultPage.wrong[lang]}: ${wrong}`}
+					{`${locales[language].wrong}: ${wrong}`}
 				</div>
 			</div>
 		</div>

@@ -1,3 +1,3 @@
-import MultiplicationTablePage from "./MultiplicationTablePage";
+import MultiplicationTablePage from './MultiplicationTablePage';
 
 export default MultiplicationTablePage;

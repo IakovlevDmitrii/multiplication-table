@@ -1,3 +1,3 @@
-import SelectResultPage from "./SelectResultPage";
+import SelectResultPage from './SelectResultPage';
 
 export default SelectResultPage;

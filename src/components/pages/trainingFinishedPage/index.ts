@@ -1,3 +1,3 @@
-import TrainingFinishedPage from "./TrainingFinishedPage";
+import TrainingFinishedPage from './TrainingFinishedPage';
 
 export default TrainingFinishedPage;

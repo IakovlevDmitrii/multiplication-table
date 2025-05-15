@@ -1,23 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "./store";
-import { createArrayRange } from "../utils";
+import type { EquationsState } from "../types";
+import { MATH_CONFIG } from "../utils/config";
 
-const multiplierList: number[] = createArrayRange(2, 9, 1);
-
-export interface EquationsState {
-	multiplication: {
-		multiplierList: number[],
-		remainingMultiplierList: number[] | [],
-		currentSubjectOfRepetition: number,
-	}
-}
-
+const { MIN_MULTIPLIER } = MATH_CONFIG.MULTIPLICATION;
 const initialState: EquationsState = {
 	multiplication: {
-		multiplierList,
-		remainingMultiplierList: multiplierList,
-		currentSubjectOfRepetition: 2,
+		currentSubjectOfRepetition: MIN_MULTIPLIER,
 	}
 };
 
@@ -26,21 +16,33 @@ export const equationsSlice = createSlice({
 	initialState,
 	reducers: {
 		changeSubjectOfRepetition_multiplication: (state, action: PayloadAction<number>) => {
+			// state.multiplication = {
+			// 	...initialState.multiplication,
+			// 	multiplierList: createMultiplierList(),
+			// 	currentSubjectOfRepetition: action.payload
+			// }
+			state.multiplication.currentSubjectOfRepetition = action.payload;
+		},
+		// increaseCurrentEquationIndex: (state) => {
+		// 	if(state.multiplication.currentEquationIndex < MULTIPLIER_LIST_LENGTH) {
+		// 		state.multiplication.currentEquationIndex++;
+		// 	} else {
+		// 		state.multiplication.currentEquationIndex = 0;
+		// 		state.multiplication.isTraining = false;
+		// 	}
+		// },
+		clearMultiplicationEquation: (state) => {
 			state.multiplication = {
 				...initialState.multiplication,
-				currentSubjectOfRepetition: action.payload
 			}
-		},
-		decreaseRemainingMultiplierList: (state, action: PayloadAction<number>) => {
-			state.multiplication.remainingMultiplierList =
-				state.multiplication.remainingMultiplierList.filter(item => item !== action.payload);
 		}
 	}
 });
 
 export const {
 	changeSubjectOfRepetition_multiplication,
-	decreaseRemainingMultiplierList } = equationsSlice.actions;
+	clearMultiplicationEquation,
+} = equationsSlice.actions;
 
 export const selectEquations = (
 	state: RootState) => state.equations;

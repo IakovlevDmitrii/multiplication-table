@@ -1,23 +1,49 @@
-import React, {FC, JSX} from "react";
-import styles from './PageLayout.module.scss';
+import { FC, JSX, RefObject, useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import styles from "./PageLayout.module.scss";
 
 interface PageLayoutProps {
-   header: JSX.Element,
-   content: JSX.Element,
-   myRef?: React.RefObject<HTMLDivElement | null>,
+	header: JSX.Element;
+	mainContent: JSX.Element;
 }
 
 const PageLayout: FC<PageLayoutProps> = (
-   { header, content, myRef }) => (
+	{ header, mainContent }: PageLayoutProps ): JSX.Element => {
+	const animationRef: RefObject<HTMLDivElement | null> = useRef<HTMLDivElement>(null);
+	const headerRef: RefObject<HTMLHeadElement | null> = useRef<HTMLHeadElement | null>(null);
+	const mainRef: RefObject<HTMLElement | null> = useRef<HTMLElement | null>(null);
 
-   <div className={styles._} ref={myRef}>
-      <header>
-         {header}
-      </header>
-      <main>
-         {content}
-      </main>
-   </div>
-);
+	useGSAP(() => {
+		const fadeIn = {
+			from: {
+				scale: 0.5,
+				opacity: 0,
+				y: 20
+			},
+			to: {
+				scale: 1,
+				opacity: 1,
+				y: 0,
+				duration: 0.4,
+				ease: "back.out(1.2)",
+				stagger: 0.15
+			}
+		};
+
+		gsap.fromTo(
+			[headerRef.current, mainRef.current],
+			fadeIn.from,
+			fadeIn.to
+		);
+	}, { scope: animationRef });
+
+	return (
+		<div ref={animationRef} className={styles._}>
+			<header ref={headerRef}>{header}</header>
+			<main ref={mainRef}>{mainContent}</main>
+		</div>
+	);
+};
 
 export default PageLayout;

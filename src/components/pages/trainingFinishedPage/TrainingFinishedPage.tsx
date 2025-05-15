@@ -1,46 +1,49 @@
-import { JSX, useCallback } from "react";
+import { FC, JSX } from "react";
+import { NavLink } from "react-router-dom";
 import PageLayout from "../../pageLayout";
-import TrainingFinishedContent from "./trainingFinishedContent";
-import TrainingFinishedHeader from "./trainingFinishedHeader";
-import { useAppSelector, useAppDispatch } from "../../../features/hooks";
-import { selectUi } from "../../../store/uiSlice";
+import Header from "../../header";
+import BackLink from "../../backLink";
+import ResultCounter from "../../resultCounter";
+import { useAppDispatch, useAppSelector, useSettings } from "../../../features/hooks";
 import { deleteMultiplicationSolution } from "../../../store/solutionsSlice";
 import { selectEquations } from "../../../store/equationsSlice";
-import contentTexts from "../../../features/contentTexts";
+import locales from "../../../features/locales";
+import { MATH_CONFIG } from "../../../utils/config";
+import styles from "./TrainingFinishedPage.module.scss";
 
-const TrainingFinishedPage = (): JSX.Element => {
-	const { lang } = useAppSelector(selectUi);
-	const equations = useAppSelector(selectEquations);
+const TrainingFinishedPage: FC = (): JSX.Element => {
 	const dispatch = useAppDispatch();
+	const { multiplication } = useAppSelector(selectEquations);
+	const { currentSubjectOfRepetition } = multiplication;
 
-	const handleLinkToBack = useCallback(() => {
-		dispatch(deleteMultiplicationSolution())
-	}, [dispatch]);
+	const leftTab: JSX.Element = (
+		<BackLink
+			to={`/multiplication-table/${currentSubjectOfRepetition}`}
+			alt='link to multiplication table'
+			onClick={() => dispatch(deleteMultiplicationSolution())}
+		/>
+	);
 
-	const title = (
-		<h1>
-			{contentTexts.trainingFinishedPage.title[lang]}
-		</h1>
+	const { language } = useSettings();
+	const headerTitle: string = locales[language].trainingFinished;
+
+	const mainContent: JSX.Element = (
+		<article className={styles.content}>
+			<ResultCounter questionsTotal={MATH_CONFIG.MULTIPLICATION.MULTIPLIER_LIST_LENGTH} />
+			<div className={styles.links}>
+				<NavLink to='summary'>
+					{locales[language].answersLink}
+				</NavLink>
+			</div>
+		</article>
 	);
 
 	return (
 		<PageLayout
-			header={
-				<TrainingFinishedHeader
-					subjectOfRepetition={equations.multiplication.currentSubjectOfRepetition}
-					handleClick={handleLinkToBack}
-					title={title}
-				/>
-			}
-			content={
-				<TrainingFinishedContent
-					answersLink={
-						<>{contentTexts.trainingFinishedPage.answersLink[lang]}</>
-					}
-				/>
-			}
+			header={<Header title={headerTitle} leftTab={leftTab} />}
+			mainContent={mainContent}
 		/>
-	)
+	);
 };
 
 export default TrainingFinishedPage;

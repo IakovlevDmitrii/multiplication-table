@@ -1,115 +1,104 @@
-import { FC, useCallback, useRef } from "react";
-import TrainingFinishedPage from "../trainingFinishedPage";
+import { FC, JSX, RefObject, useEffect, useMemo, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import classNames from "classnames";
 import PageLayout from "../../pageLayout";
-import SelectResultHeader from "./selectResultHeader";
-import SelectResultContent from "./selectResultContent";
-import { useAppDispatch, useAppSelector } from "../../../features/hooks";
-import {
-	multiplicationSolution,
-	deleteMultiplicationSolution,
-} from "../../../store/solutionsSlice";
-import {
-	selectEquations,
-	changeSubjectOfRepetition_multiplication,
-	decreaseRemainingMultiplierList,
-} from "../../../store/equationsSlice";
-import {
-	fillArrayWithUniqueRandomNumbers,
-	getRandomElementFromArray,
-} from "../../../utils";
-import gsap from "gsap";
+import Header from "../../header";
+import BackLink from "../../backLink";
+import ResultCounter from "../../resultCounter";
+import { useAppDispatch, useAppSelector, useSettings } from "../../../features/hooks";
+import {	selectEquations } from "../../../store/equationsSlice";
+import { multiplicationSolution, deleteMultiplicationSolution } from "../../../store/solutionsSlice";
+import { generateOptions, createMultiplierList } from "../../../utils";
+import locales from "../../../features/locales";
+import styles from "./SelectResultPage.module.scss";
 
-const SelectResultPage: FC = () => {
-	const { multiplication } = useAppSelector(selectEquations);
-	const {
-		remainingMultiplierList,
-		currentSubjectOfRepetition,
-	} = multiplication;
+const SelectResultPage: FC = (): JSX.Element => {
+	const navigate = useNavigate();
+	const multiplierList: number[] = useMemo((): number[] => createMultiplierList(), []);
+	const [ currentEquationIndex, setCurrentEquationIndex ] = useState<number>(0);
+	const secondMultiplier: number = multiplierList[currentEquationIndex];
+	const isTraining: boolean = multiplierList.length > currentEquationIndex;
+
+	useEffect((): void => {
+		if(!isTraining) {
+			navigate('/training-finished')
+		}
+	}, [ isTraining, navigate ]);
+
 	const dispatch = useAppDispatch();
-	const buttonsRef = useRef<(HTMLButtonElement | null)[]>([]);
+	const { language } = useSettings();
 
-	const isTrainingFinished = !remainingMultiplierList.length;
-	const secondMultiplier: number = getRandomElementFromArray(remainingMultiplierList);
-	const versions: number[] = fillArrayWithUniqueRandomNumbers(4, 2, 9, secondMultiplier);
-	const correctIndex = versions.indexOf(secondMultiplier);
+	const versions: number[] = useMemo(
+		(): number[] => generateOptions(4, 2, 9, secondMultiplier, 3)
+		,[ secondMultiplier ]);
 
-	const handleLinkToBack = useCallback(()=> {
-		dispatch(
-			changeSubjectOfRepetition_multiplication(currentSubjectOfRepetition));
-		dispatch(
-			deleteMultiplicationSolution());
-	}, [dispatch, currentSubjectOfRepetition]);
+	const [ isVersionSelected, setIsVersionSelected] = useState<boolean>(false);
+	const buttonRefs: RefObject<(HTMLButtonElement | null)[]> = useRef<(HTMLButtonElement | null)[]>([]);
 
+	const { multiplication } = useAppSelector(selectEquations);
+	const { currentSubjectOfRepetition } = multiplication;
 
-	const onVersionClick =	(
-		isCorrect: boolean, value: number, index: number): void => {
+	const leftTab: JSX.Element = (
+		<BackLink
+			to={`/multiplication-table/${currentSubjectOfRepetition}`}
+			alt='link to multiplication table'
+			onClick={() => dispatch(deleteMultiplicationSolution())}
+		/>
+	);
 
-		const button = buttonsRef.current[index];
-		const correctButton = buttonsRef.current[correctIndex];
+	const headerTitle: string = locales[language].selectResult;
 
-		const tl = gsap.timeline();
+	const onVersionClick: (version: number ) =>  void = (
+		version: number ): void => {
+		setIsVersionSelected(true);
+		dispatch(multiplicationSolution({
+				subjectOfRepetition: currentSubjectOfRepetition,
+				secondMultiplier,
+				product: version,
+			})
+		);
+		setCurrentEquationIndex(currentEquationIndex + 1);
+		setIsVersionSelected(false);
+	};
 
-		tl.to(button, {
-			backgroundColor: isCorrect ? "#4CAF50" : "#F44336",
-			duration: 0.3,
-			ease: "power2.out",
-		});
-
-		if (!isCorrect && correctButton) {
-			tl.to(correctButton, {
-				backgroundColor: "#4CAF50",
-				duration: 0.3,
-				delay: 0.2,
-			});
-		}
-
-		// ⚡ Здесь вызываем `onComplete`, чтобы `dispatch` сработал раньше
-		tl.to(button, {
-			backgroundColor: "",
-			duration: 0.5,
-			delay: 0.3, // Уменьшаем задержку
-			onComplete: () => {
-				dispatch(multiplicationSolution({
-					subjectOfRepetition: currentSubjectOfRepetition,
-					secondMultiplier,
-					product: value,
-				}));
-				dispatch(decreaseRemainingMultiplierList(secondMultiplier));
-			},
-		});
-
-		if (!isCorrect && correctButton) {
-			tl.to(correctButton, {
-				backgroundColor: "",
-				duration: 0.5,
-				delay: 0.3,
-			});
-		}
-	}
-
-	if(isTrainingFinished) {
-		return <TrainingFinishedPage/>
-	}
+	const mainContent: JSX.Element = (
+		<article className={styles._}>
+			<div className={styles.condition}>
+				<div>
+					{`${currentSubjectOfRepetition} * ${secondMultiplier} = ?`}
+				</div>
+			</div>
+			<div className={styles.versions}>
+				<ol>
+					{versions.map((version: number, index: number): JSX.Element => (
+						<li key={version}>
+							<button
+								ref={(el: HTMLButtonElement | null): void => {
+									if (buttonRefs.current) {
+										buttonRefs.current[index] = el;
+									}
+								}}
+								className={classNames(styles.version, styles.opacity)}
+								type="button"
+								onClick={(): void => onVersionClick(version * currentSubjectOfRepetition)}
+								disabled={isVersionSelected}
+							>
+								{version * currentSubjectOfRepetition}
+							</button>
+						</li>
+					))}
+				</ol>
+			</div>
+			<ResultCounter questionsTotal={multiplierList.length}	/>
+		</article>
+	);
 
 	return (
 		<PageLayout
-			header={
-				<SelectResultHeader
-					subjectOfRepetition={currentSubjectOfRepetition}
-					handleClick={handleLinkToBack}
-				/>
-			}
-			content={
-				<SelectResultContent
-					refs={buttonsRef}
-					subjectOfRepetition={currentSubjectOfRepetition}
-					secondMultiplier={secondMultiplier}
-					versions={versions}
-					onVersionClick={onVersionClick}
-				/>
-			}
+			header={<Header leftTab={leftTab} title={headerTitle} />}
+			mainContent={mainContent}
 		/>
-	)
+	);
 };
 
 export default SelectResultPage;

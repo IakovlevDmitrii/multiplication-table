@@ -1,0 +1,13 @@
+@import "../../styles/const.module";
+
+.example {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 1.5rem;
+	gap: 0.25rem;
+}
+
+.condition {
+	font-size: $fontSize_regular;
+}

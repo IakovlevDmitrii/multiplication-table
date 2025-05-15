@@ -1,0 +1,15 @@
+@import '../../../../styles/const.module';
+
+._ {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 1rem;
+	border: 1px solid var(--border-color__opacity);
+	border-radius: $borderRadius_regular;
+	background-color: var(--background-color__opacity);
+	padding: 0 0.5rem;
+	font-size: $fontSize_regular;
+	text-align: center;
+	cursor: none;
+}
