@@ -19,7 +19,20 @@ body {
 	font-weight: 400;
 	line-height: 1.2;
 	letter-spacing: 0;
-	cursor: none;
+
+	@media only screen and ($screen-lg) {
+		cursor: none;
+	}
+
+	:global {
+		#cursor {
+			display: none;
+
+			@media only screen and ($screen-lg) {
+				display: block;
+			}
+		}
+	}
 
 	.correct {
 		color: var(--color-green);
