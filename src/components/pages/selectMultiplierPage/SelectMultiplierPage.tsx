@@ -47,31 +47,33 @@ const SelectMultiplierPage: FC = (): JSX.Element => {
 	const multiplierList: JSX.Element = (
 		<section className={styles.multiplierList}>
 			<article>
-				<Swiper
-					{...swiperParams}
-					modules={[
-						Autoplay,
-						EffectCoverflow,
-						Keyboard,
-						Mousewheel,
-						Navigation,
-						Pagination,
-					]}
-				>
-					{list.map((multiplier: number): JSX.Element => (
-						<SwiperSlide key={multiplier}>
-							<NavLink
-								to={`/multiplication-table/${multiplier}`}
-								onClick={() => dispatch(
-									changeSubjectOfRepetition_multiplication(multiplier))}>
-								<span>{multiplier}</span>
-							</NavLink>
-						</SwiperSlide>
-					))}
-				</Swiper>
-				<div className={styles.customNavigation}>
-					<div className="button-prev"></div>
-					<div className="button-next"></div>
+				<div className={styles.swiperContainer}>
+					<Swiper
+						{...swiperParams}
+						modules={[
+							Autoplay,
+							EffectCoverflow,
+							Keyboard,
+							Mousewheel,
+							Navigation,
+							Pagination,
+						]}
+					>
+						{list.map((multiplier: number): JSX.Element => (
+							<SwiperSlide key={multiplier}>
+								<NavLink
+									to={`/multiplication-table/${multiplier}`}
+									onClick={() => dispatch(
+										changeSubjectOfRepetition_multiplication(multiplier))}>
+									<span>{multiplier}</span>
+								</NavLink>
+							</SwiperSlide>
+						))}
+					</Swiper>
+					<div className={styles.customNavigation}>
+						<div className="button-prev"></div>
+						<div className="button-next"></div>
+					</div>
 				</div>
 			</article>
 		</section>
