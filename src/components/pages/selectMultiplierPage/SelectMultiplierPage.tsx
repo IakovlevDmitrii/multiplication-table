@@ -1,10 +1,7 @@
 import { FC, JSX, useEffect, useMemo } from "react";
 import { NavLink } from "react-router-dom";
 import {	Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, EffectCoverflow,
-	FreeMode,
-	Navigation,
-	Pagination, Keyboard, Mousewheel } from "swiper/modules";
+import { Autoplay, EffectCoverflow, Keyboard, Mousewheel, Navigation, Pagination } from "swiper/modules";
 import PageLayout from "../../../components/pageLayout";
 import Header from "../../header";
 import { useAppDispatch, useSettings } from "../../../features/hooks";
@@ -12,14 +9,14 @@ import { clearMultiplicationEquation, changeSubjectOfRepetition_multiplication }
 import { createArrayRange } from "../../../utils";
 import { MATH_CONFIG } from "../../../utils/config";
 import locales from "../../../features/locales";
-
+import { swiperParams } from "../../../utils/swiper-params";
 import 'swiper/scss';
 import 'swiper/scss/autoplay';
-import 'swiper/scss/free-mode';
 import 'swiper/scss/effect-coverflow';
+import 'swiper/scss/keyboard';
+import 'swiper/scss/mousewheel';
 import 'swiper/scss/pagination';
 import 'swiper/scss/navigation';
-
 import styles from "./SelectMultiplierPage.module.scss";
 
 const SelectMultiplierPage: FC = (): JSX.Element => {
@@ -51,48 +48,14 @@ const SelectMultiplierPage: FC = (): JSX.Element => {
 		<section className={styles.multiplierList}>
 			<article>
 				<Swiper
-					effect={'coverflow'}
-					centeredSlides={true}
-					slidesPerView={'auto'}
-					autoplay={{
-						delay: 1000
-					}}
-					coverflowEffect={{
-						rotate: 50,
-						stretch: 0,
-						depth: 100,
-						modifier: 1,
-						slideShadows: true,
-					}}
-					pagination={{
-						hideOnClick: true,
-						type: 'progressbar',
-					}}
-					keyboard={{
-						enabled: true,
-						onlyInViewport: false,
-					}}
-					mousewheel={{
-						invert: true,
-					}}
-					navigation={{
-						prevEl: '.button-prev',
-						nextEl: '.button-next',
-					}}
-					loop={true}
-					freeMode={{
-						// enabled: true,
-						// sticky: true,
-					}}
-					speed={600}
+					{...swiperParams}
 					modules={[
 						Autoplay,
 						EffectCoverflow,
-						FreeMode,
-						Pagination,
 						Keyboard,
 						Mousewheel,
 						Navigation,
+						Pagination,
 					]}
 				>
 					{list.map((multiplier: number): JSX.Element => (
