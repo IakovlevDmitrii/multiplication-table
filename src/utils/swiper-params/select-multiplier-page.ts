@@ -1,4 +1,4 @@
-export const swiperParams = {
+export const selectMultiplierPageSwiperParams = {
 	autoplay: {
 		delay: 600,
 	},
