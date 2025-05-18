@@ -9,7 +9,7 @@ import { clearMultiplicationEquation, changeSubjectOfRepetition_multiplication }
 import { createArrayRange } from "../../../utils";
 import { MATH_CONFIG } from "../../../utils/config";
 import locales from "../../../features/locales";
-import { swiperParams } from "../../../utils/swiper-params";
+import SWIPER_PARAMS from "../../../utils/swiper-params";
 import 'swiper/scss';
 import 'swiper/scss/autoplay';
 import 'swiper/scss/effect-coverflow';
@@ -49,7 +49,7 @@ const SelectMultiplierPage: FC = (): JSX.Element => {
 			<article>
 				<div className={styles.swiperContainer}>
 					<Swiper
-						{...swiperParams}
+						{...SWIPER_PARAMS.SELECT_MULTIPLIER}
 						modules={[
 							Autoplay,
 							EffectCoverflow,
