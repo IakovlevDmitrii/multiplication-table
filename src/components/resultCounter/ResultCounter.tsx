@@ -1,9 +1,9 @@
 import { FC, JSX } from 'react';
 import { useAppSelector, useSettings } from "../../features/hooks";
-import { selectSolutions } from "../../store/solutionsSlice";
+import { selectEquations } from "../../store/equationsSlice";
 import { getMultiplicationResultCounter } from "../../utils";
 import locales from "../../features/locales";
-import type { SolutionsState } from "../../store/solutionsSlice";
+import type { EquationsState } from "../../types";
 import styles from './ResultCounter.module.scss';
 
 interface ResultCounterProps {
@@ -13,10 +13,9 @@ interface ResultCounterProps {
 const ResultCounter: FC<ResultCounterProps> = (
 	{ questionsTotal }: ResultCounterProps): JSX.Element => {
 	const { language } = useSettings();
-	const solutions: SolutionsState = useAppSelector(selectSolutions);
-	const resultCounter: {correct: number, wrong: number} = getMultiplicationResultCounter(solutions.multiplication);
-	const correct: number = resultCounter.correct;
-	const wrong: number = resultCounter.wrong;
+	const equations: EquationsState = useAppSelector(selectEquations);
+	const { correct, wrong }: {correct: number, wrong: number} =
+		getMultiplicationResultCounter(equations.multiplication.solutions);
 
 	return (
 		<div className={styles._}>
