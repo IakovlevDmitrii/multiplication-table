@@ -5,7 +5,7 @@ import { Autoplay, EffectCoverflow, Keyboard, Mousewheel, Navigation, Pagination
 import PageLayout from "../../../components/pageLayout";
 import Header from "../../header";
 import { useAppDispatch, useSettings } from "../../../features/hooks";
-import { clearMultiplicationEquation, changeSubjectOfRepetition_multiplication } from "../../../store/equationsSlice";
+import { clearEquation_multiplication, changeSubjectOfRepetition_multiplication } from "../../../store/equationsSlice";
 import { createArrayRange } from "../../../utils";
 import { MATH_CONFIG } from "../../../utils/config";
 import locales from "../../../features/locales";
@@ -23,7 +23,7 @@ const SelectMultiplierPage: FC = (): JSX.Element => {
 	const dispatch = useAppDispatch();
 
 	useEffect((): void => {
-		dispatch(clearMultiplicationEquation());
+		dispatch(clearEquation_multiplication());
 	}, [dispatch]);
 
 	const { language } = useSettings();
@@ -31,18 +31,9 @@ const SelectMultiplierPage: FC = (): JSX.Element => {
 
 	const { MAX_MULTIPLIER, MIN_MULTIPLIER } = MATH_CONFIG.MULTIPLICATION;
 	const list: number[] = useMemo(
-		(): number[] => createArrayRange(MIN_MULTIPLIER, MAX_MULTIPLIER)
-		,[MIN_MULTIPLIER, MAX_MULTIPLIER]
+		(): number[] => createArrayRange(MIN_MULTIPLIER, MAX_MULTIPLIER),
+		[MIN_MULTIPLIER, MAX_MULTIPLIER]
 	);
-
-	// const animationRef: RefObject<HTMLOListElement | null> = useRef<HTMLOListElement>(null);
-	// useGSAP((): void => {
-	// 	gsap.from("li", {
-	// 		scale: 0,
-	// 		opacity: 0,
-	// 		stagger: 0.05,
-	// 	});
-	// }, { scope: animationRef });
 
 	const multiplierList: JSX.Element = (
 		<section className={styles.multiplierList}>
@@ -64,7 +55,9 @@ const SelectMultiplierPage: FC = (): JSX.Element => {
 								<NavLink
 									to={`/multiplication-table/${multiplier}`}
 									onClick={() => dispatch(
-										changeSubjectOfRepetition_multiplication(multiplier))}>
+										changeSubjectOfRepetition_multiplication(multiplier))
+									}
+								>
 									<span>{multiplier}</span>
 								</NavLink>
 							</SwiperSlide>
