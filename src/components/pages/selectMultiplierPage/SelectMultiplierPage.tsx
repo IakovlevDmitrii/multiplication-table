@@ -5,7 +5,7 @@ import { Autoplay, EffectCoverflow, Keyboard, Mousewheel, Navigation, Pagination
 import PageLayout from "../../../components/pageLayout";
 import Header from "../../header";
 import { useAppDispatch, useSettings } from "../../../features/hooks";
-import { clearEquation_multiplication, changeSubjectOfRepetition_multiplication } from "../../../store/equationsSlice";
+import { clearEquations_multiplication, changeSubjectOfRepetition_multiplication } from "../../../store/equationsSlice";
 import { createArrayRange } from "../../../utils";
 import { MATH_CONFIG } from "../../../utils/config";
 import locales from "../../../features/locales";
@@ -23,7 +23,7 @@ const SelectMultiplierPage: FC = (): JSX.Element => {
 	const dispatch = useAppDispatch();
 
 	useEffect((): void => {
-		dispatch(clearEquation_multiplication());
+		dispatch(clearEquations_multiplication());
 	}, [dispatch]);
 
 	const { language } = useSettings();

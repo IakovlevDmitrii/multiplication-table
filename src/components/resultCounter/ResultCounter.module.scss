@@ -1,7 +1,9 @@
 @import '../../styles/const.module';
 
 ._ {
+	width: 100%;
 	padding: 0.5rem 0;
+
 	.counter {
 		display: flex;
 		justify-content: center;
