@@ -3,19 +3,16 @@ import { useAppSelector, useSettings } from "../../features/hooks";
 import { selectEquations } from "../../store/equationsSlice";
 import { getMultiplicationResultCounter } from "../../utils";
 import locales from "../../features/locales";
+import { MATH_CONFIG } from "../../utils/config";
 import type { EquationsState } from "../../types";
 import styles from './ResultCounter.module.scss';
 
-interface ResultCounterProps {
-	questionsTotal: number;
-}
-
-const ResultCounter: FC<ResultCounterProps> = (
-	{ questionsTotal }: ResultCounterProps): JSX.Element => {
+const ResultCounter: FC = (): JSX.Element => {
 	const { language } = useSettings();
 	const equations: EquationsState = useAppSelector(selectEquations);
 	const { correct, wrong }: {correct: number, wrong: number} =
 		getMultiplicationResultCounter(equations.multiplication.solutions);
+	const { MULTIPLIER_LIST_LENGTH: questionsTotal } = MATH_CONFIG.MULTIPLICATION;
 
 	return (
 		<div className={styles._}>

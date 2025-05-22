@@ -64,7 +64,7 @@ const MultiplicationTablePage: FC = (): JSX.Element => {
 				{conditionsList}
 				<div className={styles.link}>
 					<NavLink
-						to={`/select-result/${currentSubjectOfRepetition}`}
+						to={`/examination/${currentSubjectOfRepetition}`}
 						className={styles.opacity
 					}>
 						{locales[language].checkYourself}

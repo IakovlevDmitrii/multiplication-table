@@ -3,7 +3,20 @@
 ._ {
 	display: flex;
 	flex-direction: column;
-	gap: 1rem;
+	align-items: center;
+	justify-content: flex-start;
+	height: 100%;
+	padding: 1rem 0.5rem 1rem;
+	background: var(--color-surface-1);
+
+	article {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: flex-start;
+		height: 100%;
+		gap: 1rem;
+	}
 
 	.condition{
 		display: flex;
@@ -24,6 +37,9 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		padding: 0.5rem;
+		border: 1px solid var(--color-outline-variant);
+		background: var(--color-surface);
 
 		ol {
 			display: grid;
@@ -48,7 +64,25 @@
 			font-size: $fontSize_regular;
 			border: 1px solid var(--border-color);
 			border-radius: $borderRadius_regular;
-			cursor: pointer;
+			cursor: none;
+		}
+	}
+
+	.links {
+		display: flex;
+		justify-content: center;
+		align-items: flex-start;
+		padding: 1rem 0;
+
+		a {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			padding: 0.25rem 1rem;
+			font-size: $fontSize_regular;
+			text-align: center;
+			background-color: var(--background-color__opacity);
+			border: 1px solid var(--border-color__opacity);
 		}
 	}
 }

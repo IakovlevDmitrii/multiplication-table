@@ -1,7 +1,7 @@
 import createArrayRange from "./create-array-range";
 import createEquationsList from "./mathematical-operations/createEquationsList";
-import createMultiplierList from "./create-multiplier-list";
-import generateOptions from "./generate-options";
+import createShuffleMultiplierList from "./create-shuffle-multiplier-list";
+import generateVersions from "./generate-versions";
 // import fillArrayWithUniqueRandomNumbers from "./fill-array-with-unique-random-numbers";
 // import generateNewRandomInteger from './generate-new-random-integer';
 // import generateRandomInteger from './generate-new-random-integer';
@@ -12,8 +12,8 @@ import shuffleArray from "./shuffle-array";
 export {
    createArrayRange,
    createEquationsList,
-   createMultiplierList,
-   generateOptions,
+   createShuffleMultiplierList,
+   generateVersions,
    // fillArrayWithUniqueRandomNumbers,
    // generateNewRandomInteger,
    // generateRandomInteger,

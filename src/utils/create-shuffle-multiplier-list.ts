@@ -7,8 +7,8 @@ const {
 	MAX_MULTIPLIER,
 } = MATH_CONFIG.MULTIPLICATION;
 
-const createMultiplierList: () => number[] = (): number[] => shuffleArray(
+const createShuffleMultiplierList: () => number[] = (): number[] => shuffleArray(
 	createArrayRange(MIN_MULTIPLIER, MAX_MULTIPLIER)
 );
 
-export default createMultiplierList;
+export default createShuffleMultiplierList;

@@ -1,31 +1,37 @@
 import { shuffleArray } from "./index";
+import { MATH_CONFIG } from "./config";
 
-const generateOptions = (
-	length: number, // Длина списка вариантов
-	min: number, // Минимальное значение варианта
-	max: number, // Максимальное значение варианта
-	correctValue: number, // Верное значение
-	delta: number // Максимальное отклонение от правильного ответа
+const generateVersions: (correctValue: number) => number[] = (
+	correctValue: number
 ): number[] => {
+	const {
+		MIN: min, // Минимальное значение варианта
+		MAX: max, // Максимальное значение варианта
+		LENGTH: length, // Длина списка вариантов
+		DELTA: delta, // Максимальное отклонение от правильного ответа
+	} = MATH_CONFIG.MULTIPLICATION.VERSIONS_LIST;
+
 	// Определяем диапазон для выбора вариантов
-	const lowerBound = Math.max(min, correctValue - delta);
-	const upperBound = Math.min(max, correctValue + delta);
+	const lowerBound: number = Math.max(min, correctValue - delta);
+	const upperBound: number = Math.min(max, correctValue + delta);
 
 	// Создаем массив всех возможных значений в диапазоне [lowerBound, upperBound]
-	const allValues = Array.from(
+	const allValues: number[] = Array.from(
 		{ length: upperBound - lowerBound + 1 },
-		(_, i) => lowerBound + i
+		(_: unknown, i: number): number => lowerBound + i
 	);
 
 	// Удаляем верное значение из массива, чтобы избежать дублирования
-	const filteredValues = allValues.filter((value) => value !== correctValue);
+	const filteredValues: number[] = allValues.filter(
+		(value: number) => value !== correctValue
+	);
 
 	// Инициализируем randomValues с верным ответом
 	const randomValues: number[] = [correctValue];
 
 	// Выбираем случайные значения из оставшегося массива
 	while (randomValues.length < length) {
-		const randomIndex = Math.floor(Math.random() * filteredValues.length);
+		const randomIndex: number = Math.floor(Math.random() * filteredValues.length);
 		randomValues.push(filteredValues[randomIndex]);
 		filteredValues.splice(randomIndex, 1); // Удаляем выбранное значение, чтобы избежать повторов
 	}
@@ -34,4 +40,4 @@ const generateOptions = (
 	return shuffleArray(randomValues);
 };
 
-export default generateOptions;
+export default generateVersions;

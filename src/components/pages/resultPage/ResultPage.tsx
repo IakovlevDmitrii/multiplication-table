@@ -6,10 +6,8 @@ import Header from '../../header';
 import BackLink from '../../backLink';
 import MultiplicationExample from "../../multiplicationExample";
 import { useAppDispatch, useAppSelector, useSettings } from "../../../features/hooks";
-import { selectSolutions, deleteMultiplicationSolution } from "../../../store/solutionsSlice";
-import { changeSubjectOfRepetition_multiplication } from "../../../store/equationsSlice";
+import { selectEquations, clearEquations_multiplication } from "../../../store/equationsSlice";
 import locales from "../../../features/locales";
-import type { SolutionsState } from "../../../store/solutionsSlice";
 import type { Solution_Multiplication } from "../../../types";
 import styles from "./ResultPage.module.scss";
 
@@ -18,11 +16,10 @@ const ResultPage: FC = (): JSX.Element => {
 
 	const leftTab: JSX.Element = (
 		<BackLink
-			to='/select-result'
+			to='/select-multiplier'
 			alt='link to multiplication table'
 			onClick={() => {
-				dispatch(deleteMultiplicationSolution());
-				dispatch(changeSubjectOfRepetition_multiplication(2));
+				dispatch(clearEquations_multiplication());
 			}}
 		/>
 	);
@@ -40,8 +37,8 @@ const ResultPage: FC = (): JSX.Element => {
 		});
 	}, { scope: animationRef });
 
-	const solutions: SolutionsState = useAppSelector(selectSolutions);
-	const solutionsList: Solution_Multiplication[] | [] = solutions.multiplication;
+	const { multiplication } = useAppSelector(selectEquations);
+	const solutionsList: Solution_Multiplication[] | [] = multiplication.solutions;
 	const mainContent: JSX.Element = (
 		<article className={styles._}>
 			<ol ref={animationRef}>
