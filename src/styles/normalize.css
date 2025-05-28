@@ -65,6 +65,7 @@ button {
 	border-image: initial;
 	border: none;
 	line-height: 1em;
+	cursor: none;
 }
 
 button,

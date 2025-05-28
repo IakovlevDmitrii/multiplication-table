@@ -1,9 +1,10 @@
-import { FC, JSX, RefObject, useMemo, useRef, useState } from "react";
-import classNames from "classnames";
-import { NavLink } from "react-router-dom";
+import { FC, JSX, useCallback, useMemo, useState, useRef } from "react";
 import PageLayout from "../../pageLayout";
 import Header from "../../header";
 import BackLink from "../../backLink";
+import EquationDisplay from "./equationDisplay";
+import AnswerOptions from "./answerOptions";
+import SummaryLink from "./summaryLink";
 import ResultCounter from "../../resultCounter";
 import { useLanguage, useSolutions, useTargetMultiplier } from "../../../features/hooks";
 import { createShuffleMultiplierList, generateVersions } from "../../../utils";
@@ -16,97 +17,91 @@ const ExaminationPage: FC = (): JSX.Element => {
 	const { addSolution, clearSolutions } = useSolutions();
 	const { targetMultiplier } = useTargetMultiplier();
 
-	const multiplierList: number[] = useMemo(
-		(): number[] => createShuffleMultiplierList(),
-		[]
-	);
+	const multiplierList: number[] = useMemo(createShuffleMultiplierList, []);
 
-	const [ currentEquationIndex, setCurrentEquationIndex ] = useState<number>(0);
+	const [currentEquationIndex, setCurrentEquationIndex] = useState<number>(0);
+	const [isVersionSelected, setIsVersionSelected] = useState<boolean>(false);
+
 	const secondMultiplier: number = multiplierList[currentEquationIndex];
-	const [ isVersionSelected, setIsVersionSelected ] = useState<boolean>(false);
+	const hasMoreEquations: boolean = multiplierList.length > currentEquationIndex;
 
 	const versions: number[] = useMemo(
 		(): number[] => generateVersions(secondMultiplier),
 		[secondMultiplier]
 	);
 
-	const buttonRefs: RefObject<(HTMLButtonElement | null)[]> =
-		useRef<(HTMLButtonElement | null)[]>([]);
+	const headerTitle: string = useMemo((): string =>
+		hasMoreEquations ? locale.selectResult : locale.trainingFinished,
+		[hasMoreEquations, locale]
+	);
 
-	const leftTab: JSX.Element = (
+	const leftTab: JSX.Element = useMemo((): JSX.Element => (
 		<BackLink
 			to={`/multiplication-table/${targetMultiplier}`}
 			alt='link to multiplication table'
 			onClick={clearSolutions}
 		/>
-	);
+	), [targetMultiplier, clearSolutions]);
 
-	const headerTitle: string = multiplierList.length > currentEquationIndex
-		? locale.selectResult
-		: locale.trainingFinished;
-
-	const onVersionClick: (version: number ) =>  void = (
-		version: number
-	): void => {
+	const handleVersionSelect = useCallback((version: number ): void => {
 		setIsVersionSelected(true);
 		addSolution({
 			targetMultiplier,
 			secondMultiplier,
 			product: version,
 		});
-		setCurrentEquationIndex(currentEquationIndex + 1);
+		setCurrentEquationIndex(prev => prev + 1);
 		setIsVersionSelected(false);
-	};
+	}, [setIsVersionSelected, addSolution, targetMultiplier, secondMultiplier]);
 
-	const mainContent: JSX.Element = (
-		<section className={styles._}>
-			<article>
-				{multiplierList.length > currentEquationIndex &&
-					<>
-						<div className={styles.condition}>
-							<div>
-								{`${targetMultiplier} * ${secondMultiplier} = ?`}
-							</div>
-						</div>
-						<div className={styles.versions}>
-							<ol>
-								{versions.map((version: number, index: number): JSX.Element => (
-									<li key={version}>
-										<button
-											ref={(el: HTMLButtonElement | null): void => {
-												if (buttonRefs.current) {
-													buttonRefs.current[index] = el;
-												}
-											}}
-											className={classNames(styles.version, styles.opacity)}
-											type="button"
-											onClick={(): void => onVersionClick(version * targetMultiplier)}
-											disabled={isVersionSelected}
-										>
-											{version * targetMultiplier}
-										</button>
-									</li>
-								))}
-							</ol>
-						</div>
-					</>
-				}
-				<ResultCounter />
-				{multiplierList.length <= currentEquationIndex &&
-					<div className={styles.links}>
-						<NavLink to='summary'>
-							{locale.answersLink}
-						</NavLink>
-					</div>
-				}
-			</article>
-		</section>
+	const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
+	const setButtonRef = useCallback((index: number) =>
+		(el: HTMLButtonElement | null): void => {
+			if (buttonRefs.current) {
+				buttonRefs.current[index] = el;
+			}
+		}, []
 	);
 
 	return (
 		<PageLayout
-			header={<Header leftTab={leftTab} title={headerTitle} />}
-			mainContent={mainContent}
+			header={
+				<Header
+					leftTab={leftTab}
+					title={headerTitle}
+				/>
+			}
+			mainContent={
+				<section className={styles._}>
+					<article>
+						{hasMoreEquations ? (
+							<>
+								<EquationDisplay
+									target={targetMultiplier}
+									second={secondMultiplier}
+								/>
+								<AnswerOptions
+									versions={versions}
+									target={targetMultiplier}
+									onSelect={handleVersionSelect}
+									isDisabled={isVersionSelected}
+									setButtonRef={setButtonRef}
+								/>
+								<ResultCounter />
+							</>
+						) : (
+							<>
+								<ResultCounter />
+								<SummaryLink
+									to={'summary'}
+									label={locale.answersLink}
+								/>
+							</>
+						)}
+					</article>
+				</section>
+			}
 		/>
 	);
 };

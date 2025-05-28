@@ -1,0 +1,19 @@
+@import '../../../../styles/const.module';
+
+._ {
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+
+	a {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		padding: 0.25rem 1rem;
+		text-align: center;
+		color: var(--text-color);
+		border: 1px solid var(--border-color);
+		font-size: $fontSize_regular;
+	}
+}

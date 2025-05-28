@@ -24,7 +24,7 @@ const MultiplicationExample: FC<MultiplicationExampleProps> = ({
 	return (
 		<div className={styles.example}>
 			<div className={styles.condition}>
-				{`${firstMultiplier} * ${secondMultiplier} =`}
+				{`${firstMultiplier} x ${secondMultiplier} =`}
 			</div>
 			<Result
 				result={displayResult}
