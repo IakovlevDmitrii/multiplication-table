@@ -1,0 +1,104 @@
+._ {
+	height: 100%;
+	position: relative;
+	--switcher-size: 3rem;
+	aspect-ratio: 1;
+
+	.planetButton {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		border-radius: 50%;
+		overflow: hidden;
+		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+		background: radial-gradient(
+						circle at 30% 30%,
+						var(--color-surface_background) 0%,
+						var(--color-surface-2) 70%
+		);
+
+		box-shadow:
+				inset 0 -2px 4px rgba(255,255,255,0.1),
+				inset 0 2px 4px rgba(0,0,0,0.1),
+				0 4px 8px rgba(0,0,0,0.1);
+
+		&:hover {
+			transform: scale(1.05);
+			box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+
+			.languageIcon {
+				transform: translate(-5px, -5px) rotate(-15deg);
+			}
+
+			.themeIcon {
+				transform: translate(5px, 5px) rotate(15deg);
+			}
+		}
+
+		&:active {
+			transform: scale(0.95);
+		}
+	}
+
+	.languageIcon {
+		position: absolute;
+		top: 10%;
+		left: 10%;
+		font-size: 1.2em;
+		transition: transform 0.4s ease-out, opacity 0.3s ease;
+		will-change: transform, opacity;
+
+		// Анимация появления флага
+		@keyframes flagAppear {
+			from {
+				opacity: 0;
+				transform: translateY(-10px) rotate(-30deg);
+			}
+			to {
+				opacity: 1;
+				transform: translate(0) rotate(0);
+			}
+		}
+
+		// Анимация смены языка
+		&.orbit {
+			animation: langSwitch 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+		}
+	}
+
+	@keyframes langSwitch {
+		0% {
+			transform: translateX(0);
+			opacity: 1;
+		}
+		40% {
+			transform: translateX(-150%);
+			opacity: 0;
+		}
+		60% {
+			transform: translateX(150%);
+			opacity: 0;
+		}
+		100% {
+			transform: translateX(0);
+			opacity: 1;
+		}
+	}
+
+	.themeIcon {
+		position: absolute;
+		bottom: 10%;
+		right: 10%;
+		font-size: 1em;
+		transition: transform 0.4s ease-out, opacity 0.3s ease;
+
+		// Мерцание иконки темы
+		animation: twinkle 2s infinite alternate;
+
+		@keyframes twinkle {
+			from { filter: brightness(1); }
+			to { filter: brightness(1.2); }
+		}
+	}
+}

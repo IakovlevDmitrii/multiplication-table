@@ -1,13 +1,12 @@
-import { FC, JSX, useEffect, useMemo } from "react";
+import { FC, JSX, useCallback, useEffect, useMemo } from "react";
 import { NavLink } from "react-router-dom";
 import {	Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectCoverflow, Keyboard, Mousewheel, Navigation, Pagination } from "swiper/modules";
 import PageLayout from "../../../components/pageLayout";
 import Header from "../../header";
-import { useAppDispatch, useSettings } from "../../../features/hooks";
-import { clearEquations_multiplication, changeSubjectOfRepetition_multiplication } from "../../../store/equationsSlice";
+import { useLanguage, useSolutions, useTargetMultiplier } from "../../../features/hooks";
 import { createArrayRange } from "../../../utils";
-import { MATH_CONFIG } from "../../../utils/config";
+import MATH_CONFIG from "../../../utils/config";
 import locales from "../../../features/locales";
 import SWIPER_PARAMS from "../../../utils/swiper-params";
 import 'swiper/scss';
@@ -20,19 +19,28 @@ import 'swiper/scss/navigation';
 import styles from "./SelectMultiplierPage.module.scss";
 
 const SelectMultiplierPage: FC = (): JSX.Element => {
-	const dispatch = useAppDispatch();
+	const { currentLanguage } = useLanguage();
+	const { clearSolutions } = useSolutions();
+	const { setTargetMultiplier } = useTargetMultiplier();
+	const { MAX_MULTIPLIER, MIN_MULTIPLIER } = MATH_CONFIG;
 
 	useEffect((): void => {
-		dispatch(clearEquations_multiplication());
-	}, [dispatch]);
+		clearSolutions();
+		setTargetMultiplier(MIN_MULTIPLIER);
+	}, [clearSolutions, setTargetMultiplier, MIN_MULTIPLIER]);
 
-	const { language } = useSettings();
-	const headerTitle: string = locales[language].selectMultiplier;
+	const headerTitle: string = locales[currentLanguage].selectMultiplier;
 
-	const { MAX_MULTIPLIER, MIN_MULTIPLIER } = MATH_CONFIG.MULTIPLICATION;
 	const list: number[] = useMemo(
 		(): number[] => createArrayRange(MIN_MULTIPLIER, MAX_MULTIPLIER),
 		[MIN_MULTIPLIER, MAX_MULTIPLIER]
+	);
+
+	const handleMultiplierClick: (multiplier: number) => void = useCallback(
+		(multiplier: number): void => {
+			setTargetMultiplier(multiplier);
+		},
+		[setTargetMultiplier]
 	);
 
 	const multiplierList: JSX.Element = (
@@ -54,9 +62,7 @@ const SelectMultiplierPage: FC = (): JSX.Element => {
 							<SwiperSlide key={multiplier}>
 								<NavLink
 									to={`/multiplication-table/${multiplier}`}
-									onClick={() => dispatch(
-										changeSubjectOfRepetition_multiplication(multiplier))
-									}
+									onClick={() => handleMultiplierClick(multiplier)}
 								>
 									<span>{multiplier}</span>
 								</NavLink>

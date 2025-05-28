@@ -1,14 +1,15 @@
-import type { Solution_Multiplication } from "../../types";
+import type { Solution } from "../../types";
 
 const getMultiplicationSolutionsList = (
-	subjectOfRepetition: number, multiplierList: number[]) => {
-	const equationsList: Solution_Multiplication[] = [];
+	targetMultiplier: number, multiplierList: number[]
+): Solution[] => {
+	const equationsList: Solution[] = [];
 
 	multiplierList.forEach(multiplier => {
 		equationsList.push({
-			subjectOfRepetition,
+			targetMultiplier,
 			secondMultiplier: multiplier,
-			product: subjectOfRepetition * multiplier,
+			product: targetMultiplier * multiplier,
 		})
 	})
 

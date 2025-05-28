@@ -5,10 +5,9 @@ import PageLayout from '../../pageLayout';
 import Header from '../../header';
 import BackLink from '../../backLink';
 import MultiplicationExample from "../../multiplicationExample";
-import { useAppDispatch, useAppSelector, useSettings } from "../../../features/hooks";
-import { selectEquations, clearEquations_multiplication } from "../../../store/equationsSlice";
+import { useLanguage, useSolutions } from "../../../features/hooks";
 import locales from "../../../features/locales";
-import type { Solution_Multiplication } from "../../../types";
+import type { Solution } from "../../../types";
 import SWIPER_PARAMS from "../../../utils/swiper-params";
 import 'swiper/scss';
 import 'swiper/scss/effect-coverflow';
@@ -19,23 +18,16 @@ import 'swiper/scss/pagination';
 import styles from "./ResultPage.module.scss";
 
 const ResultPage: FC = (): JSX.Element => {
-	const dispatch = useAppDispatch();
+	const { currentLanguage } = useLanguage();
+	const headerTitle: string = locales[currentLanguage].resultTitle;
+	const { solutions } = useSolutions();
 
 	const leftTab: JSX.Element = (
 		<BackLink
 			to='/select-multiplier'
 			alt='link to select a multiplier'
-			onClick={() => {dispatch(
-				clearEquations_multiplication()
-			);}}
 		/>
 	);
-
-	const { language } = useSettings();
-	const headerTitle: string = locales[language].resultTitle;
-
-	const { multiplication } = useAppSelector(selectEquations);
-	const list: Solution_Multiplication[] | [] = multiplication.solutions;
 
 	const solutionsList: JSX.Element = (
 		<div className={styles.swiperContainer}>
@@ -49,14 +41,11 @@ const ResultPage: FC = (): JSX.Element => {
 					Pagination,
 				]}
 			>
-				{list.map(({
-				  subjectOfRepetition,
-				  secondMultiplier,
-				  product
-			  }: Solution_Multiplication): JSX.Element => (
+				{solutions.map((
+					{ targetMultiplier, secondMultiplier, product }: Solution): JSX.Element => (
 					<SwiperSlide key={secondMultiplier}>
 						<MultiplicationExample
-							firstMultiplier={subjectOfRepetition}
+							firstMultiplier={targetMultiplier}
 							secondMultiplier={secondMultiplier}
 							hideResult={false}
 							userAnswer={product}

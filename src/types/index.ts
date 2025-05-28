@@ -1,22 +1,34 @@
-export type Language = "en" | "ru";
-export type Theme = "light" | "dark";
+type Language = "en" | "es" | "pt" | "ru";
+type Theme = "light" | "dark";
 
-export interface Solution_Multiplication {
-   subjectOfRepetition: number,
+interface Solution {
+   targetMultiplier: number,
    secondMultiplier: number,
    product: number,
 }
 
-export interface EquationsState {
-   multiplication: {
-      currentSubjectOfRepetition: number,
-      solutions: Solution_Multiplication[] | [],
-   }
+interface EquationsState {
+   solutions: Solution[] | [],
+   targetMultiplier: number,
 }
 
-export interface PointerPosition {
+interface SettingsState {
+   language: Language,
+   theme: Theme,
+}
+
+interface PointerPosition {
    x: number;
    y: number;
+}
+
+export {
+   EquationsState,
+   Language,
+   PointerPosition,
+   SettingsState,
+   Solution,
+   Theme,
 }
 
 

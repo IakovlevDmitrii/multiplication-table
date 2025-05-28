@@ -5,28 +5,25 @@ import PageLayout from "../../pageLayout";
 import Header from "../../header";
 import BackLink from "../../backLink";
 import ResultCounter from "../../resultCounter";
-import { useAppSelector, useAppDispatch, useSettings } from "../../../features/hooks";
-import {
-	selectEquations,
-	addSolution_multiplication,
-	clearSolutions_multiplication,
-} from "../../../store/equationsSlice";
+import { useLanguage, useSolutions, useTargetMultiplier } from "../../../features/hooks";
 import { createShuffleMultiplierList, generateVersions } from "../../../utils";
 import locales from "../../../features/locales";
 import styles from "./ExaminationPage.module.scss";
 
 const ExaminationPage: FC = (): JSX.Element => {
+	const { currentLanguage } = useLanguage();
+	const locale = locales[currentLanguage];
+	const { addSolution, clearSolutions } = useSolutions();
+	const { targetMultiplier } = useTargetMultiplier();
+
 	const multiplierList: number[] = useMemo(
 		(): number[] => createShuffleMultiplierList(),
 		[]
 	);
+
 	const [ currentEquationIndex, setCurrentEquationIndex ] = useState<number>(0);
 	const secondMultiplier: number = multiplierList[currentEquationIndex];
 	const [ isVersionSelected, setIsVersionSelected ] = useState<boolean>(false);
-	const dispatch = useAppDispatch();
-	const { multiplication } = useAppSelector(selectEquations);
-	const { currentSubjectOfRepetition } = multiplication;
-	const { language } = useSettings();
 
 	const versions: number[] = useMemo(
 		(): number[] => generateVersions(secondMultiplier),
@@ -38,29 +35,25 @@ const ExaminationPage: FC = (): JSX.Element => {
 
 	const leftTab: JSX.Element = (
 		<BackLink
-			to={`/multiplication-table/${currentSubjectOfRepetition}`}
+			to={`/multiplication-table/${targetMultiplier}`}
 			alt='link to multiplication table'
-			onClick={() => dispatch(
-				clearSolutions_multiplication()
-			)}
+			onClick={clearSolutions}
 		/>
 	);
 
-	const headerTitle: string = multiplierList.length > currentEquationIndex ?
-		locales[language].selectResult :
-		locales[language].trainingFinished;
+	const headerTitle: string = multiplierList.length > currentEquationIndex
+		? locale.selectResult
+		: locale.trainingFinished;
 
 	const onVersionClick: (version: number ) =>  void = (
 		version: number
 	): void => {
 		setIsVersionSelected(true);
-		dispatch(
-			addSolution_multiplication({
-				subjectOfRepetition: currentSubjectOfRepetition,
-				secondMultiplier,
-				product: version,
-			})
-		);
+		addSolution({
+			targetMultiplier,
+			secondMultiplier,
+			product: version,
+		});
 		setCurrentEquationIndex(currentEquationIndex + 1);
 		setIsVersionSelected(false);
 	};
@@ -72,7 +65,7 @@ const ExaminationPage: FC = (): JSX.Element => {
 					<>
 						<div className={styles.condition}>
 							<div>
-								{`${currentSubjectOfRepetition} * ${secondMultiplier} = ?`}
+								{`${targetMultiplier} * ${secondMultiplier} = ?`}
 							</div>
 						</div>
 						<div className={styles.versions}>
@@ -87,10 +80,10 @@ const ExaminationPage: FC = (): JSX.Element => {
 											}}
 											className={classNames(styles.version, styles.opacity)}
 											type="button"
-											onClick={(): void => onVersionClick(version * currentSubjectOfRepetition)}
+											onClick={(): void => onVersionClick(version * targetMultiplier)}
 											disabled={isVersionSelected}
 										>
-											{version * currentSubjectOfRepetition}
+											{version * targetMultiplier}
 										</button>
 									</li>
 								))}
@@ -102,7 +95,7 @@ const ExaminationPage: FC = (): JSX.Element => {
 				{multiplierList.length <= currentEquationIndex &&
 					<div className={styles.links}>
 						<NavLink to='summary'>
-							{locales[language].answersLink}
+							{locale.answersLink}
 						</NavLink>
 					</div>
 				}

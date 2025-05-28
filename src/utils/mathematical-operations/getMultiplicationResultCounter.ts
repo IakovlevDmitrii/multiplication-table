@@ -1,19 +1,16 @@
-import type { Solution_Multiplication } from "../../types";
+import type { Solution } from "../../types";
 
-const getMultiplicationResultCounter :(equationList: Solution_Multiplication[]) =>
-	{correct: number, wrong: number} = (
-	equationList: Solution_Multiplication[]): {correct: number, wrong: number} => {
-	const resultCounter = {
-		correct: 0,
-		wrong: 0
-	};
+const getMultiplicationResultCounter :(equationList: Solution[]) => {correct: number, wrong: number} = (
+	equationList: Solution[]
+): {correct: number, wrong: number} => {
+	const resultCounter = {correct: 0, wrong: 0};
 
-	equationList.forEach((
-		{ subjectOfRepetition, secondMultiplier, product }: Solution_Multiplication): void => {
-		if(subjectOfRepetition * secondMultiplier === product) {
-			resultCounter.correct++
-		} else {resultCounter.wrong++}
-	});
+	equationList.forEach(
+		({ targetMultiplier, secondMultiplier, product }: Solution): void => {
+			targetMultiplier * secondMultiplier === product
+			? resultCounter.correct ++
+			: resultCounter.wrong ++
+		});
 
 	return resultCounter;
 };

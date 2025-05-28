@@ -6,10 +6,11 @@ import PageLayout from "../../pageLayout";
 import Header from "../../header";
 import BackLink from "../../backLink";
 import MultiplicationExample from "../../multiplicationExample";
-import { selectEquations } from "../../../store/equationsSlice";
-import { useAppSelector, useSettings, useSolutionList } from "../../../features/hooks";
+import { useLanguage, useTargetMultiplier } from "../../../features/hooks";
 import locales from "../../../features/locales";
-import type { Solution_Multiplication } from "../../../types";
+import MATH_CONFIG from "../../../utils/config";
+import { createArrayRange, getMultiplicationSolutionsList } from "../../../utils";
+import type { Solution } from "../../../types";
 import SWIPER_PARAMS from "../../../utils/swiper-params";
 import 'swiper/scss';
 import 'swiper/scss/effect-coverflow';
@@ -20,15 +21,26 @@ import 'swiper/scss/pagination';
 import styles from "./MultiplicationTablePage.module.scss";
 
 const MultiplicationTablePage: FC = (): JSX.Element => {
-	const leftTab: JSX.Element = <BackLink to='/select-multiplier' alt='link to select a multiplier' />;
-	const { language } = useSettings();
-	const { multiplication } = useAppSelector(selectEquations);
-	const { currentSubjectOfRepetition } = multiplication;
-	const headerTitle: string = `${locales[language].tableTitle} ${currentSubjectOfRepetition}`;
+	const { currentLanguage } = useLanguage();
+	const locale = locales[currentLanguage];
+	const { targetMultiplier } = useTargetMultiplier();
+	const headerTitle: string = `${locale.tableTitle} ${targetMultiplier}`;
 
-	const list: Solution_Multiplication[] = useSolutionList();
+	const leftTab: JSX.Element = (
+		<BackLink
+			to='/select-multiplier'
+			alt='link to select a multiplier'
+		/>
+	);
 
-	const conditionsList: JSX.Element = (
+	const { MIN_MULTIPLIER, MAX_MULTIPLIER } = MATH_CONFIG;
+	const rangeList: number[] = createArrayRange(MIN_MULTIPLIER, MAX_MULTIPLIER);
+	const conditionsList: Solution[] = getMultiplicationSolutionsList(
+		targetMultiplier ?? MIN_MULTIPLIER,
+		rangeList
+	);
+
+	const conditions: JSX.Element = (
 		<div className={styles.swiperContainer}>
 			<Swiper
 				{...SWIPER_PARAMS.MULTIPLICATION_TABLE}
@@ -40,14 +52,11 @@ const MultiplicationTablePage: FC = (): JSX.Element => {
 					Pagination,
 				]}
 			>
-				{list.map(({
-					subjectOfRepetition,
-					secondMultiplier,
-					product
-				}: Solution_Multiplication): JSX.Element => (
+				{conditionsList.map((
+					{ targetMultiplier, secondMultiplier, product }: Solution): JSX.Element => (
 					<SwiperSlide key={secondMultiplier}>
 						<MultiplicationExample
-							firstMultiplier={subjectOfRepetition}
+							firstMultiplier={targetMultiplier}
 							secondMultiplier={secondMultiplier}
 							hideResult
 							correctAnswer={product}
@@ -59,15 +68,15 @@ const MultiplicationTablePage: FC = (): JSX.Element => {
 	);
 
 	const mainContent: JSX.Element = (
-		<section className={styles.multiplicationTable}>
+		<section className={styles._}>
 			<article>
-				{conditionsList}
+				{conditions}
 				<div className={styles.link}>
 					<NavLink
-						to={`/examination/${currentSubjectOfRepetition}`}
-						className={styles.opacity
-					}>
-						{locales[language].checkYourself}
+						to={`/examination/${targetMultiplier}`}
+						className={styles.opacity}
+					>
+						{locale.checkYourself}
 					</NavLink>
 				</div>
 			</article>

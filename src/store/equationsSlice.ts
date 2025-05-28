@@ -1,59 +1,46 @@
-import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import MATH_CONFIG from "../utils/config";
 import type { RootState } from "./store";
-import type { EquationsState, Solution_Multiplication } from "../types";
-import { MATH_CONFIG } from "../utils/config";
+import type { EquationsState, Solution } from "../types";
 
-const { MIN_MULTIPLIER } = MATH_CONFIG.MULTIPLICATION;
 const initialState: EquationsState = {
-	multiplication: {
-		currentSubjectOfRepetition: MIN_MULTIPLIER,
-		solutions: [],
-	}
+	solutions: [],
+	targetMultiplier: MATH_CONFIG.MIN_MULTIPLIER,
 };
 
 export const equationsSlice = createSlice({
 	name: "equations",
 	initialState,
 	reducers: {
-		changeSubjectOfRepetition_multiplication: (
-			state,
-			action: PayloadAction<number>
+		setTargetMultiplierAction: (
+			state, action: PayloadAction<number>
 		): void => {
-			state.multiplication.currentSubjectOfRepetition = action.payload;
+			state.targetMultiplier = action.payload;
 		},
-		addSolution_multiplication: (
-			state,
-			action: PayloadAction<Solution_Multiplication>
-		) => {
-			state.multiplication.solutions = [
-				...state.multiplication.solutions,
+		addSolutionAction: (
+			state, action: PayloadAction<Solution>
+		): void => {
+			state.solutions = [
+				...state.solutions,
 				action.payload
 			];
 		},
-		clearSolutions_multiplication: (
-			state,
-		) => {
-			state.multiplication.solutions = [];
-		},
-		clearEquations_multiplication: (
-			state
-		) => {
-			state.multiplication = {
-				...initialState.multiplication,
-			}
+		clearSolutionsAction: (state): void => {
+			state.solutions = [];
 		},
 	}
 });
 
 export const {
-	changeSubjectOfRepetition_multiplication,
-	addSolution_multiplication,
-	clearSolutions_multiplication,
-	clearEquations_multiplication,
+	setTargetMultiplierAction,
+	addSolutionAction,
+	clearSolutionsAction,
 } = equationsSlice.actions;
 
-export const selectEquations = (
-	state: RootState) => state.equations;
+export const selectTargetMultiplier =
+	(state: RootState): number => state.equations.targetMultiplier;
+
+export const selectSolutions =
+	(state: RootState): [] | Solution[] => state.equations.solutions;
 
 export default equationsSlice.reducer;
