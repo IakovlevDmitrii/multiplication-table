@@ -8,6 +8,7 @@ import generateVersions from "./generate-versions";
 import getMultiplicationResultCounter from "./mathematical-operations/getMultiplicationResultCounter";
 import getMultiplicationSolutionsList from "./mathematical-operations/getMultiplicationSolutionsList";
 import shuffleArray from "./shuffle-array";
+import throttle from "./throttle";
 
 export {
    createArrayRange,
@@ -20,4 +21,5 @@ export {
    getMultiplicationResultCounter,
    getMultiplicationSolutionsList,
    shuffleArray,
+   throttle,
 }
