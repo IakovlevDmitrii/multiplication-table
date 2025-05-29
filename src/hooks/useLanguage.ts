@@ -1,8 +1,8 @@
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectLanguage, setLanguageAction } from "../../store/settingsSlice";
-import type { AppDispatch } from "../../store/store";
-import type { Language } from "../../types";
+import { selectLanguage, setLanguageAction } from "../store/settingsSlice";
+import type { AppDispatch } from "../store/store";
+import type { Language } from "../types";
 
 const useLanguage = () => {
 	const dispatch: AppDispatch = useDispatch();

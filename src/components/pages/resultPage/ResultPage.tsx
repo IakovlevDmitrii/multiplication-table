@@ -5,7 +5,7 @@ import PageLayout from '../../pageLayout';
 import Header from '../../header';
 import BackLink from '../../backLink';
 import MultiplicationExample from "../../multiplicationExample";
-import { useLanguage, useSolutions } from "../../../features/hooks";
+import { useLanguage, useSolutions } from "../../../hooks";
 import locales from "../../../features/locales";
 import type { Solution } from "../../../types";
 import SWIPER_PARAMS from "../../../utils/swiper-params";

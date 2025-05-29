@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useAppDispatch, useAppSelector } from "./index";
-import { selectSolutions, addSolutionAction, clearSolutionsAction } from "../../store/equationsSlice";
-import type { Solution } from "../../types";
+import { selectSolutions, addSolutionAction, clearSolutionsAction } from "../store/equationsSlice";
+import type { Solution } from "../types";
 
 const useSolutions = () => {
 	const dispatch = useAppDispatch();

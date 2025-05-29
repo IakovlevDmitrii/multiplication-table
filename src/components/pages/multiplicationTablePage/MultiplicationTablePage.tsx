@@ -6,7 +6,7 @@ import PageLayout from "../../pageLayout";
 import Header from "../../header";
 import BackLink from "../../backLink";
 import MultiplicationExample from "../../multiplicationExample";
-import { useLanguage, useTargetMultiplier } from "../../../features/hooks";
+import { useLanguage, useTargetMultiplier } from "../../../hooks";
 import locales from "../../../features/locales";
 import MATH_CONFIG from "../../../utils/config";
 import { createArrayRange, getMultiplicationSolutionsList } from "../../../utils";
@@ -24,7 +24,7 @@ const MultiplicationTablePage: FC = (): JSX.Element => {
 	const { currentLanguage } = useLanguage();
 	const locale = locales[currentLanguage];
 	const { targetMultiplier } = useTargetMultiplier();
-	const headerTitle: string = `${locale.tableTitle} ${targetMultiplier}`;
+	const headerTitle: string = `${locale.multiplying_by} ${targetMultiplier}`;
 
 	const leftTab: JSX.Element = (
 		<BackLink
@@ -72,10 +72,7 @@ const MultiplicationTablePage: FC = (): JSX.Element => {
 			<article>
 				{conditions}
 				<div className={styles.link}>
-					<NavLink
-						to={`/examination/${targetMultiplier}`}
-						className={styles.opacity}
-					>
+					<NavLink to={`/examination/${targetMultiplier}`}>
 						{locale.checkYourself}
 					</NavLink>
 				</div>

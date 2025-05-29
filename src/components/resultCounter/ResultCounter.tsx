@@ -1,5 +1,5 @@
 import { FC, JSX } from 'react';
-import { useLanguage, useSolutions } from "../../features/hooks";
+import { useLanguage, useSolutions } from "../../hooks";
 import { getMultiplicationResultCounter } from "../../utils";
 import locales from "../../features/locales";
 import MATH_CONFIG from "../../utils/config";

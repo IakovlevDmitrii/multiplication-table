@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { useAppDispatch, useAppSelector } from "./index";
-import { selectTargetMultiplier, setTargetMultiplierAction } from "../../store/equationsSlice";
+import { selectTargetMultiplier, setTargetMultiplierAction } from "../store/equationsSlice";
 
 const useTargetMultiplier = () => {
 	const dispatch = useAppDispatch();

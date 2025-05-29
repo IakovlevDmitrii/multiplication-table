@@ -1,5 +1,5 @@
 import { FC, JSX, useEffect, useRef, useState, RefObject, MouseEvent } from "react";
-import { useLanguage, useTheme } from "../../features/hooks";
+import { useLanguage, useTheme } from "../../hooks";
 import styles from "./ThemeLanguageSwitcher.module.scss";
 
 const LANGUAGES = {

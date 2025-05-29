@@ -4,7 +4,7 @@ import {	Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectCoverflow, Keyboard, Mousewheel, Navigation, Pagination } from "swiper/modules";
 import PageLayout from "../../../components/pageLayout";
 import Header from "../../header";
-import { useLanguage, useSolutions, useTargetMultiplier } from "../../../features/hooks";
+import { useLanguage, useSolutions, useTargetMultiplier } from "../../../hooks";
 import { createArrayRange } from "../../../utils";
 import MATH_CONFIG from "../../../utils/config";
 import locales from "../../../features/locales";
@@ -29,7 +29,7 @@ const SelectMultiplierPage: FC = (): JSX.Element => {
 		setTargetMultiplier(MIN_MULTIPLIER);
 	}, [clearSolutions, setTargetMultiplier, MIN_MULTIPLIER]);
 
-	const headerTitle: string = locales[currentLanguage].selectMultiplier;
+	const headerTitle: string = locales[currentLanguage].choose_multiplier;
 
 	const list: number[] = useMemo(
 		(): number[] => createArrayRange(MIN_MULTIPLIER, MAX_MULTIPLIER),

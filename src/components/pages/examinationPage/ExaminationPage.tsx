@@ -6,7 +6,7 @@ import EquationDisplay from "./equationDisplay";
 import AnswerOptions from "./answerOptions";
 import SummaryLink from "./summaryLink";
 import ResultCounter from "../../resultCounter";
-import { useLanguage, useSolutions, useTargetMultiplier } from "../../../features/hooks";
+import { useLanguage, useSolutions, useTargetMultiplier } from "../../../hooks";
 import { createShuffleMultiplierList, generateVersions } from "../../../utils";
 import locales from "../../../features/locales";
 import styles from "./ExaminationPage.module.scss";
