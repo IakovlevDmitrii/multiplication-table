@@ -1,5 +1,3 @@
-@import '../../styles/const.module';
-
 .chalkParticles {
 	position: fixed;
 	top: 0;
@@ -22,9 +20,7 @@
 		animation-name: floatUp;
 		animation-timing-function: linear;
 		animation-iteration-count: infinite;
-
 		will-change: transform, opacity;
-
 	}
 }
 

@@ -22,7 +22,7 @@ const MultiplicationExample: FC<MultiplicationExampleProps> = ({
 	const isUserAnswer: boolean = typeof userAnswer !== "undefined";
 
 	return (
-		<div className={styles.example}>
+		<div className={styles._}>
 			<div className={styles.condition}>
 				{`${firstMultiplier} x ${secondMultiplier} =`}
 			</div>

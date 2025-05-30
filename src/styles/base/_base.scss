@@ -1,0 +1,41 @@
+@use '../abstracts/variables' as v;
+
+html {
+	font-size: 26px;
+	@media only screen and (v.$screen-sm) {font-size: 30px;}
+	@media only screen and (v.$screen-md) {font-size: 30px;}
+	@media only screen and (v.$screen-lg) {font-size: 32px;}
+	@media only screen and (v.$screen-xl) {font-size: 32px;}
+	@media only screen and (v.$screen-xxl) {font-size: 36px;}
+}
+
+body {
+	background-image: var(--color-surface_gradient);
+	color: var(--color-primary);
+
+	&::before {
+		content: "";
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		opacity: 0.08;
+		pointer-events: none;
+		z-index: -1;
+	}
+
+	@media only screen and (v.$screen-lg) {
+		cursor: none;
+	}
+
+	:global {
+		#cursor {
+			display: none;
+
+			@media only screen and (v.$screen-lg) {
+				display: block;
+			}
+		}
+	}
+}

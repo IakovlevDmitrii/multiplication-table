@@ -1,0 +1,27 @@
+@use '../abstracts/variables' as v;
+
+body {
+	line-height: 1.2;
+	letter-spacing: 0;
+	font: {
+		family: 'Caveat', -apple-system, BlinkMacSystemFont, sans-serif;
+		weight: 400;
+		size: v.$fontSize_regular;
+	}
+}
+
+h1 {
+	font-weight: 700;
+}
+
+h2 {
+	font-weight: 600;
+}
+
+h3, h4 {
+	font-weight: 500;
+}
+
+h5, h6 {
+	font-weight: 400;
+}

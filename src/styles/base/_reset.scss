@@ -4,47 +4,11 @@
 	box-sizing: border-box;
 }
 
-html {
-	height: auto;
-}
-
-body {
-	height: auto;
-}
-
 a {
 	background-color: transparent;
 	color: inherit;
 	text-decoration: none;
 	cursor: none;
-}
-
-img {
-	border-style: none;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	font-size: inherit;
-	margin-block-start: unset;
-	margin-block-end: unset;
-	margin-inline-start: unset;
-	margin-inline-end: unset;
-	font-weight: normal;
-}
-
-ul, ol {
-	display: block;
-	list-style-type: none;
-	margin-block-start: 0;
-	margin-block-end: 0;
-	margin-inline-start: 0;
-	margin-inline-end: 0;
-	padding-inline-start: 0;
 }
 
 button {
@@ -65,12 +29,6 @@ button {
 	border-image: initial;
 	border: none;
 	line-height: 1em;
-	cursor: none;
-}
-
-button,
-select {
-	text-transform: none;
 }
 
 button,
@@ -78,4 +36,30 @@ button,
 [type='reset'],
 [type='submit'] {
 	-webkit-appearance: button;
+}
+
+img {
+	border-style: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-size: inherit;
+	margin-block-start: unset;
+	margin-block-end: unset;
+	margin-inline-start: unset;
+	margin-inline-end: unset;
+}
+
+ol, ul {
+	display: block;
+	list-style-type: none;
+	margin-block-start: 0;
+	margin-block-end: 0;
+	margin-inline-start: 0;
+	margin-inline-end: 0;
+	padding-inline-start: 0;
+}
+
+select {
+	text-transform: none;
 }

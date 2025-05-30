@@ -1,5 +1,5 @@
 import gsap from 'gsap';
-import variables from '../styles/_const.module.scss';
+import variables from '../styles/abstracts/_variables.scss';
 
 const { bgColor_regular } = variables;
 export default function bgAnimation() {

@@ -1,8 +1,8 @@
 import { FC, JSX , MouseEvent } from "react";
 import { NavLink } from "react-router-dom";
 import { useTheme } from "../../hooks";
-import darkArrow from "../../img/arrow-to-left/arrow-to-left_dark.png";
-import lightArrow from "../../img/arrow-to-left/arrow-to-left_light.png";
+import darkArrow from "../../assets/images/arrow-to-left/arrow-to-left_dark.png";
+import lightArrow from "../../assets/images/arrow-to-left/arrow-to-left_light.png";
 import styles from './BackLink.module.scss';
 
 interface BackLinkProps {
