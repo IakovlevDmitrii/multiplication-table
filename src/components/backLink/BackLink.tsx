@@ -5,14 +5,12 @@ import darkArrow from "../../assets/images/arrow-to-left/arrow-to-left_dark.png"
 import lightArrow from "../../assets/images/arrow-to-left/arrow-to-left_light.png";
 import styles from './BackLink.module.scss';
 
-interface BackLinkProps {
+const BackLink: FC<{
 	to: string;
 	alt: string;
 	onClick?: (event: MouseEvent<HTMLAnchorElement>) => void;
-}
-
-const BackLink: FC<BackLinkProps> = (
-	{ to, alt, onClick }: BackLinkProps
+}> = (
+	{ to, alt, onClick }
 ): JSX.Element => {
 	const { currentTheme } = useTheme();
 	const arrowSrc: string = currentTheme === 'light' ? darkArrow : lightArrow;

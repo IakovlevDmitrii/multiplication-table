@@ -1,11 +1,11 @@
 import { FC, JSX, useCallback, useMemo, useState, useRef } from "react";
-import PageLayout from "../../pageLayout";
-import Header from "../../header";
-import BackLink from "../../backLink";
-import EquationDisplay from "./equationDisplay";
-import AnswerOptions from "./answerOptions";
-import SummaryLink from "./summaryLink";
-import ResultCounter from "../../resultCounter";
+import PageLayout from "../../pageLayout/PageLayout";
+import Header from "../../header/Header";
+import BackLink from "../../backLink/BackLink";
+import EquationDisplay from "./equationDisplay/EquationDisplay";
+import AnswerOptions from "./answerOptions/AnswerOptions";
+import SummaryLink from "./summaryLink/SummaryLink";
+import ResultCounter from "../../resultCounter/ResultCounter";
 import { useLanguage, useSolutions, useTargetMultiplier } from "../../../hooks";
 import { createShuffleMultiplierList, generateVersions } from "../../../utils";
 import locales from "../../../features/locales";

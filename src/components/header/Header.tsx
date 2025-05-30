@@ -1,14 +1,12 @@
 import { FC, JSX } from "react";
-import ThemeLanguageSwitcher from "../theme-language-switcher";
+import ThemeLanguageSwitcher from "../theme-language-switcher/ThemeLanguageSwitcher";
 import styles from './Header.module.scss';
 
-interface HeaderProps {
+const Header: FC<{
 	title: string;
 	leftTab?: JSX.Element;
-}
-
-const Header: FC<HeaderProps> = (
-	{ title, leftTab }: HeaderProps
+}> = (
+	{ title, leftTab }
 ): JSX.Element => (
 	<div className={styles._}>
 		<div className={styles.tabs}>

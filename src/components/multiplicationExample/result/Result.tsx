@@ -4,19 +4,17 @@ import { useGSAP } from "@gsap/react";
 import classNames from "classnames";
 import styles from "./Result.module.scss";
 
-interface ResultProps {
+const Result: FC<{
 	result: number;
 	isHighlighted?: boolean;
 	isError?: boolean;
 	isHidden?: boolean;
-}
-
-const Result: FC<ResultProps> = ({
+}> = ({
 	result,
 	isHighlighted = false,
 	isError = false,
 	isHidden = false
-}: ResultProps): JSX.Element => {
+}): JSX.Element => {
 	const cubeRef: RefObject<HTMLDivElement | null> = useRef<HTMLDivElement>(null);
 
 	useGSAP((): (() => void) | undefined => {

@@ -3,7 +3,7 @@ import { usePageVisibility } from "../../hooks";
 import styles from './ChalkDust.module.scss';
 
 const ChalkDust: FC = (): JSX.Element => {
-	const isVisible = usePageVisibility();
+	const isVisible: boolean = usePageVisibility();
 	const particleCount = 20;
 
 	const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });

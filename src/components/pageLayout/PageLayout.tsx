@@ -3,13 +3,12 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import styles from "./PageLayout.module.scss";
 
-interface PageLayoutProps {
+const PageLayout: FC<{
 	header: JSX.Element;
 	mainContent: JSX.Element;
-}
-
-const PageLayout: FC<PageLayoutProps> = (
-	{ header, mainContent }: PageLayoutProps ): JSX.Element => {
+}> = (
+	{ header, mainContent }
+): JSX.Element => {
 	const animationRef: RefObject<HTMLDivElement | null> = useRef<HTMLDivElement>(null);
 	const headerRef: RefObject<HTMLHeadElement | null> = useRef<HTMLHeadElement | null>(null);
 	const mainRef: RefObject<HTMLElement | null> = useRef<HTMLElement | null>(null);

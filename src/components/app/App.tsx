@@ -1,13 +1,21 @@
 import { FC, JSX, Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ErrorBoundary } from 'react-error-boundary';
-import Loader from "../loader";
+import Loader from "../loader/Loader";
 import '../../styles/main.module.scss';
 
-const MultiplicationTablePage = lazy(() => import('../pages/multiplicationTablePage'));
-const ResultPage = lazy(() => import('../pages/resultPage'));
-const SelectMultiplierPage = lazy(() => import('../pages/selectMultiplierPage'));
-const ExaminationPage = lazy(() => import('../pages/examinationPage'));
+const MultiplicationTablePage = lazy(
+	() => import('../pages/multiplicationTablePage/MultiplicationTablePage')
+);
+const ResultPage = lazy(
+	() => import('../pages/resultPage/ResultPage')
+);
+const SelectMultiplierPage = lazy(
+	() => import('../pages/selectMultiplierPage/SelectMultiplierPage')
+);
+const ExaminationPage = lazy(
+	() => import('../pages/examinationPage/ExaminationPage')
+);
 
 const ErrorFallback: FC = (): JSX.Element => <div>Произошла ошибка!</div>;
 

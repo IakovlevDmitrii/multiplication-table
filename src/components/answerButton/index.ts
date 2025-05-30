@@ -1,3 +1,3 @@
-import AnswerButton from "./AnswerButton";
-
-export default AnswerButton;
+// import AnswerButton from "./AnswerButton";
+//
+// export default AnswerButton;

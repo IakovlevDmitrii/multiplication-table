@@ -1,10 +1,10 @@
 import { FC, JSX } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, FreeMode, Keyboard, Mousewheel, Pagination } from "swiper/modules";
-import PageLayout from '../../pageLayout';
-import Header from '../../header';
-import BackLink from '../../backLink';
-import MultiplicationExample from "../../multiplicationExample";
+import PageLayout from '../../pageLayout/PageLayout';
+import Header from '../../header/Header';
+import BackLink from '../../backLink/BackLink';
+import MultiplicationExample from "../../multiplicationExample/MultiplicationExample";
 import { useLanguage, useSolutions } from "../../../hooks";
 import locales from "../../../features/locales";
 import type { Solution } from "../../../types";
