@@ -31,7 +31,7 @@ const ExaminationPage: FC = (): JSX.Element => {
 	);
 
 	const headerTitle: string = useMemo((): string =>
-		hasMoreEquations ? locale.selectResult : locale.trainingFinished,
+		hasMoreEquations ? locale.exercise_title : locale.results_title,
 		[hasMoreEquations, locale]
 	);
 
@@ -95,7 +95,7 @@ const ExaminationPage: FC = (): JSX.Element => {
 								<ResultCounter />
 								<SummaryLink
 									to={'summary'}
-									label={locale.answersLink}
+									label={locale.review_button}
 								/>
 							</>
 						)}

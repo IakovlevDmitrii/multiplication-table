@@ -19,7 +19,7 @@ import styles from "./ResultPage.module.scss";
 
 const ResultPage: FC = (): JSX.Element => {
 	const { currentLanguage } = useLanguage();
-	const headerTitle: string = locales[currentLanguage].resultTitle;
+	const headerTitle: string = locales[currentLanguage].answers_title;
 	const { solutions } = useSolutions();
 
 	const leftTab: JSX.Element = (

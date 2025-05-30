@@ -23,7 +23,7 @@ const ResultCounter: FC = (): JSX.Element => {
 					{`${locale.correct}: ${correct}`}
 				</div>
 				<div className={styles.wrong}>
-					{`${locale.wrong}: ${wrong}`}
+					{`${locale.incorrect}: ${wrong}`}
 				</div>
 			</div>
 		</div>

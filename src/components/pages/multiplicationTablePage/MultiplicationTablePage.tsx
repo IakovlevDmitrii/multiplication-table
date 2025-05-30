@@ -73,7 +73,7 @@ const MultiplicationTablePage: FC = (): JSX.Element => {
 				{conditions}
 				<div className={styles.link}>
 					<NavLink to={`/examination/${targetMultiplier}`}>
-						{locale.checkYourself}
+						{locale.test_skills_button}
 					</NavLink>
 				</div>
 			</article>
