@@ -2,7 +2,7 @@ import { FC, JSX, Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ErrorBoundary } from 'react-error-boundary';
 import Loader from "../loader";
-import '../../styles/styles.module.scss';
+import '../../styles/main.module.scss';
 
 const MultiplicationTablePage = lazy(() => import('../pages/multiplicationTablePage'));
 const ResultPage = lazy(() => import('../pages/resultPage'));

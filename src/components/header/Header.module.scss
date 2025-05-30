@@ -1,9 +1,9 @@
-@import '../../styles/const.module';
+@use '../../styles/abstracts/variables' as v;
 
 ._ {
-	background-color: var(--color-surface-1);
+	background-color: var(--color-surface);
 	padding: 0.2rem;
-	border-bottom: 1px solid var(--border-color);
+	border-bottom: 1px solid var(--color-primary);
 
 	.tabs {
 		display: flex;
@@ -17,27 +17,34 @@
 		justify-content: flex-start;
 		align-items: flex-end;
 		height: 2.5rem;
-		animation: fadeUp 0.8s ease-out;
+
+		&::after {
+			content: "";
+			position: absolute;
+			bottom: -2px;
+			left: 30%;
+			transform: translateX(-50%);
+			width: 80%;
+			height: 5px;
+			background: linear-gradient(90deg, transparent, currentColor, transparent);
+			animation: pulseLine 3s infinite;
+		}
 
 		span {
-			font-size: $fontSize_title;
-
-			font-weight: 700;
+			//@include m.caveat-font(700, 2.2rem);
+			font-size: v.$fontSize_title;
 			letter-spacing: -0.02em;
 			position: relative;
 			display: inline-block;
+			text-shadow: var(--color-chalk-shadow);
+			animation: write 1.5s steps(40) forwards;
+			width: 0;
+			overflow: hidden;
+			white-space: nowrap;
 
-
-			//text-shadow: 0 2px 4px rgba(0,0,0,0.08);
-			//text-shadow: 0 2px 4px $chalk-shadow;
-			//text-shadow:
-			//		0 2px 4px rgba(0,0,0,0.1),
-			//		0 0 0 3px #2a5934, /* Тонкий "меловой" контур */
-			//		0 0 20px rgba(248,249,250,0.3);
-			//transform: rotate(-1deg); /* Легкий наклон как рукописный текст */
-			//
-			//
-			//animation: fadeInScale 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+			@keyframes write {
+				to { width: 100%; }
+			}
 
 			//
 			//&::after {
@@ -50,50 +57,35 @@
 			//	background: linear-gradient(90deg, transparent, $chalk-white, transparent);
 			//	animation: underlinePulse 3s infinite;
 			//}
-
-			animation: write 1.5s steps(40) forwards;
-			width: 0;
-			overflow: hidden;
-			white-space: nowrap;
-		}
-
-		h1::after {
-			content: "";
-			position: absolute;
-			bottom: -10px;
-			left: 50%;
-			transform: translateX(-50%);
-			width: 80%;
-			height: 3px;
-			background: linear-gradient(90deg, transparent, currentColor, transparent);
-			animation: pulseLine 3s infinite;
 		}
 	}
 
-	@keyframes fadeUp {
-		0% { opacity: 0; transform: translateY(3px); }
-		100% { opacity: 1; transform: translateY(0); }
-	}
+	//animation: fadeUp 0.8s ease-out;
+	//@keyframes fadeUp {
+	//	0% { opacity: 0; transform: translateY(3px); }
+	//	100% { opacity: 1; transform: translateY(0); }
+	//}
+
+	//animation: fadeInScale 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+	//@keyframes fadeInScale {
+	//	0% {
+	//		opacity: 0;
+	//		transform: rotate(-1deg) scale(0.95);
+	//	}
+	//	100% {
+	//		opacity: 1;
+	//		transform: rotate(-1deg) scale(1);
+	//	}
+	//}
+
 	@keyframes underlinePulse {
 		0% { opacity: 0.2; }
 		50% { opacity: 0.8; }
 		100% { opacity: 0.2; }
 	}
-	@keyframes fadeInScale {
-		0% {
-			opacity: 0;
-			transform: rotate(-1deg) scale(0.95);
-		}
-		100% {
-			opacity: 1;
-			transform: rotate(-1deg) scale(1);
-		}
-	}
+
 	@keyframes pulseLine {
 		0%, 100% { opacity: 0.3; }
 		50% { opacity: 0.8; }
-	}
-	@keyframes write {
-		to { width: 100%; }
 	}
 }

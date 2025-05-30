@@ -1,0 +1,61 @@
+$screen-sm:  'min-width:  576px';
+$screen-md:  'min-width:  768px';
+$screen-lg:  'min-width:  992px';
+$screen-xl:  'min-width: 1200px';
+$screen-xxl: 'min-width: 1400px';
+
+$fontSize_regular: 1rem;
+$fontSize_title: 1.2rem;
+
+$borderRadius_small: 0.25rem;
+$borderRadius_regular: 0.5rem;
+$borderRadius_large: 1rem;
+
+$borderWidth_regular: 1px;
+
+:root {
+	--border-radius-small: #{$borderRadius_small};
+	--border-radius-regular: #{$borderRadius_regular};
+	--border-radius-large: #{$borderRadius_large};
+
+	--border-width-regular: #{$borderWidth_regular};
+
+	--color-base: initial;
+
+	--color-primary-shade: initial;
+	--color-primary-tint: initial;
+	--color-primary-tint_opacity: initial;
+
+	--color-primary: initial;
+
+	--color-on-primary: initial;
+	--color-primary-container: initial;
+	--color-on-primary-container: initial;
+
+	--color-secondary: initial;
+	--color-on-secondary: initial;
+	--color-secondary-container: initial;
+	--color-on-secondary-container: initial;
+
+	--color-surface: initial;
+	--color-surface_gradient: initial;
+	--color-on-surface: initial;
+	--color-surface-variant: initial;
+	--color-on-surface-variant: initial;
+
+	--color-surface-0: initial;
+	--color-surface-1: initial;
+	--color-surface-2: initial;
+	--color-surface-3: initial;
+	--color-surface-4: initial;
+	--color-surface-5: initial;
+	--color-surface-6: initial;
+	--color-surface-7: initial;
+	--color-surface-8: initial;
+	--color-surface-9: initial;
+	--color-surface-10: initial;
+
+	--color-red: initial;
+	--color-green: initial;
+	--color-chalk-shadow: initial;
+}

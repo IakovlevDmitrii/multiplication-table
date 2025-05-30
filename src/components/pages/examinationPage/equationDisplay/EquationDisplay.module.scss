@@ -1,4 +1,4 @@
-@import '../../../../styles/const.module';
+@use '../../../../styles/abstracts/variables' as v;
 
 ._{
 	display: flex;
@@ -11,6 +11,6 @@
 		display: flex;
 		justify-content: center;
 		padding: 1rem 0;
-		font-size: $fontSize_regular;
+		font-size: v.$fontSize_regular;
 	}
 }

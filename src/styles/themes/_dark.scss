@@ -1,0 +1,46 @@
+:root[data-theme="dark"] {
+	color-scheme: dark;
+
+	--color-base: rgba(30, 33, 40, 1);
+
+	--color-primary-shade: rgba(63, 60, 48, 1);
+	--color-primary-tint: rgba(159, 155, 138, 1);
+	--color-primary-tint_opacity: rgba(159, 155, 138, 0.4);
+
+	--color-primary: rgba(159, 154, 131, 1);
+
+	--color-on-primary: rgba(159, 155, 138, 1);
+	--color-primary-container: rgba(125, 133, 149, 1);
+	--color-on-primary-container: rgba(63, 60, 48, 1);
+
+	--color-secondary: rgba(63, 55, 48, 1);
+	--color-on-secondary: rgba(159, 147, 138, 1);
+	--color-secondary-container: rgba(159, 143, 131, 1);
+	--color-on-secondary-container: rgba(41, 27, 16, 1);
+
+	--color-surface: rgba(30, 33, 40, 1);
+	--color-surface_gradient: linear-gradient(45deg, rgba(30, 33, 40, 1) 0%, rgba(20, 21, 24, 1) 100%);
+	--color-on-surface: rgba(131, 137, 149, 1);
+	--color-surface-variant: rgba(63, 60, 48, 1);
+	--color-on-surface-variant: rgba(125, 133, 149, 1);
+
+	--color-surface-0: rgba(5, 3, 0, 1);
+	--color-surface-1: rgba(10, 9, 8, 1);
+	--color-surface-2: rgba(15, 15, 16, 1);
+	--color-surface-3: rgba(20, 21, 24, 1);
+	--color-surface-4: rgba(25, 27, 32, 1);
+	--color-surface-5: rgba(30, 33, 40, 1);
+	--color-surface-6: rgba(35, 39, 48, 1);
+	--color-surface-7: rgba(40, 45, 54, 1);
+	--color-surface-8: rgba(45, 51, 62, 1);
+	--color-surface-9: rgba(50, 57, 70, 1);
+	--color-surface-10: rgba(55, 71, 78, 1);
+
+	--color-red: #ff3d00;
+	--color-green: rgba(97, 149, 109, 1);
+	--color-chalk-shadow: (
+			0 2px 4px rgba(0, 0, 0, 0.2),
+			0 0 0.2rem var(--color-secondary),
+			0 0 0.5rem var(--color-primary-tint_opacity)
+	);
+}

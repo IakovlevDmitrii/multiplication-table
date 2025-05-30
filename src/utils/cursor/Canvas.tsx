@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import usePointerPosition from './usePointerPosition';
 import useDelayedValue from './useDelayedValue';
 import type { PointerPosition } from "../../types";
-import "../../styles/_const.module.scss";
+import "../../styles/abstracts/_variables.scss";
 import styles from './styles.module.scss';
 
 const Canvas: FC = (): JSX.Element => {
@@ -20,7 +20,7 @@ const Canvas: FC = (): JSX.Element => {
 
 	return (
 		<>
-			<Dot position={pos1} size={30} opacity={0.2} />
+			<Dot position={pos1} size={20} opacity={0.6} />
 			<Dot position={pos2} size={100} opacity={0.055} />
 			<Dot position={pos3} size={150} opacity={0.06} />
 			<Dot position={pos4} size={200} opacity={0.065} />
