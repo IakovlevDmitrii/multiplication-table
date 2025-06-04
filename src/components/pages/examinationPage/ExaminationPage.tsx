@@ -1,6 +1,5 @@
 import { FC, JSX, useCallback, useMemo, useState, useRef } from "react";
 import PageLayout from "../../pageLayout/PageLayout";
-import Header from "../../header/Header";
 import BackLink from "../../backLink/BackLink";
 import EquationDisplay from "./equationDisplay/EquationDisplay";
 import AnswerOptions from "./answerOptions/AnswerOptions";
@@ -25,14 +24,14 @@ const ExaminationPage: FC = (): JSX.Element => {
 	const secondMultiplier: number = multiplierList[currentEquationIndex];
 	const hasMoreEquations: boolean = multiplierList.length > currentEquationIndex;
 
-	const versions: number[] = useMemo(
-		(): number[] => generateVersions(secondMultiplier),
-		[secondMultiplier]
+	const versions: number[] = useMemo((): number[] =>
+			generateVersions(secondMultiplier)
+		, [secondMultiplier]
 	);
 
-	const headerTitle: string = useMemo((): string =>
-		hasMoreEquations ? locale.exercise_title : locale.results_title,
-		[hasMoreEquations, locale]
+	const title: string = useMemo((): string =>
+			hasMoreEquations ? locale.exercise_title : locale.results_title
+		, [hasMoreEquations, locale]
 	);
 
 	const leftTab: JSX.Element = useMemo((): JSX.Element => (
@@ -41,18 +40,20 @@ const ExaminationPage: FC = (): JSX.Element => {
 			alt='link to multiplication table'
 			onClick={clearSolutions}
 		/>
-	), [targetMultiplier, clearSolutions]);
+		), [targetMultiplier, clearSolutions]
+	);
 
 	const handleVersionSelect = useCallback((version: number ): void => {
-		setIsVersionSelected(true);
-		addSolution({
-			targetMultiplier,
-			secondMultiplier,
-			product: version,
-		});
-		setCurrentEquationIndex(prev => prev + 1);
-		setIsVersionSelected(false);
-	}, [setIsVersionSelected, addSolution, targetMultiplier, secondMultiplier]);
+			setIsVersionSelected(true);
+			addSolution({
+				targetMultiplier,
+				secondMultiplier,
+				product: version,
+			});
+			setCurrentEquationIndex(prev => prev + 1);
+			setIsVersionSelected(false);
+		}, [setIsVersionSelected, addSolution, targetMultiplier, secondMultiplier]
+	);
 
 	const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
@@ -66,13 +67,9 @@ const ExaminationPage: FC = (): JSX.Element => {
 
 	return (
 		<PageLayout
-			header={
-				<Header
-					leftTab={leftTab}
-					title={headerTitle}
-				/>
-			}
-			mainContent={
+			leftTab={leftTab}
+			title={title}
+			main={
 				<section className={styles._}>
 					<article>
 						{hasMoreEquations ? (
