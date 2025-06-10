@@ -17,7 +17,7 @@
 	--color-on-secondary-container: rgba(63, 15, 39, 1);
 
 	--color-surface: rgba(61, 110, 73, 1);
-	--color-surface_gradient: linear-gradient(45deg, var(--color-surface) 0%, var(--color-surface-3) 100%);
+	--color-surface_gradient: linear-gradient(45deg, rgba(61, 110, 73, 1) 0%, rgba(37, 84, 49, 1) 100%);
 	--color-on-surface: rgba(187, 149, 111, 1);
 	--color-surface-variant: rgba(224, 226, 236, 1);
 	--color-on-surface-variant: rgba(88, 70, 53, 1);
@@ -27,7 +27,7 @@
 	--color-surface-2: rgba(25, 71, 37, 1);
 	--color-surface-3: rgba(37, 84, 49, 1);
 	--color-surface-4: rgba(49, 97, 61, 1);
-	--color-surface-5: var(--color-surface);
+	--color-surface-5: rgba(61, 110, 73, 1);
 	--color-surface-6: rgba(73, 123, 85, 1);
 	--color-surface-7: rgba(85, 136, 97, 1);
 	--color-surface-8: rgba(97, 149, 109, 1);
