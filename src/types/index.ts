@@ -9,7 +9,7 @@ interface Solution {
 
 interface EquationsState {
    solutions: Solution[] | [],
-   targetMultiplier: number,
+   targetMultiplier: number | null;
 }
 
 interface SettingsState {

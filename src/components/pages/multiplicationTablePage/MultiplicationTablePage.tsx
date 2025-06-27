@@ -1,40 +1,47 @@
-import { FC, JSX, useMemo } from 'react';
+import { FC, JSX, useMemo } from "react";
 import { NavLink } from "react-router-dom";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { EffectCoverflow, FreeMode, Keyboard, Mousewheel, Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, EffectCoverflow, FreeMode, Keyboard, Mousewheel, Pagination } from "swiper/modules";
 import PageLayout from "../../pageLayout/PageLayout";
 import BackLink from "../../backLink/BackLink";
 import MultiplicationExample from "../../multiplicationExample/MultiplicationExample";
-import { useLanguage, useTargetMultiplier } from "../../../hooks";
+import { useAppSelector, useLanguage } from "../../../hooks";
+import { selectTargetMultiplier } from "../../../store/equations/equationsSelectors";
 import locales from "../../../features/locales";
-import MATH_CONFIG from "../../../utils/config";
-import { createArrayRange, getMultiplicationSolutionsList } from "../../../utils";
+import { createDefaultArrayRange, getMultiplicationSolutionsList } from "../../../utils/math";
 import type { Solution } from "../../../types";
 import SWIPER_PARAMS from "../../../utils/swiper-params";
-import 'swiper/scss';
-import 'swiper/scss/effect-coverflow';
-import 'swiper/scss/free-mode';
-import 'swiper/scss/keyboard';
-import 'swiper/scss/mousewheel';
-import 'swiper/scss/pagination';
+import "swiper/scss";
+import "swiper/scss/autoplay";
+import "swiper/scss/effect-coverflow";
+import "swiper/scss/free-mode";
+import "swiper/scss/keyboard";
+import "swiper/scss/mousewheel";
+import "swiper/scss/pagination";
 import styles from "./MultiplicationTablePage.module.scss";
 
 const MultiplicationTablePage: FC = (): JSX.Element => {
 	const { currentLanguage } = useLanguage();
 	const locale = locales[currentLanguage];
-	const { targetMultiplier } = useTargetMultiplier();
+	const targetMultiplier = useAppSelector(selectTargetMultiplier);
 
-	const title: string = useMemo((): string => (
+	const title: string = useMemo(
+		(): string => (
 			`${locale.multiplying_by} ${targetMultiplier}`
 		), [locale, targetMultiplier]
 	);
 
-	const { MIN_MULTIPLIER, MAX_MULTIPLIER } = MATH_CONFIG;
-	const rangeList: number[] = createArrayRange(MIN_MULTIPLIER, MAX_MULTIPLIER);
-	const conditionsList: Solution[] = getMultiplicationSolutionsList(
-		targetMultiplier ?? MIN_MULTIPLIER
-		, rangeList
+	const multiplierList: number[] = useMemo(
+		(): number[] =>
+			createDefaultArrayRange()
+		, []
 	);
+
+	const conditionsList: Solution[] = useMemo(
+		(): Solution[] =>
+			getMultiplicationSolutionsList(targetMultiplier, multiplierList)
+		, [targetMultiplier, multiplierList]
+	) ;
 
 	return (
 		<PageLayout
@@ -45,22 +52,26 @@ const MultiplicationTablePage: FC = (): JSX.Element => {
 				/>
 			}
 			title={title}
-			main={
-				<section className={styles._}>
-					<article>
-						<div className={styles.swiperContainer}>
-							<Swiper
-								{...SWIPER_PARAMS.MULTIPLICATION_TABLE}
-								modules={[
-									EffectCoverflow,
-									FreeMode,
-									Keyboard,
-									Mousewheel,
-									Pagination,
-								]}
-							>
-								{conditionsList.map((
-									{ targetMultiplier, secondMultiplier, product }: Solution): JSX.Element => (
+			content={
+				<>
+					<div className={styles.swiperContainer}>
+						<Swiper
+							{...SWIPER_PARAMS.MULTIPLICATION_TABLE}
+							modules={[
+								Autoplay,
+								EffectCoverflow,
+								FreeMode,
+								Keyboard,
+								Mousewheel,
+								Pagination,
+							]}
+						>
+							{conditionsList.map(
+								({
+									 targetMultiplier,
+									 secondMultiplier,
+									 product,
+								}: Solution): JSX.Element => (
 									<SwiperSlide key={secondMultiplier}>
 										<MultiplicationExample
 											firstMultiplier={targetMultiplier}
@@ -69,16 +80,17 @@ const MultiplicationTablePage: FC = (): JSX.Element => {
 											correctAnswer={product}
 										/>
 									</SwiperSlide>
-								))}
-							</Swiper>
-						</div>
-						<div className={styles.link}>
-							<NavLink to={`/examination/${targetMultiplier}`}>
-								{locale.test_skills_button}
-							</NavLink>
-						</div>
-					</article>
-				</section>
+								)
+							)}
+						</Swiper>
+					</div>
+					<NavLink
+						className={styles.testLink}
+						to={`/examination/${targetMultiplier}`}
+					>
+						<span>{locale.test_skills_button}</span>
+					</NavLink>
+				</>
 			}
 		/>
 	);

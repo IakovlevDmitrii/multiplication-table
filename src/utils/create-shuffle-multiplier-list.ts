@@ -1,6 +1,6 @@
-import createArrayRange from "./create-array-range";
+import createArrayRange from "./math/create-array-range";
 import shuffleArray from "./shuffle-array";
-import MATH_CONFIG from "./config";
+import MATH_CONFIG from "./math/math-config";
 
 const { MIN_MULTIPLIER, MAX_MULTIPLIER } = MATH_CONFIG;
 

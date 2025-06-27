@@ -21,8 +21,10 @@ const MultiplicationExample: FC<{
 
 	return (
 		<div className={styles._}>
-			<div className={styles.condition}>
-				{`${firstMultiplier} x ${secondMultiplier} =`}
+			<div>
+				<span>
+					{`${firstMultiplier} x ${secondMultiplier} =`}
+				</span>
 			</div>
 			<Result
 				result={displayResult}

@@ -1,14 +1,16 @@
 import { FC, JSX } from 'react';
-import { useLanguage, useSolutions } from "../../hooks";
+import { useAppSelector, useLanguage } from "../../hooks";
+import { selectSolutions } from "../../store/equations/equationsSelectors";
 import { getMultiplicationResultCounter } from "../../utils";
 import locales from "../../features/locales";
-import MATH_CONFIG from "../../utils/config";
+import MATH_CONFIG from "../../utils/math/math-config";
+import type { Solution } from "../../types";
 import styles from './ResultCounter.module.scss';
 
 const ResultCounter: FC = (): JSX.Element => {
 	const { currentLanguage } = useLanguage();
 	const locale = locales[currentLanguage];
-	const { solutions } = useSolutions();
+	const solutions: [] | Solution[] = useAppSelector(selectSolutions);
 	const { correct, wrong }: {correct: number, wrong: number} =
 		getMultiplicationResultCounter(solutions);
 	const { MULTIPLIER_LIST_LENGTH: questionsTotal } = MATH_CONFIG;

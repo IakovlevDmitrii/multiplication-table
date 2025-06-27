@@ -5,9 +5,9 @@ import styles from "./PageLayout.module.scss";
 const PageLayout: FC<{
 	leftTab?: JSX.Element;
 	title: string;
-	main: JSX.Element;
+	content: JSX.Element;
 }> = (
-	{ leftTab, title, main }
+	{ leftTab, title, content }
 ): JSX.Element => (
 	<div className={styles._}>
 		<header>
@@ -22,8 +22,13 @@ const PageLayout: FC<{
 			</h1>
 		</header>
 		<main>
-			{main}
+			<article>
+				{content}
+			</article>
 		</main>
+		<footer>
+			<p>&copy; 2025 ID</p>
+		</footer>
 	</div>
 );
 

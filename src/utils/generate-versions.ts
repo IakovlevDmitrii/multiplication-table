@@ -1,5 +1,5 @@
 import { shuffleArray } from "./index";
-import MATH_CONFIG from "./config";
+import MATH_CONFIG from "./math/math-config";
 
 const generateVersions: (correctValue: number) => number[] = (
 	correctValue: number

@@ -1,0 +1,6 @@
+
+@mixin swiper-container-base() {
+	position: relative;
+	border: var(--border-width-small) solid var(--color-primary-tint_opacity);
+	background-color: var(--color-surface-4);
+}

@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import logger from "redux-logger";
-import equationsReducer from "./equationsSlice";
+import equationsReducer from "./equations/equationsSlice";
 import settingsReducer from "./settingsSlice";
 
 const reducer = {

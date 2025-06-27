@@ -1,24 +1,27 @@
 export const multiplicationTablePageSwiperParams = {
 	direction: 'vertical' as const,
+	autoplay: {
+		delay: 100,
+	},
 	effect: 'coverflow' as const,
 	coverflowEffect: {
-		rotate: 0,
-		stretch: 0,
-		depth: 0,
-		modifier: 1,
+		rotate: -10,
+		stretch: 20,
+		depth: 50,
+		modifier: 0.8,
 		slideShadows: true,
 	},
-	centeredSlides: false,
+	centeredSlides: true,
 	freeMode: {
 		enabled: true,
 		momentumRatio: 0.25,
 		sticky: true,
 	},
-	initialSlide: 0,
 	keyboard: {
 		enabled: true,
 		onlyInViewport: false,
 	},
+	loop: true,
 	mousewheel: {
 		forceToAxis: true,
 		sensitivity: 0.5
@@ -27,5 +30,6 @@ export const multiplicationTablePageSwiperParams = {
 		type: 'progressbar' as const,
 	},
 	slidesPerView: 'auto' as const,
-	spaceBetween: 5,
+	spaceBetween: 30,
+	speed: 1000,
 };

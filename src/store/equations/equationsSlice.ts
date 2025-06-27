@@ -1,11 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import MATH_CONFIG from "../utils/config";
-import type { RootState } from "./store";
-import type { EquationsState, Solution } from "../types";
+import type { EquationsState, Solution } from "../../types";
 
 const initialState: EquationsState = {
 	solutions: [],
-	targetMultiplier: MATH_CONFIG.MIN_MULTIPLIER,
+	targetMultiplier: null,
 };
 
 export const equationsSlice = createSlice({
@@ -13,9 +11,12 @@ export const equationsSlice = createSlice({
 	initialState,
 	reducers: {
 		setTargetMultiplierAction: (
-			state, action: PayloadAction<number>
+			state, action: PayloadAction<number | null>
 		): void => {
 			state.targetMultiplier = action.payload;
+		},
+		clearTargetMultiplierAction: (state) => {
+			state.targetMultiplier = null;
 		},
 		addSolutionAction: (
 			state, action: PayloadAction<Solution>
@@ -33,14 +34,9 @@ export const equationsSlice = createSlice({
 
 export const {
 	setTargetMultiplierAction,
+	clearTargetMultiplierAction,
 	addSolutionAction,
 	clearSolutionsAction,
 } = equationsSlice.actions;
-
-export const selectTargetMultiplier =
-	(state: RootState): number => state.equations.targetMultiplier;
-
-export const selectSolutions =
-	(state: RootState): [] | Solution[] => state.equations.solutions;
 
 export default equationsSlice.reducer;

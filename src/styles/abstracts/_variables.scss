@@ -4,6 +4,7 @@ $screen-lg: '992px';
 $screen-xl: '1200px';
 $screen-xxl: '1400px';
 
+$fontSize_small: 0.6rem;
 $fontSize_regular: 1rem;
 $fontSize_title: 1.2rem;
 $fontSize_large: 3rem;
@@ -23,6 +24,7 @@ $borderWidth_large: 4px;
 }
 
 :root {
+	--fontSize_small: #{$fontSize_small};
 	--fontSize_regular: #{$fontSize_regular};
 	--fontSize_title: #{$fontSize_title};
 	--fontSize_large: #{$fontSize_large};

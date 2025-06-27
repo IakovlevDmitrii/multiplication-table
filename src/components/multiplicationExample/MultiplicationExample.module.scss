@@ -1,7 +1,11 @@
 ._ {
 	display: flex;
-	justify-content: center;
 	align-items: center;
+	justify-content: center;
 	height: 1.75rem;
 	gap: 0.25rem;
+
+	span {
+		font-size: 1.25rem;
+	}
 }
