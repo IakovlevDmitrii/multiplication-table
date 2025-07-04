@@ -1,8 +1,5 @@
 export const multiplicationTablePageSwiperParams = {
 	direction: 'vertical' as const,
-	autoplay: {
-		delay: 100,
-	},
 	effect: 'coverflow' as const,
 	coverflowEffect: {
 		rotate: -10,
@@ -31,5 +28,4 @@ export const multiplicationTablePageSwiperParams = {
 	},
 	slidesPerView: 'auto' as const,
 	spaceBetween: 30,
-	speed: 1000,
 };

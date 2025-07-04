@@ -1,7 +1,7 @@
 import { FC, JSX, useMemo } from "react";
 import { NavLink } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, EffectCoverflow, FreeMode, Keyboard, Mousewheel, Pagination } from "swiper/modules";
+import { EffectCoverflow, FreeMode, Keyboard, Mousewheel, Pagination } from "swiper/modules";
 import PageLayout from "../../pageLayout/PageLayout";
 import BackLink from "../../backLink/BackLink";
 import MultiplicationExample from "../../multiplicationExample/MultiplicationExample";
@@ -12,7 +12,6 @@ import { createDefaultArrayRange, getMultiplicationSolutionsList } from "../../.
 import type { Solution } from "../../../types";
 import SWIPER_PARAMS from "../../../utils/swiper-params";
 import "swiper/scss";
-import "swiper/scss/autoplay";
 import "swiper/scss/effect-coverflow";
 import "swiper/scss/free-mode";
 import "swiper/scss/keyboard";
@@ -58,7 +57,6 @@ const MultiplicationTablePage: FC = (): JSX.Element => {
 						<Swiper
 							{...SWIPER_PARAMS.MULTIPLICATION_TABLE}
 							modules={[
-								Autoplay,
 								EffectCoverflow,
 								FreeMode,
 								Keyboard,
