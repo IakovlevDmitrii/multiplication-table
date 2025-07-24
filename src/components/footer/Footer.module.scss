@@ -1,0 +1,11 @@
+@use "../../styles/abstracts/mixins" as mixins;
+
+footer {
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+
+	p {
+		@include mixins.caveat-font(400, var(--fontSize_small));
+	}
+}
