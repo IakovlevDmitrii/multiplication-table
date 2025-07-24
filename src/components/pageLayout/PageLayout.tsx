@@ -1,20 +1,18 @@
-import { FC, JSX } from "react";
+import { FC, JSX, ReactNode } from "react";
 import ThemeLanguageSwitcher from "../theme-language-switcher/ThemeLanguageSwitcher";
 import styles from "./PageLayout.module.scss";
 
 const PageLayout: FC<{
 	leftTab?: JSX.Element;
 	title: string;
-	content: JSX.Element;
+	children: ReactNode;
 }> = (
-	{ leftTab, title, content }
+	{ leftTab, title, children }
 ): JSX.Element => (
 	<div className={styles._}>
 		<header>
 			<div className={styles.tabs}>
-				<div>
-					{leftTab}
-				</div>
+				<div>{leftTab}</div>
 				<ThemeLanguageSwitcher />
 			</div>
 			<h1>
@@ -23,7 +21,7 @@ const PageLayout: FC<{
 		</header>
 		<main>
 			<article>
-				{content}
+				{children}
 			</article>
 		</main>
 		<footer>
