@@ -22,58 +22,6 @@
 		timing-function: ease-out;
 	}
 
-	header {
-		width: 100%;
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		position: relative;
-		background-color: var(--color-surface);
-		padding: 0.2rem;
-		margin-bottom: 0.5rem;
-		border-bottom: 1px solid var(--color-primary);
-
-		&::after {
-			content: "";
-			position: absolute;
-			bottom: -2px;
-			left: 0;
-			width: 60%;
-			height: 4px;
-			background: linear-gradient(90deg, transparent, currentColor, transparent);
-			animation: pulseLine 3s infinite;
-		}
-	}
-
-	.tabs {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		height: 1.5rem;
-	}
-
-	h1 {
-		display: flex;
-		justify-content: flex-start;
-		align-items: flex-end;
-
-		span {
-			position: relative;
-			display: inline-block;
-			animation: write 1.5s steps(40) forwards;
-			width: 0;
-			overflow: hidden;
-			white-space: nowrap;
-
-			@include mixins.caveat-font(600, var(--fontSize_title));
-
-			&::selection {
-				background-color: var(--color-on-surface);
-				color: var(--color-secondary);
-			}
-		}
-	}
-
 	main {
 		display: flex;
 		width: 100%;
@@ -96,25 +44,6 @@
 		}
 		gap: 1rem;
 		background-color: var(--color-surface);
-	}
-
-	footer {
-		display: flex;
-		justify-content: center;
-		align-items: flex-end;
-
-		p {
-			@include mixins.caveat-font(400, var(--fontSize_small));
-		}
-	}
-
-	@keyframes write {
-		to { width: 100%; }
-	}
-
-	@keyframes pulseLine {
-		0%, 100% { opacity: 0.3; }
-		50% { opacity: 0.8; }
 	}
 
 	@keyframes fadeIn {
