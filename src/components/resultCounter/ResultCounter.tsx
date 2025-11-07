@@ -1,11 +1,11 @@
-import { FC, JSX } from 'react';
+import { FC, JSX } from "react";
 import { useAppSelector, useLanguage } from "../../hooks";
 import { selectSolutions } from "../../store/equations/equationsSelectors";
 import { getMultiplicationResultCounter } from "../../utils";
 import locales from "../../features/locales";
 import MATH_CONFIG from "../../utils/math/math-config";
 import type { Solution } from "../../types";
-import styles from './ResultCounter.module.scss';
+import styles from "./ResultCounter.module.scss";
 
 const ResultCounter: FC = (): JSX.Element => {
 	const { currentLanguage } = useLanguage();
@@ -17,16 +17,18 @@ const ResultCounter: FC = (): JSX.Element => {
 
 	return (
 		<div className={styles._}>
-			<div className={styles.counter}>
-				{`${correct + wrong} / ${questionsTotal}`}
-			</div>
 			<div className={styles.answers}>
-				<div className={styles.correct}>
+				<span>
 					{`${locale.correct}: ${correct}`}
-				</div>
-				<div className={styles.wrong}>
+				</span>
+				<span>
 					{`${locale.incorrect}: ${wrong}`}
-				</div>
+				</span>
+			</div>
+			<div className={styles.counter}>
+				<span>
+					{`${correct + wrong} / ${questionsTotal}`}
+				</span>
 			</div>
 		</div>
 	)

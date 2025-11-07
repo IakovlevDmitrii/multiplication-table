@@ -1,7 +1,7 @@
 import { shuffleArray } from "./index";
 import MATH_CONFIG from "./math/math-config";
 
-const generateVersions: (correctValue: number) => number[] = (
+const generateCandidateMultipliers: (correctValue: number) => number[] = (
 	correctValue: number
 ): number[] => {
 	const {
@@ -38,4 +38,4 @@ const generateVersions: (correctValue: number) => number[] = (
 	return shuffleArray(randomValues);
 };
 
-export default generateVersions;
+export default generateCandidateMultipliers;

@@ -8,7 +8,7 @@ import ResultCounter from "../../resultCounter/ResultCounter";
 import { useAppDispatch, useAppSelector, useLanguage } from "../../../hooks";
 import { addSolutionAction, clearSolutionsAction } from "../../../store/equations/equationsSlice";
 import { selectTargetMultiplier } from "../../../store/equations/equationsSelectors";
-import { createShuffleMultiplierList, generateVersions } from "../../../utils";
+import { createShuffleMultiplierList, generateCandidateMultipliers } from "../../../utils";
 import locales from "../../../features/locales";
 import type { Solution } from "../../../types";
 
@@ -36,13 +36,15 @@ const ExaminationPage: FC = (): JSX.Element => {
 
 	const [currentEquationIndex, setCurrentEquationIndex] = useState<number>(0);
 	const [isVersionSelected, setIsVersionSelected] = useState<boolean>(false);
+	const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+	const [correctIndex, setCorrectIndex] = useState<number | null>(null);
 
 	const secondMultiplier: number = multiplierList[currentEquationIndex];
 	const hasMoreEquations: boolean = multiplierList.length > currentEquationIndex;
 
-	const versions: number[] = useMemo(
+	const candidateMultipliers: number[] = useMemo(
 		(): number[] =>
-			generateVersions(secondMultiplier)
+			generateCandidateMultipliers(secondMultiplier)
 		, [secondMultiplier]
 	);
 
@@ -62,46 +64,59 @@ const ExaminationPage: FC = (): JSX.Element => {
 		), [targetMultiplier, clearSolutions]
 	);
 
-	const handleVersionSelect = useCallback(
-		(version: number ): void => {
+	const onVersionSelect = useCallback(
+		(index: number): void => {
 			setIsVersionSelected(true);
-			if(targetMultiplier) {
+			setSelectedIndex(index);
+
+			const correctIndex = candidateMultipliers.indexOf(secondMultiplier);
+			setCorrectIndex(correctIndex);
+
+			if (candidateMultipliers[index] !== secondMultiplier && "vibrate" in navigator) {
+				navigator.vibrate(150);
+			}
+
+			if (targetMultiplier) {
 				addSolution({
 					targetMultiplier,
 					secondMultiplier,
-					product: version,
+					product: candidateMultipliers[index] * secondMultiplier,
 				});
 			}
-			setCurrentEquationIndex(prev => prev + 1);
-			setIsVersionSelected(false);
-		}, [setIsVersionSelected, addSolution, targetMultiplier, secondMultiplier]
+
+			setTimeout(() => {
+				setCurrentEquationIndex(prev => prev + 1);
+				setSelectedIndex(null);
+				setCorrectIndex(null);
+				setIsVersionSelected(false);
+			}, 800);
+		}, [setIsVersionSelected, addSolution, secondMultiplier, targetMultiplier, candidateMultipliers]
 	);
 
 	const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
-	const setButtonRef = useCallback((index: number) =>
-		(el: HTMLButtonElement | null): void => {
-			if (buttonRefs.current) {
-				buttonRefs.current[index] = el;
-			}
-		}, []
+	const setButtonRef = useCallback(
+		(index: number) =>
+			(el: HTMLButtonElement | null): void => {
+				if (buttonRefs.current) {
+					buttonRefs.current[index] = el;
+				}
+			}, []
 	);
 
 	return (
-		<PageLayout
-			leftTab={leftTab}
-			title={title}
-			content={hasMoreEquations ? (
+		<PageLayout leftTab={leftTab} title={title}>
+			{hasMoreEquations ? (
 				<>
-					<EquationDisplay
-						target={targetMultiplier}
-						second={secondMultiplier}
-					/>
+					<EquationDisplay target={targetMultiplier} second={secondMultiplier}/>
 					<AnswerOptions
-						versions={versions}
+						key={`${targetMultiplier}-${candidateMultipliers.join("-")}`}
+						multipliers={candidateMultipliers}
 						target={targetMultiplier}
-						onSelect={handleVersionSelect}
+						onSelect={onVersionSelect}
 						isDisabled={isVersionSelected}
+						selectedIndex={selectedIndex}
+						correctIndex={correctIndex}
 						setButtonRef={setButtonRef}
 					/>
 					<ResultCounter />
@@ -109,13 +124,10 @@ const ExaminationPage: FC = (): JSX.Element => {
 			) : (
 				<>
 					<ResultCounter />
-					<SummaryLink
-						to={'summary'}
-						label={locale.review_button}
-					/>
+					<SummaryLink to={'summary'} label={locale.review_button}/>
 				</>
 			)}
-		/>
+		</PageLayout>
 	);
 };
 

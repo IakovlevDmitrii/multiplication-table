@@ -33,10 +33,39 @@
 	}
 }
 
-@mixin caveat-font($weight: 400, $size: 1rem) {
-	font-family: 'Caveat', cursive;
-	font-weight: $weight;
+@mixin hover-animation {
+	box-shadow: 0 0 15px rgba(248, 249, 250, 0.4);
+	will-change: transform;
+	transform: translateY(-2px);
+}
+
+@mixin font($weight, $style: normal) {
+	font: {
+		weight: $weight;
+		style: $style;
+	}
+}
+
+@mixin caveat-font($weight, $size) {
+	font-family: 'Caveat', -apple-system, BlinkMacSystemFont, sans-serif;
 	font-size: $size;
+	line-height: 1.2;
 	letter-spacing: -0.02em;
-	text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	text-shadow: var(--color-chalk-shadow);
+
+	@include font($weight);
+}
+
+@mixin caveat-font-face($styleName, $weight) {
+	@font-face {
+		font-family: 'Caveat';
+		src:
+				local('Caveat #{$styleName}'),
+				local('Caveat-#{$styleName}'),
+				url('../../../public/fonts/Caveat/static/Caveat-#{$styleName}.woff2') format('woff2'),
+				url('../../../public/fonts/Caveat/static/Caveat-#{$styleName}.ttf') format('truetype');
+		font-display: swap;
+
+		@include font($weight);
+	}
 }

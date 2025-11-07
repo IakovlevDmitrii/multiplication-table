@@ -7,7 +7,11 @@ const EquationDisplay: FC<{
 	{ target, second }: {target: number; second: number}
 ): JSX.Element => (
 	<div className={styles._}>
-		<div>{`${target} x ${second} = ?`}</div>
+		<div className={styles.equation}>
+			<span>
+				{`${target} x ${second} = ?`}
+			</span>
+		</div>
 	</div>
 );
 

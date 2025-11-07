@@ -1,21 +1,21 @@
-@use '../abstracts/variables' as v;
-@use '../abstracts/mixins' as m;
+@use '../abstracts/variables' as variables;
+@use '../abstracts/mixins' as mixins;
 
 html {
 	font-size: 26px;
-	@include m.respond-to(v.$screen-sm) {
+	@include mixins.respond-to(variables.$screen-sm) {
 		font-size: 30px
 	}
-	@include m.respond-to(v.$screen-md) {
+	@include mixins.respond-to(variables.$screen-md) {
 		font-size: 30px
 	}
-	@include m.respond-to(v.$screen-lg) {
+	@include mixins.respond-to(variables.$screen-lg) {
 		font-size: 32px
 	}
-	@include m.respond-to(v.$screen-xl) {
+	@include mixins.respond-to(variables.$screen-xl) {
 		font-size: 32px
 	}
-	@include m.respond-to(v.$screen-xxl) {
+	@include mixins.respond-to(variables.$screen-xxl) {
 		font-size: 36px
 	}
 }
@@ -37,7 +37,7 @@ body {
 		z-index: -1;
 	}
 
-	@include m.respond-to(v.$screen-lg) {
+	@include mixins.respond-to(variables.$screen-lg) {
 		cursor: none;
 	}
 
@@ -45,7 +45,7 @@ body {
 		#cursor {
 			display: none;
 
-			@include m.respond-to(v.$screen-lg) {
+			@include mixins.respond-to(variables.$screen-lg) {
 				display: block;
 			}
 		}

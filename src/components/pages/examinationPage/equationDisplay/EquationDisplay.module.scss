@@ -5,12 +5,25 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	min-height: 3rem;
+	width: 100%;
+	border: var(--border-width-small) solid var(--color-primary-tint_opacity);
+	background-color: var(--color-surface-4);
+	padding-top: 0.75rem;
+	padding-bottom: 0.75rem;
 
-	div {
-		display: flex;
-		justify-content: center;
-		padding: 1rem 0;
-		font-size: v.$fontSize_regular;
+	.equation {
+		height: fit-content;
+		padding: {
+			top: 0.2rem;
+			bottom: 0.2rem;
+			right: 0.75rem;
+			left: 0.75rem;
+		}
+		background-color: var(--color-surface-6);
+		border: var(--border-width-small) solid var(--color-primary);
+
+		span {
+			font-size: v.$fontSize_regular;
+		}
 	}
 }

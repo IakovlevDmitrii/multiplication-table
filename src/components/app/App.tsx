@@ -18,7 +18,6 @@ const ExaminationPage = lazy(
 );
 
 const ErrorFallback: FC = (): JSX.Element => <div>Произошла ошибка!</div>;
-
 const App: FC = (): JSX.Element => {
 	return (
 		<ErrorBoundary FallbackComponent={ErrorFallback}>

@@ -21,6 +21,13 @@ const ResultPage: FC = (): JSX.Element => {
 	const { currentLanguage } = useLanguage();
 	const solutions: [] | Solution[] = useAppSelector(selectSolutions);
 
+	const leftTab: JSX.Element = (
+		<BackLink
+			to='/select-multiplier'
+			alt='link to select a multiplier'
+		/>
+	);
+
 	const title: string = useMemo(
 		(): string => (
 			locales[currentLanguage].answers_title
@@ -28,41 +35,32 @@ const ResultPage: FC = (): JSX.Element => {
 	);
 
 	return (
-		<PageLayout
-			leftTab={
-				<BackLink
-					to='/select-multiplier'
-					alt='link to select a multiplier'
-				/>
-			}
-			title={title}
-			content={
-				<div className={styles.swiperContainer}>
-					<Swiper
-						{...SWIPER_PARAMS.MULTIPLICATION_TABLE}
-						modules={[
-							EffectCoverflow,
-							FreeMode,
-							Keyboard,
-							Mousewheel,
-							Pagination,
-						]}
-					>
-						{solutions.map((
-							{ targetMultiplier, secondMultiplier, product }: Solution): JSX.Element => (
-							<SwiperSlide key={secondMultiplier}>
-								<MultiplicationExample
-									firstMultiplier={targetMultiplier}
-									secondMultiplier={secondMultiplier}
-									hideResult={false}
-									userAnswer={product}
-								/>
-							</SwiperSlide>
-						))}
-					</Swiper>
-				</div>
-			}
-		/>
+		<PageLayout leftTab={leftTab} title={title}>
+			<div className={styles.swiperContainer}>
+				<Swiper
+					{...SWIPER_PARAMS.MULTIPLICATION_TABLE}
+					modules={[
+						EffectCoverflow,
+						FreeMode,
+						Keyboard,
+						Mousewheel,
+						Pagination,
+					]}
+				>
+					{solutions.map((
+						{ targetMultiplier, secondMultiplier, product }: Solution): JSX.Element => (
+						<SwiperSlide key={secondMultiplier}>
+							<MultiplicationExample
+								firstMultiplier={targetMultiplier}
+								secondMultiplier={secondMultiplier}
+								hideResult={false}
+								userAnswer={product}
+							/>
+						</SwiperSlide>
+					))}
+				</Swiper>
+			</div>
+		</PageLayout>
 	);
 };
 

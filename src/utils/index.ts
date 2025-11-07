@@ -1,7 +1,7 @@
 import createArrayRange from "./math/create-array-range";
 import createEquationsList from "./mathematical-operations/createEquationsList";
 import createShuffleMultiplierList from "./create-shuffle-multiplier-list";
-import generateVersions from "./generate-versions";
+import generateCandidateMultipliers from "./generate-candidate-multipliers";
 import getMultiplicationResultCounter from "./mathematical-operations/getMultiplicationResultCounter";
 import getMultiplicationSolutionsList from "./math/getMultiplicationSolutionsList";
 import shuffleArray from "./shuffle-array";
@@ -11,7 +11,7 @@ export {
    createArrayRange,
    createEquationsList,
    createShuffleMultiplierList,
-   generateVersions,
+   generateCandidateMultipliers,
    getMultiplicationResultCounter,
    getMultiplicationSolutionsList,
    shuffleArray,

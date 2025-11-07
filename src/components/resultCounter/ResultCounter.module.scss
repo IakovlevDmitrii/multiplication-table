@@ -2,15 +2,19 @@
 	width: 100%;
 	padding: 0.5rem 0;
 
-	.counter {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
-
 	.answers {
 		display: flex;
 		justify-content: space-evenly;
 		align-items: center;
+	}
+
+	.counter {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		span {
+			font-size: var(--font-size_regular);
+		}
 	}
 }

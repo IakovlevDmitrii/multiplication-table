@@ -1,47 +1,6 @@
-@font-face {
-	font-family: 'Caveat';
-	src:
-			local('Caveat Regular'),
-			local('Caveat-Regular'),
-			url('../../../public/fonts/Caveat/static/Caveat-Regular.woff2') format('woff2'),
-			url('../../../public/fonts/Caveat/static/Caveat-Regular.ttf') format('truetype');
-	font-weight: 400;
-	font-style: normal;
-	font-display: swap;
-}
+@use "../abstracts/mixins" as mixins;
 
-@font-face {
-	font-family: 'Caveat';
-	src:
-			local('Caveat Medium'),
-			local('Caveat-Medium'),
-			url('../../../public/fonts/Caveat/static/Caveat-Medium.woff2') format('woff2'),
-			url('../../../public/fonts/Caveat/static/Caveat-Medium.ttf') format('truetype');
-	font-weight: 500;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: 'Caveat';
-	src:
-			local('Caveat SemiBold'),
-			local('Caveat-SemiBold'),
-			url('../../../public/fonts/Caveat/static/Caveat-SemiBold.woff2') format('woff2'),
-			url('../../../public/fonts/Caveat/static/Caveat-SemiBold.ttf') format('truetype');
-	font-weight: 600;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: 'Caveat';
-	src:
-			local('Caveat Bold'),
-			local('Caveat-Bold'),
-			url('../../../public/fonts/Caveat/static/Caveat-Bold.woff2') format('woff2'),
-			url('../../../public/fonts/Caveat/static/Caveat-Bold.ttf') format('truetype');
-	font-weight: 700;
-	font-style: normal;
-	font-display: swap;
-}
+@include mixins.caveat-font-face("Regular", 400);
+@include mixins.caveat-font-face("Medium", 500);
+@include mixins.caveat-font-face("SemiBold", 600);
+@include mixins.caveat-font-face("Bold", 700);
